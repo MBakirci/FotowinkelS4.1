@@ -11,6 +11,7 @@
 <%@page import="Test.PhotoCustomer"%>
 
 <jsp:include page="Masterpage_final.jsp"></jsp:include>
+<%@include file="TaalSettings.jsp" %>
 <!DOCTYPE html>
 <html>
     <head>

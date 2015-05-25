@@ -10,6 +10,7 @@
 <%@page import = "Test.Photo" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:include page="Masterpage_final.jsp"/>
+<%@include file="TaalSettings.jsp" %>
 <!DOCTYPE html>
 <html>
     <head>

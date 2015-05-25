@@ -15,6 +15,7 @@
 <%@page import= "Test.Databaseconnector"%>
 <%@page import = "Test.registreer"%>
 <%@page import = "Test.Verwijderaccount"%>
+<%@include file="TaalSettings.jsp" %>
 
 <!DOCTYPE html>
 <html>

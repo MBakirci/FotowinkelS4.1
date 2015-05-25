@@ -17,6 +17,7 @@
 <%@page import = "Test.registreer"%>
 <%@page import = "Test.Verwijderaccount"%>
 <jsp:include page="Masterpage_final.jsp"></jsp:include>
+    <%@include file="TaalSettings.jsp" %>
 <%if (session.getAttribute("Role") == null || !session.getAttribute("Role").equals("admin")) {
         response.sendRedirect("index.jsp");
     }

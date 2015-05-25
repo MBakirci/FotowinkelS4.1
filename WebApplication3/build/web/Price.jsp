@@ -8,6 +8,7 @@
 <%@page import="Test.PriceSettings"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:include page="Masterpage_final.jsp"></jsp:include>
+<%@include file="TaalSettings.jsp" %>
     <!DOCTYPE html>
     <html>
         <head>

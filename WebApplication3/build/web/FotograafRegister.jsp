@@ -4,6 +4,7 @@
     Author     : Gebruiker
 --%>
 <jsp:include page="Masterpage_final.jsp"/>
+<%@include file="TaalSettings.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

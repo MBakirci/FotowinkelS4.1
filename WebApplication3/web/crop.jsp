@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <%@include file="TaalSettings.jsp" %>
         <title>Cropper</title>
         <link href="CSS/bootstrap.min.css" rel="stylesheet">
         <link href="CSS/cropper.css" rel="stylesheet">

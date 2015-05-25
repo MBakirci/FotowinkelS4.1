@@ -10,6 +10,7 @@
 <%@page import= "java.util.*"%>
 
 <jsp:include page="Masterpage_final.jsp"/>
+<%@include file="TaalSettings.jsp" %>
 
 <%--<%@page import= "Test.Databaseconnector"%>--%>
 <%@page import="Test.Login" %>

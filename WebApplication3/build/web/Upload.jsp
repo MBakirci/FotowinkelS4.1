@@ -21,6 +21,7 @@
 <%@page import="Test.Categorie" %>
 <!DOCTYPE html>
 <jsp:include page="Masterpage_final.jsp"></jsp:include>
+<%@include file="TaalSettings.jsp" %>
     <html>
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
