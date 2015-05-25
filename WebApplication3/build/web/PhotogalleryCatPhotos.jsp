@@ -13,7 +13,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Mijn Foto's</title>
+        <title><fmt:message key='Photogallery_Title'/></title>
     </head>
     <body>
         <!-- <h1>Hello World!</h1>
@@ -84,7 +84,7 @@
             <footer>
                 <div class="row">
                     <div class="col-lg-12">
-                        <p>Copyright &copy; Your Website 2014</p>
+                        <p><fmt:message key='footer2'/></p>
                     </div>
                 </div>
             </footer>

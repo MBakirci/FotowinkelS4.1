@@ -25,18 +25,18 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Account gegevens verwerken</title>
+        <title><fmt:message key='Adminpage_Title'/></title>
         <link href="CSS/chosen.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <div class="container">
-            <h2 class="form-signin-heading">Account (de)Activeren</h2>
+            <h2 class="form-signin-heading"><fmt:message key='Adminpage_h2'/></h2>
             <hr>
 
             <form class="col-md-6" method="post">
 
                 <div class="form-group col-md-12">
-                    <label class="control-label">Account: </label>
+                    <label class="control-label"><fmt:message key='Adminpage_Account'/></label>
                     <%
                         Verwijderaccount vw = new Verwijderaccount();
                         ResultSet rs = vw.getallUsers();
@@ -61,10 +61,10 @@
                 </div>
                     
                 <div class="form-group col-md-6">
-                    <button class="btn btn-lg btn-primary btn-block" type="submit" name="btnNonactief">Account op non actief </button>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit" name="btnNonactief"><fmt:message key='Adminpage_button_deactiveren'/></button>
                 </div>
                 <div class="form-group col-md-6">
-                    <button class="btn btn-lg btn-primary btn-block" type="submit" name="btnActief">Account naar actief </button>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit" name="btnActief"><fmt:message key='Adminpage_button_activeren'/></button>
                 </div>
             </form>
 

@@ -13,44 +13,44 @@
     </head>
     <body>
         <div class="container">
-            <h1>Registeer fotograaf</h1>
+            <h1><fmt:message key='FotograafRegister_H1'/></h1>
             <hr>
         </div>
 
         <div class="container">
             <div class="row">
                 <form role="form">
-                    <div class="well well-sm"><strong><span class="glyphicon glyphicon-asterisk"></span>Required Field</strong></div>
+                    <div class="well well-sm"><strong><span class="glyphicon glyphicon-asterisk"></span><fmt:message key='FotograafRegister_RequiredField'/></strong></div>
                     <div class="col-md-6 col-sm-6 col-xs-12">
                         <div class="form-group col-md-12">
-                            <label for="voornaam">Naam</label>
+                            <label for="voornaam"><fmt:message key='FotograafRegister_Naam'/></label>
                             <div class="input-group col-md-12">
                                 <input type="text" class="form-control" id="voornaam" name="voornaam" placeholder="Naam" required>
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                             </div>
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="tussenvoegsel">Tussenvoegsel</label>
+                            <label for="tussenvoegsel"><fmt:message key='FotograafRegister_Tussenvoegsel'/></label>
                             <div class="input-group">
                                 <input type="text" class="form-control" id="tussenvoegsel" name="tussenvoegsel" placeholder="Tussenvoegsel">
                             </div>
                         </div>
                         <div class="form-group col-md-8">
-                            <label for="achternaam">Achternaam</label>
+                            <label for="achternaam"><fmt:message key='FotograafRegister_Achternaam'/></label>
                             <div class="input-group">
                                 <input type="text" class="form-control" id="achternaam" name="achternaam" placeholder="Achternaam" required>
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                             </div>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="username">Email</label>
+                            <label for="username"><fmt:message key='FotograafRegister_Email'/></label>
                             <div class="input-group">
                                 <input type="email" class="form-control" id="username" name="username" placeholder="Email" required>
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                             </div>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="password">Wachtwoord</label>
+                            <label for="password"><fmt:message key='FotograafRegister_Wachtwoord'/></label>
                             <div class="input-group">
                                 <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
@@ -60,35 +60,35 @@
 
                     <div class="col-md-6 col-sm-6 col-xs-12">
                         <div class="form-group col-md-8">
-                            <label for="straat">Straat</label>
+                            <label for="straat"><fmt:message key='FotograafRegister_Straat'/></label>
                             <div class="input-group">
                                 <input type="text" class="form-control" id="straat" name="straat" placeholder="Straat" required>
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                             </div>
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="huisnummer">Huisnummer</label>
+                            <label for="huisnummer"><fmt:message key='FotograafRegister_Huisnummer'/></label>
                             <div class="input-group">
                                 <input type="text" class="form-control" id="huisnummer" name="huisnummer" placeholder="Huisnummer" required>
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                             </div>
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="postcode">Postcode</label>
+                            <label for="postcode"><fmt:message key='FotograafRegister_Postcode'/></label>
                             <div class="input-group">
                                 <input type="text" class="form-control" id="postcode" name="postcode" placeholder="Postcode" required>
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                             </div>
                         </div>
                         <div class="form-group col-md-8">
-                            <label for="stad">Stad</label>
+                            <label for="stad"><fmt:message key='FotograafRegister_Stad'/></label>
                             <div class="input-group">
                                 <input type="text" class="form-control" id="stad" name="stad" placeholder="Stad" required>
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                             </div>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="voornaam">Telefoon</label>
+                            <label for="voornaam"><fmt:message key='FotograafRegister_Telefoon'/></label>
                             <div class="input-group col-md-12">
                                 <input type="text" class="form-control" id="telefoon" name="telefoon" placeholder="Telefoon" required>
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
@@ -128,7 +128,7 @@
             }
         %>
                     <footer class="footer">
-                <p>&copy; Company 2014</p>
+                <p><fmt:message key='footer'/></p>
             </footer>
     </body>
 </html>

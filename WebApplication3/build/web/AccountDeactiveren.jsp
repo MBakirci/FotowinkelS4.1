@@ -27,7 +27,7 @@
     <meta name="author" content="">
     <link rel="icon" href="favicon.ico">
 
-    <title>Account gegevens verwerken</title>
+    <title><fmt:message key='AccountDeactiveren_Title'/></title>
 
     <!-- Bootstrap core CSS -->
     <link href="CSS/bootstrap.min.css" rel="stylesheet" type="text/css"/>
@@ -54,13 +54,13 @@
                 <h3 class="text-muted">Project name</h3>
                 <nav>
                     <ul class="nav nav-justified">
-                        <li class="active"><a href="index.jsp">Home</a></li>
-                        <li><a href="Adminpage.jsp">Accountinformatie</a></li>
-                        <li><a href="fotograafProfiel.jsp">Profiel</a></li>
-                        <li><a href="Registreren.jsp">Registreren</a></li>
-                        <li><a href="Inlogscherm.jsp">login</a></li>
-                        <li><a href="logout.jsp">Logout</a></li>
-                        <li><a href="Upload.jsp">Upload</a></li>
+                        <li class="active"><a href="index.jsp"><fmt:message key='Menu_index'/></a></li>
+                        <li><a href="Adminpage.jsp"><fmt:message key='Menu_Adminpage'/></a></li>
+                        <li><a href="fotograafProfiel.jsp"><fmt:message key='Menu_fotograafProfiel'/></a></li>
+                        <li><a href="Registreren.jsp"><fmt:message key='Menu_Registreren'/></a></li>
+                        <li><a href="Inlogscherm.jsp"><fmt:message key='Menu_Inlogscherm'/></a></li>
+                        <li><a href="logout.jsp"><fmt:message key='Menu_Logout'/></a></li>
+                        <li><a href="Upload.jsp"><fmt:message key='Menu_Upload'/></a></li>
                     </ul>
                 </nav>
             </div>
@@ -83,13 +83,13 @@
    <div class="container">
 
        <form class="form-signin" method="post">
-        <h2 class="form-signin-heading">Please sign in</h2>
-        <label for="inputName" class="sr-only">Email address</label>
+        <h2 class="form-signin-heading"><fmt:message key='AccountDeactiveren_h2'/></h2>
+        <label for="inputName" class="sr-only"><fmt:message key='AccountDeactiveren_label'/></label>
         <input type="email" id="Name" name="Email" class="form-control" placeholder="Email" required autofocus>
         
        
-        <button class="btn btn-lg btn-primary btn-block" type="submit" name="btnNonactief">Account op non actief </button>
-         <button class="btn btn-lg btn-primary btn-block" type="submit" name="btnActief">Account naar actief </button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" name="btnNonactief"><fmt:message key='AccountDeactiveren_button_deactiveren'/></button>
+         <button class="btn btn-lg btn-primary btn-block" type="submit" name="btnActief"><fmt:message key='AccountDeactiveren_button_activeren'/></button>
          
       </form>
 

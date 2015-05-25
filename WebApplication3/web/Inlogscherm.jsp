@@ -17,7 +17,7 @@
 <jsp:include page="Masterpage_final.jsp"></jsp:include><!DOCTYPE html>
 <html>
      <head>
-    <title>Log in</title>
+    <title><fmt:message key='Inlogscherm_Title'/></title>
   </head>
     <body>
      
@@ -41,19 +41,19 @@
    <div class="container">
 
        <form class="form-signin" method="post">
-        <h2 class="form-signin-heading">Please sign in</h2>
-      <label for="inputName" class="sr-only">Email address</label>
+        <h2 class="form-signin-heading"><fmt:message key='Inlogscherm_H2'/></h2>
+      <label for="inputName" class="sr-only"><fmt:message key='Inlogscherm_email'/></label>
         <input type="text" id="Name" name="username" class="form-control" placeholder="Username" required autofocus>
-        <label for="inputPassword" class="sr-only">Password</label>
+        <label for="inputPassword" class="sr-only"><fmt:message key='Inlogscherm_Password'/></label>
    <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
           
         <div class="checkbox">
           <label>
-            <input type="checkbox" value="remember-me"> Remember me
+            <input type="checkbox" value="remember-me"> <fmt:message key='Inlogscherm_Remember'/>
           </label>
         </div>
 
-        <button class="btn btn-lg btn-primary btn-block" type="submit" name="btnLogin">Sign in</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" name="btnLogin"><fmt:message key='Inlogscherm_SignIn'/></button>
       </form>
 
     </div>

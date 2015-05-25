@@ -11,13 +11,13 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Account Informatie</title>
+        <title><fmt:message key='AccountInformation_Title'/></title>
     </head>
 
     <body>
         
         <div class="container">
-            <h1>Account Informatie</h1>
+            <h1><fmt:message key='AccountInformation_H1'/></h1>
         <hr>
         </div>
         <div class="container">
@@ -60,20 +60,20 @@
             <div class="row vdivide">
                 <form id="info-form">
                 <div class="col-md-4 col-sm-6 col-xs-12">
-                    <h3>Account informatie:</h3>
+                    <h3><fmt:message key='AccountInformation_H3_1'/></h3>
                     <div class="text-center">
                         <img src="http://simpleicon.com/wp-content/uploads/account.png" class="avatar img-circle img-thumbnail" alt="avatar">
                     </div>
                     <div class="form-group">
-                        <label for="Email">Email address</label>
+                        <label for="Email"><fmt:message key='AccountInformation_email'/></label>
                         <input type="email" name="email" class="form-control" id="Email" placeholder="<%=user.geteMail()%>" readonly>
                     </div>
                     <div class="form-group">
-                        <label for="Wachtwoord">Password</label>
+                        <label for="Wachtwoord"><fmt:message key='AccountInformation_password'/></label>
                         <input type="password" name="pass" class="form-control" id="Wachtwoord" placeholder="Nieuw wachtwoord" >
                     </div>
                     <div class="form-group">
-                        <label for="VerifyWachtwoord">Verify Password</label>
+                        <label for="VerifyWachtwoord"><fmt:message key='AccountInformation_password_ver'/></label>
                         <input type="password" name="passv" class="form-control" id="VerifyWachtwoord" placeholder="Verifieer Nieuw Wachtwoord" oninput="check(this)" >
                     </div>
                     <script language='javascript' type='text/javascript'>
@@ -91,52 +91,52 @@
                            }
                         }
                     </script>
-                    <button type="submit" name="btnSaveEmailPass" class="btn btn-default">Save changes</button>
+                    <button type="submit" name="btnSaveEmailPass" class="btn btn-default"><fmt:message key='AccountInformation_Save'/></button>
                 </div>
                 </form>
                     
                     <form>
                 <div class="col-md-8 col-sm-6 col-xs-12">
-                    <h3>Persoonlijke informatie:</h3>
+                    <h3><fmt:message key='AccountInformation_H3_2'/></h3>
                     <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                        <label for="Voornaam">Firstname</label>
+                        <label for="Voornaam"><fmt:message key='AccountInformation_firstname'/></label>
                         <input type="text" name="fname" class="form-control" id="Voornaam" value="<%=user.getVoornaam()%>" required>
                     </div>
                     <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                        <label for="Tussenvoegsel">Tussenvoegsel</label>
+                        <label for="Tussenvoegsel"><fmt:message key='AccountInformation_Tussenvoegsel'/></label>
                         <input type="text" name="tname" class="form-control" id="Tussenvoegsel" value="<%=user.getTussenvoegsel()%> " >
                     </div>
                     <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                        <label for="Achternaam">Lastname</label>
+                        <label for="Achternaam"><fmt:message key='AccountInformation_Lastname'/></label>
                         <input type="text" name="lname" class="form-control" id="Achternaam" value="<%=user.getAchternaam()%> " required >
                     </div>
                     <%if(session.getAttribute("Role").equals("fotograaf")){%>
                     <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                        <label for="Straat">Street</label>
+                        <label for="Straat"><fmt:message key='AccountInformation_Street'/></label>
                         <input type="text" name="street" class="form-control" id="Straat" value="<%=user.getStraat()%> " >
                     </div>
                     <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                        <label for="Huisnr">Housenumber</label>
+                        <label for="Huisnr"><fmt:message key='AccountInformation_Housenumber'/></label>
                         <input type="text" name="housenumber" class="form-control" id="Huisnr" value="<%=user.getHuisnr()%> " >
                     </div>
                     <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                        <label for="Postcode">Zipcode</label>
+                        <label for="Postcode"><fmt:message key='AccountInformation_Zipcode'/></label>
                         <input type="text" name="zipcode" class="form-control" id="Postcode" value="<%=user.getPostcode()%>" >
                     </div>
                     <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                        <label for="Stad">City</label>
+                        <label for="Stad"><fmt:message key='AccountInformation_City'/></label>
                         <input type="text" name="city" class="form-control" id="Stad" value="<%=user.getStad()%> ">
                     </div>
                     
                     <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                        <label for="Telefoon">Telefoonnummer</label>
+                        <label for="Telefoon"><fmt:message key='AccountInformation_Telefoonnummer'/></label>
                         <input type="tel" name="telnr" class="form-control bfh-phone" id="Telefoon" value="<%=user.getTelefoon()%>"  data-format="+31 (ddd) dddddd" required>
                     </div>
                     
                      <%}%>
                 </div>
                    <div class="col-md-6 col-sm-6 col-xs-12"> 
-                    <button type="submit" name="btnSave" class="btn btn-default">Save changes</button>
+                    <button type="submit" name="btnSave" class="btn btn-default"><fmt:message key='AccountInformation_Save'/></button>
                     </div>
                     
             </form>
@@ -144,7 +144,7 @@
 
             <!-- Site footer -->
             <footer class="footer">
-                <p>&copy; Company 2014</p>
+                <p><fmt:message key='footer'/></p>
             </footer>
         </div>
     </body>
