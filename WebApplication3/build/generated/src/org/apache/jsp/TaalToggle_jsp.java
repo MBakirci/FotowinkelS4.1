@@ -4,17 +4,15 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
 
-public final class newjsp_jsp extends org.apache.jasper.runtime.HttpJspBase
+public final class TaalToggle_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
 
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
 
   private static java.util.List<String> _jspx_dependants;
 
-  private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_fmt_message_var_key_nobody;
   private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_c_set_var_value_scope_nobody;
   private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_fmt_setBundle_basename_nobody;
-  private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_fmt_message_key_nobody;
   private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_fmt_setLocale_value_nobody;
 
   private org.glassfish.jsp.api.ResourceInjector _jspx_resourceInjector;
@@ -24,18 +22,14 @@ public final class newjsp_jsp extends org.apache.jasper.runtime.HttpJspBase
   }
 
   public void _jspInit() {
-    _jspx_tagPool_fmt_message_var_key_nobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
     _jspx_tagPool_c_set_var_value_scope_nobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
     _jspx_tagPool_fmt_setBundle_basename_nobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
-    _jspx_tagPool_fmt_message_key_nobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
     _jspx_tagPool_fmt_setLocale_value_nobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
   }
 
   public void _jspDestroy() {
-    _jspx_tagPool_fmt_message_var_key_nobody.release();
     _jspx_tagPool_c_set_var_value_scope_nobody.release();
     _jspx_tagPool_fmt_setBundle_basename_nobody.release();
-    _jspx_tagPool_fmt_message_key_nobody.release();
     _jspx_tagPool_fmt_setLocale_value_nobody.release();
   }
 
@@ -63,58 +57,65 @@ public final class newjsp_jsp extends org.apache.jasper.runtime.HttpJspBase
       _jspx_out = out;
       _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
 
-      out.write("\n");
-      out.write("\n");
-      out.write("\n");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
       if (_jspx_meth_c_set_0(_jspx_page_context))
         return;
+      out.write('\r');
       out.write('\n');
       if (_jspx_meth_fmt_setLocale_0(_jspx_page_context))
         return;
+      out.write('\r');
       out.write('\n');
       if (_jspx_meth_fmt_setBundle_0(_jspx_page_context))
         return;
-      out.write("\n");
-      out.write("<!DOCTYPE html>\n");
+      out.write("\r\n");
+      out.write("<!DOCTYPE html>\r\n");
       out.write("<html lang=\"");
       out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${language}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-      out.write("\">\n");
-      out.write("    <head>\n");
-      out.write("        <title>JSP/JSTL i18n demo</title>\n");
-      out.write("    </head>\n");
-      out.write("    <body>\n");
-      out.write("        <form>\n");
-      out.write("            <select id=\"language\" name=\"language\" onchange=\"submit()\">\n");
-      out.write("                <option value=\"en\" ");
+      out.write("\">\r\n");
+      out.write("    <head>\r\n");
+      out.write("        <link href=\"CSS/bootstrap.min.css\" rel=\"stylesheet\" type=\"text/css\"/>\r\n");
+      out.write("    </head>\r\n");
+      out.write("    <body>\r\n");
+      out.write("        <div class=\"container\">\r\n");
+      out.write("        <div class=\"headerWidget\" align=\"right\">\r\n");
+      out.write("        <form>\r\n");
+      out.write("            <select id=\"language\" name=\"language\" onchange=\"submit()\">\r\n");
+      out.write("                ");
+
+                    String a = session.getAttribute("language").toString();
+                    if(a.contains("en")){
+                
+      out.write("\r\n");
+      out.write("                <option class=\"flag flag-england\" value=\"en\" ");
       out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${language == 'en' ? 'selected' : ''}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-      out.write(">English</option>\n");
+      out.write(">English</option>\r\n");
+      out.write("                <option class=\"flag flag-nl\" value=\"nl\" ");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${language == 'nl' ? 'selected' : ''}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write(">Nederlands</option>\r\n");
+      out.write("                ");
+
+                    }else{
+                
+      out.write("                \r\n");
       out.write("                <option value=\"nl\" ");
       out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${language == 'nl' ? 'selected' : ''}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-      out.write(">Nederlands</option>\n");
-      out.write("            </select>\n");
-      out.write("        </form>\n");
-      out.write("        <form method=\"post\">\n");
-      out.write("            <label for=\"username\">");
-      if (_jspx_meth_fmt_message_0(_jspx_page_context))
-        return;
-      out.write(":</label>\n");
-      out.write("            <input type=\"text\" id=\"username\" name=\"username\">\n");
-      out.write("            <br>\n");
-      out.write("            <label for=\"password\">");
-      if (_jspx_meth_fmt_message_1(_jspx_page_context))
-        return;
-      out.write(":</label>\n");
-      out.write("            <input type=\"password\" id=\"password\" name=\"password\">\n");
-      out.write("            <br>\n");
-      out.write("            ");
-      if (_jspx_meth_fmt_message_2(_jspx_page_context))
-        return;
-      out.write("\n");
-      out.write("            <input type=\"submit\" name=\"submit\" value=\"");
-      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${buttonValue}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-      out.write("\">\n");
-      out.write("        </form>\n");
-      out.write("    </body>\n");
+      out.write(">Nederlands</option>\r\n");
+      out.write("                <option value=\"en\" ");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${language == 'en' ? 'selected' : ''}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write(">English</option>\r\n");
+      out.write("                ");
+
+                    }
+                
+      out.write("\r\n");
+      out.write("            </select>\r\n");
+      out.write("        </form>\r\n");
+      out.write("        </div>\r\n");
+      out.write("        </div>\r\n");
+      out.write("    </body>\r\n");
       out.write("</html>");
     } catch (Throwable t) {
       if (!(t instanceof SkipPageException)){
@@ -182,61 +183,6 @@ public final class newjsp_jsp extends org.apache.jasper.runtime.HttpJspBase
       return true;
     }
     _jspx_tagPool_fmt_setBundle_basename_nobody.reuse(_jspx_th_fmt_setBundle_0);
-    return false;
-  }
-
-  private boolean _jspx_meth_fmt_message_0(PageContext _jspx_page_context)
-          throws Throwable {
-    PageContext pageContext = _jspx_page_context;
-    JspWriter out = _jspx_page_context.getOut();
-    //  fmt:message
-    org.apache.taglibs.standard.tag.rt.fmt.MessageTag _jspx_th_fmt_message_0 = (org.apache.taglibs.standard.tag.rt.fmt.MessageTag) _jspx_tagPool_fmt_message_key_nobody.get(org.apache.taglibs.standard.tag.rt.fmt.MessageTag.class);
-    _jspx_th_fmt_message_0.setPageContext(_jspx_page_context);
-    _jspx_th_fmt_message_0.setParent(null);
-    _jspx_th_fmt_message_0.setKey("Inlogscherm_email");
-    int _jspx_eval_fmt_message_0 = _jspx_th_fmt_message_0.doStartTag();
-    if (_jspx_th_fmt_message_0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
-      _jspx_tagPool_fmt_message_key_nobody.reuse(_jspx_th_fmt_message_0);
-      return true;
-    }
-    _jspx_tagPool_fmt_message_key_nobody.reuse(_jspx_th_fmt_message_0);
-    return false;
-  }
-
-  private boolean _jspx_meth_fmt_message_1(PageContext _jspx_page_context)
-          throws Throwable {
-    PageContext pageContext = _jspx_page_context;
-    JspWriter out = _jspx_page_context.getOut();
-    //  fmt:message
-    org.apache.taglibs.standard.tag.rt.fmt.MessageTag _jspx_th_fmt_message_1 = (org.apache.taglibs.standard.tag.rt.fmt.MessageTag) _jspx_tagPool_fmt_message_key_nobody.get(org.apache.taglibs.standard.tag.rt.fmt.MessageTag.class);
-    _jspx_th_fmt_message_1.setPageContext(_jspx_page_context);
-    _jspx_th_fmt_message_1.setParent(null);
-    _jspx_th_fmt_message_1.setKey("Inlogscherm_Password");
-    int _jspx_eval_fmt_message_1 = _jspx_th_fmt_message_1.doStartTag();
-    if (_jspx_th_fmt_message_1.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
-      _jspx_tagPool_fmt_message_key_nobody.reuse(_jspx_th_fmt_message_1);
-      return true;
-    }
-    _jspx_tagPool_fmt_message_key_nobody.reuse(_jspx_th_fmt_message_1);
-    return false;
-  }
-
-  private boolean _jspx_meth_fmt_message_2(PageContext _jspx_page_context)
-          throws Throwable {
-    PageContext pageContext = _jspx_page_context;
-    JspWriter out = _jspx_page_context.getOut();
-    //  fmt:message
-    org.apache.taglibs.standard.tag.rt.fmt.MessageTag _jspx_th_fmt_message_2 = (org.apache.taglibs.standard.tag.rt.fmt.MessageTag) _jspx_tagPool_fmt_message_var_key_nobody.get(org.apache.taglibs.standard.tag.rt.fmt.MessageTag.class);
-    _jspx_th_fmt_message_2.setPageContext(_jspx_page_context);
-    _jspx_th_fmt_message_2.setParent(null);
-    _jspx_th_fmt_message_2.setKey("Inlogscherm_SignIn");
-    _jspx_th_fmt_message_2.setVar("buttonValue");
-    int _jspx_eval_fmt_message_2 = _jspx_th_fmt_message_2.doStartTag();
-    if (_jspx_th_fmt_message_2.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
-      _jspx_tagPool_fmt_message_var_key_nobody.reuse(_jspx_th_fmt_message_2);
-      return true;
-    }
-    _jspx_tagPool_fmt_message_var_key_nobody.reuse(_jspx_th_fmt_message_2);
     return false;
   }
 }

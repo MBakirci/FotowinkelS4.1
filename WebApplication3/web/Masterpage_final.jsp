@@ -5,9 +5,10 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<jsp:include page="TaalToggle.jsp"/>
+<%@include file="TaalSettings.jsp" %>
+<%@include file="TaalToggle.jsp" %>
 <!DOCTYPE html>
-<html>
+<html lang="${language}">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -110,8 +111,8 @@
                         <li><a href="index.jsp">Home</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="Registreren.jsp">Registreren</a></li>
-                        <li><a href="Inlogscherm.jsp">Login</a></li>
+                        <li><a href="Registreren.jsp"><fmt:message key='Menu_Registreren'/></a></li>
+                        <li><a href="Inlogscherm.jsp"><fmt:message key='Menu_Inlogscherm'/></a></li>
                         <li><a></a></li>
                     </ul>
                 </nav>

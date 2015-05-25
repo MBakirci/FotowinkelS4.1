@@ -9,13 +9,18 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import= "java.util.*"%>
 
+
+
 <%--<%@page import= "Test.Databaseconnector"%>--%>
 <%@page import="Test.Login" %>
 <%@page import="java.sql.*"%>
 <%@page import= "Test.Databaseconnector"%>
 <%@page import = "Test.registreer"%>
-<jsp:include page="Masterpage_final.jsp"></jsp:include><!DOCTYPE html>
-<html>
+<%@include file="TaalSettings.jsp" %>
+<jsp:include page="Masterpage_final.jsp"></jsp:include>
+
+<!DOCTYPE html>
+<html  lang="${language}">
      <head>
     <title><fmt:message key='Inlogscherm_Title'/></title>
   </head>
