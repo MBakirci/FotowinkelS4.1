@@ -35,10 +35,9 @@
                             </tr>
                             <%
                                 while (rs.next()) {
-
                             %>
                             <tr>
-                                <td id="id" style="color:grey;"><%=rs.getString("ID")%></td>
+                                <td id="id" style="color:grey;"><%=rs.getString("PRODUCTID")%></td>
                                 <td id="naam"><%=rs.getString("NAAM")%></td>
                                 <td id="details"><%=rs.getString("DETAILS")%></td>
                                 <td id="prijs"><%=rs.getString("PRIJS")%></td>
@@ -48,7 +47,7 @@
                                         <button type="submit" class="btn btn-default btn-sm btn-danger">
                                             <span class="glyphicon glyphicon-trash"></span>
                                         </button>                                        
-                                        <input type="hidden" name="typeID" value="<%=rs.getString("ID")%>" />
+                                        <input type="hidden" name="typeID" value="<%=rs.getString("PRODUCTID")%>" />
                                     </form>
                                 </td>
                                 <td>
@@ -57,7 +56,7 @@
                                     <button type="button" class="btn btn-default btn-sm btn-primary" name="btnEdit" data-toggle="modal" data-target="#myModal">
                                         <span class="glyphicon glyphicon-edit"></span>
                                     </button> 
-                                    <!--<input type="hidden" name="type" value="<%=rs.getString("ID")%>" />
+                                    <!--<input type="hidden" name="type" value="<%=rs.getString("PRODUCTID")%>" />
                                     -->
                                     <a href="#" class="btn btn-primary edit"> <span class="glyphicon glyphicon-edit"></span></a>
 
@@ -91,7 +90,6 @@
                 $(".modal-body #naam1").val(naam);
                 $(".modal-body #details1").val(details);
                 $(".modal-body #prijs1").val(prijs);
-
                 // and finally show the modal
                 myModal.modal({show: true});
                 return false;
@@ -106,7 +104,7 @@
                         <h4 class="modal-title" id="myModalLabel">Product Aanpassen</h4>
                     </div>
                     <div class="modal-body">
-                        <form class="form-horizontal" action="PriceServlet" method="post" id="editModal">
+                        <form class="form-horizontal" id="editModal">
                             <div class="form-group">
                                 <label class="control-label col-sm-2" for="id1">ID:</label>
                                 <div class="col-sm-4">
@@ -133,22 +131,17 @@
                             </div>
                             <div class="form-group">        
                                 <div class="col-sm-offset-2 col-sm-10">
-                                    <button type="submit" name="btnBewerk" class="btn btn-primary">Bewerk</button>
+                                    <button type="submit" name="btnBewerkt" class="btn btn-primary">Bewerk</button>
                                 </div>
                             </div>
                         </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <% /*
-            if (request.getParameter("btnBewerk") != null) {
+                        <% 
+            if (request.getParameter("btnBewerkt") != null) {
                 //Get Textbox
                 String sa = request.getParameter("id1");
                 if(sa.equals("")){
                     sa = null;
                 }
-
                 if (sa != null ) {
                     opp.setTypeNaam(request.getParameter("naam1"));
                     opp.setTypeDetails(request.getParameter("details1"));
@@ -165,7 +158,11 @@
                     response.sendRedirect("Price.jsp");
                 }
             }
-                */
+                
         %>
+                    </div>
+                </div>
+            </div>
+        </div>        
     </body>
 </html>

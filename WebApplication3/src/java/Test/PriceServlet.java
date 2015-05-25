@@ -75,10 +75,9 @@ public class PriceServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if (request.getParameter("typeID") != null) {
             String a = request.getParameter("typeID");
 
-            String sql = "DELETE FROM FW_TYPE WHERE ID = ?";
+            String sql = "DELETE FROM FW_PRODUCT WHERE PRODUCTID = ?";
             Test.Databaseconnector connection = new Test.Databaseconnector();
             try {
                 if (connection.verbindmetDatabase()) {
@@ -99,47 +98,8 @@ public class PriceServlet extends HttpServlet {
             } catch (IllegalAccessException ex) {
                 Logger.getLogger(PriceServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } else if(request.getParameter("btnBewerk") != null) {
-             PriceSettings opp = new PriceSettings();
-             String sa = request.getParameter("id1");
-                if(sa.equals("")){
-                    sa = null;
-                }
-
-                if (sa != null ) {
-                    opp.setTypeNaam(request.getParameter("naam1"));
-                    opp.setTypeDetails(request.getParameter("details1"));
-                    opp.setPrijs(Double.parseDouble(request.getParameter("prijs1")));
-                    opp.setTypeID(Integer.parseInt(request.getParameter("id1")));
-                    int a = Integer.parseInt(request.getParameter("id1"));
-                 try {
-                     opp.EditProductType(a);
-                 } catch (ClassNotFoundException ex) {
-                     Logger.getLogger(PriceServlet.class.getName()).log(Level.SEVERE, null, ex);
-                 } catch (InstantiationException ex) {
-                     Logger.getLogger(PriceServlet.class.getName()).log(Level.SEVERE, null, ex);
-                 } catch (IllegalAccessException ex) {
-                     Logger.getLogger(PriceServlet.class.getName()).log(Level.SEVERE, null, ex);
-                 }
-                    response.sendRedirect("Price.jsp");
-                } else {
-                    opp.setTypeNaam(request.getParameter("naam1"));
-                    opp.setTypeDetails(request.getParameter("details1"));
-                    opp.setPrijs(Double.parseDouble(request.getParameter("prijs1")));
-                 try {
-                     opp.AddProductType();
-                 } catch (ClassNotFoundException ex) {
-                     Logger.getLogger(PriceServlet.class.getName()).log(Level.SEVERE, null, ex);
-                 } catch (InstantiationException ex) {
-                     Logger.getLogger(PriceServlet.class.getName()).log(Level.SEVERE, null, ex);
-                 } catch (IllegalAccessException ex) {
-                     Logger.getLogger(PriceServlet.class.getName()).log(Level.SEVERE, null, ex);
-                 }
-                    response.sendRedirect("Price.jsp");
-                }
-            
         }
-        }
+        
 
         /**
          * Returns a short description of the servlet.

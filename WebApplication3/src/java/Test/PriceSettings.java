@@ -61,7 +61,7 @@ public class PriceSettings {
     }
 
     public ResultSet getallProductTypes() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-        String sql = "select * from FW_TYPE";
+        String sql = "select * from FW_PRODUCT";
         Test.Databaseconnector connection = new Test.Databaseconnector();
         try {
             if (connection.verbindmetDatabase()) {
@@ -76,8 +76,8 @@ public class PriceSettings {
     }
 
     public void GetType(int typeID) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-        String sqlGet = "Select * FW_TYPE WHERE ID = ?";
-        String sql = "UPDATE FW_TYPE SET NAAM = ?, Details = ?, Prijs = ?, WHERE ID = ?";
+        String sqlGet = "Select * FW_PRODUCT WHERE PRODUCTID = ?";
+        String sql = "UPDATE FW_PRODUCT SET NAAM = ?, Details = ?, Prijs = ?, WHERE PRODUCTID = ?";
         Test.Databaseconnector connection = new Test.Databaseconnector();
         try {
             if (connection.verbindmetDatabase()) {
@@ -100,7 +100,7 @@ public class PriceSettings {
     }
 
     public void EditProductType(int typeID) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-        String sql = "UPDATE FW_TYPE SET NAAM = ?, Details = ?, Prijs = ? WHERE ID = ? ";
+        String sql = "UPDATE FW_PRODUCT SET NAAM = ?, Details = ?, Prijs = ? WHERE PRODUCTID = ? ";
         Test.Databaseconnector connection = new Test.Databaseconnector();
         try {
             if (connection.verbindmetDatabase()) {
@@ -124,7 +124,7 @@ public class PriceSettings {
     }
     
      public void AddProductType() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-        String sql = "INSERT INTO FW_TYPE (NAAM, DETAILS, PRIJS) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO FW_PRODUCT (NAAM, DETAILS, PRIJS) VALUES (?, ?, ?)";
         Test.Databaseconnector connection = new Test.Databaseconnector();
         try {
             if (connection.verbindmetDatabase()) {
