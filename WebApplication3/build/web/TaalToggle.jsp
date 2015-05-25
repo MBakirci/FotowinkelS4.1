@@ -21,12 +21,12 @@
         <c:if test="${!empty language}">
         <fmt:setLocale value="${language}" scope="session" />
         </c:if>
-            
-        <div class="headerWidget">
+            <div class="container">
+        <div class="headerWidget" align="right">
             <%-- language selection widget --%>
             <c:choose>
                 <%-- When user hasn't explicitly set language,render toggle according to browser's preferred locale --%>
-                <c:when test= "${empty sessionScope['javax.servlet.jsp.jstl.fmt.locale.session']}">>
+                <c:when test= "${empty sessionScope['javax.servlet.jsp.jstl.fmt.locale.session']}">
                     <c:choose>
                         <c:when test="${pageContext.request.locale.language ne 'nl'}">
                             english
@@ -35,7 +35,7 @@
                             <c:url var="url" value="chooseLanguage">
                                 <c:param name="language" value="en"/>
                             </c:url>
-                            <div class="bubble"><a href="${url}">english</a></div>
+                            <a href="${url}">english </a>
                         </c:otherwise>
                     </c:choose> | 
                     <c:choose>
@@ -46,7 +46,7 @@
                             <c:url var="url" value="chooseLanguage">
                                 <c:param name="language" value="nl"/>
                             </c:url>
-                            <div class="bubble"><a href="${url}">nederlands</a></div>
+                            <a href="${url}">nederlands</a>
                         </c:otherwise>
                     </c:choose>
                 </c:when>
@@ -61,7 +61,7 @@
                             <c:url var="url" value="chooseLanguage">
                                 <c:param name="language" value="en"/>
                             </c:url>
-                            <div class="bubble"><a href="${url}">english</a></div>
+                            <a href="${url}">english</a>
                         </c:otherwise>
                     </c:choose> | 
                     <c:choose>
@@ -72,12 +72,12 @@
                             <c:url var="url" value="chooseLanguage">
                                 <c:param name="language" value="nl"/>
                             </c:url>
-                            <div class="bubble"><a href="${url}">nederlands</a></div>
+                            <a href="${url}">nederlands</a>
                         </c:otherwise>
                     </c:choose>
                 </c:otherwise>
             </c:choose>
-                                        
+        </div>              
         </div> 
     </body>
 </html>
