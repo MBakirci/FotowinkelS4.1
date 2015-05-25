@@ -1,0 +1,12 @@
+{
+    "elements": {
+        "jsp:declaration": {},
+        "ul": {},
+        "li": {}
+    },
+    "attributes": {
+        "aria-expanded": {
+            "context": "a"
+        }
+    }
+}
