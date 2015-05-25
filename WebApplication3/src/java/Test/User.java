@@ -284,4 +284,42 @@ public class User {
         }
         return false;
     }
+    
+    public void SetProfitMargin(int margin) throws ClassNotFoundException, InstantiationException, IllegalAccessException{
+        //if (this.type.toLowerCase() == "fotograaf"){
+            String sql = "UPDATE FW_ACCOUNT SET WINSTMARGE = ? WHERE EMAIL = ?";
+            Test.Databaseconnector connection = new Test.Databaseconnector();
+            try {
+                if (connection.verbindmetDatabase()) {
+                    PreparedStatement state = null;
+                    state = connection.conn.prepareStatement(sql);
+                    state.setInt(1, margin);
+                    state.setString(2, this.eMail);
+                    //state.executeQuery();
+                    state.executeUpdate();
+                }
+            } catch (SQLException e) {
+                System.out.println(e.toString());
+            }
+        //}
+    }
+    
+    public int GetProfitMargin() throws ClassNotFoundException, InstantiationException, IllegalAccessException{
+            String sql = "SELECT WINSTMARGE FROM FW_ACCOUNT WHERE EMAIL = ?";
+            Test.Databaseconnector connection = new Test.Databaseconnector();
+            try {
+                if (connection.verbindmetDatabase()) {
+                    PreparedStatement state = null;
+                    state = connection.conn.prepareStatement(sql);
+                    state.setString(1, this.eMail);
+                    ResultSet result = state.executeQuery();
+                    if(result.next()){
+                        return result.getInt("WINSTMARGE");
+                    }
+                }
+            } catch (SQLException e) {
+                System.out.println(e.toString());
+            }
+        return 0;
+    }
 }
