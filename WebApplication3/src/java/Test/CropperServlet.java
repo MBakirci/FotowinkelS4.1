@@ -27,6 +27,7 @@ public class CropperServlet extends HttpServlet {
     int y1=Integer.parseInt(request.getParameter("dataY"));
     int h=Integer.parseInt(request.getParameter("dataHeight"));
     int w=Integer.parseInt(request.getParameter("dataWidht"));
+   
     
     System.out.println(x1+" "+y1+" "+w+" "+h);
     
@@ -34,7 +35,7 @@ public class CropperServlet extends HttpServlet {
     String file=request.getParameter("file");
         
     //Get the buffered image reference
-    URL url = new URL("ftp://212.64.126.219:9942/Henk@yolo.nl/Groep/" + file);
+    URL url = new URL(file);
     BufferedImage image=ImageIO.read(url);
 
     //Get the sub image

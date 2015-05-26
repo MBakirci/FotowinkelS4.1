@@ -9,11 +9,14 @@
 <%@page import="Test.ProductPage"%>
 <jsp:include page="Masterpage_final.jsp"/>
 <%@include file="TaalSettings.jsp" %>
+
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="CSS/productPage.css" rel="stylesheet">
+        <link href="CSS/cropper.css" rel="stylesheet">
+        <link href="CSS/main.css" rel="stylesheet">
         <script src="js/productpage.js"></script>
 
         <title>Product Page</title>
@@ -63,56 +66,101 @@
 
 
         </script>
+
+        <div class="modal fade" id="cropper-example-2-modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <div class="modal-body">
+                        <div id="cropper-example-2">
+                            <div class="img-container">
+                                <img src="<%=link%>" alt="Picture">
+                            </div>
+                            <form action="Cropper" method="get">             
+                                <!-- <h3 class="page-header">Data:</h3> -->                            
+                                <input class="form-control" id="dataX" name="dataX" type="hidden">
+                                <input class="form-control" id="dataY" name="dataY" type="hidden" >
+                                <input class="form-control" id="dataWidth" name="dataWidht" type="hidden">
+                                <input class="form-control" id="dataHeight" name="dataHeight" type="hidden">
+                                <input class="form-control" id="file" name="file" type="hidden" value="<%=link%>">
+                                <input type="submit" class="btn btn-success" value="Crop">
+                            </form>
+                        </div>
+                        <div class="col-md-3">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!--<button class="btn btn-primary" data-toggle="modal" data-target="#cropper-example-2-modal" type="button">Launch the demo</button>-->
+        <script>
+            var $image = $('#cropper-example-2 > img'),
+                    cropBoxData,
+                    canvasData;
+
+            $('#cropper-example-2-modal').on('shown.bs.modal', function () {
+                $image.cropper({
+                    autoCropArea: 0.5,
+                    built: function () {
+                        // Strict mode: set crop box data first
+                        $image.cropper('setCropBoxData', cropBoxData);
+                        $image.cropper('setCanvasData', canvasData);
+                    }
+                });
+            }).on('hidden.bs.modal', function () {
+                cropBoxData = $image.cropper('getCropBoxData');
+                canvasData = $image.cropper('getCanvasData');
+                $image.cropper('destroy');
+            });
+        </script>
+
         <div class="container-fluid">
             <div class="content-wrapper">	
                 <div class="item-container">
-                    <form>
-                        <div class="container">	
-                            <div class="col-md-4">
-                                <div class="product col-md-8 service-image-left">
-                                    <center>
-                                        <img height="200" width="200" id="productFoto" src="<%=link%>"/>
-                                    </center>
-                                </div>
+                    <div class="container">	
+                        <div class="col-md-4">
+                            <div class="product col-md-8 service-image-left">
+                                <center>
+                                    <img height="200" width="200" id="productFoto" src="<%=link%>"/>
+                                </center>
                             </div>
-                            <form>
-                                <div class="col-md-8">
-                                    <div class="product-title">Foto: </div>
-                                    <div class="product-desc">U kan hier uw foto's aanpassen, en vervolgens in uw winkelwagen stoppen.</div>
-                                    <hr>
-                                    <div class="product-title">Productsoort</div>
-                                    <select id="Soort2" name="Soort2" class="btn btn-default" onchange="updatePrice()">
-                                        <%for (Double es : typePrices) {%>
-                                        <option value="<%=typePrices.indexOf(es)%>"><%=typeNames.get(typePrices.indexOf(es)).toString()%> + <%=es.toString()%></option>
-                                        <%
-                                            }%>
-                                    </select>
-                                    <div class="product-title" style="margin-top: 10px">Fotokleur</div>
-                                    <select id="Type" name="Type" class="btn btn-default" onchange="changeColor();
-                                            updatePrice();">
-                                        <%for (Double num : colorPrices) {
-                                        %>
-                                        <option value="<%=colorPrices.indexOf(num)%>"><%=colorNames.get(colorPrices.indexOf(num))%> + <%=num.toString()%></option>
-                                        <%
-                                            }
-                                        %>
-                                    </select>
-                                    <div class="product-title" style="margin-top: 10px;">Afbeelding aanpassen</div>
-                                    <button class="btn btn-default">Afbeelding bijnsnijden</button>
-                                    <hr>
-                                    <div class="product-title" style="margin-top: 10px;">Aantal</div>
-                                    <input type="number" required=""/>
-                                    <hr>
-                                    <div id="Prijs" class="product-price">$ <%=basePrice%></div>
-                                    <div class="product-stock">In Voorraad</div>
-                                    <hr>
-                                    <div class="btn-group cart">
-                                        <button type="button" class="btn btn-success">
-                                            Aan winkelwagen toevoegen 
-                                        </button>
-                                    </div>
-                                </div>
-                        </div> 
+                        </div>
+                        <div class="col-md-8">
+                            <div class="product-title">Foto: </div>
+                            <div class="product-desc">U kan hier uw foto's aanpassen, en vervolgens in uw winkelwagen stoppen.</div>
+                            <hr>
+                            <div class="product-title">Productsoort</div>
+                            <select id="Soort2" name="Soort2" class="btn btn-default" onchange="updatePrice()">
+                                <%for (Double es : typePrices) {%>
+                                <option value="<%=typePrices.indexOf(es)%>"><%=typeNames.get(typePrices.indexOf(es)).toString()%> + <%=es.toString()%></option>
+                                <%
+                                    }%>
+                            </select>
+                            <div class="product-title" style="margin-top: 10px">Fotokleur</div>
+                            <select id="Type" name="Type" class="btn btn-default" onchange="changeColor();
+                                    updatePrice();">
+                                <%for (Double num : colorPrices) {
+                                %>
+                                <option value="<%=colorPrices.indexOf(num)%>"><%=colorNames.get(colorPrices.indexOf(num))%> + <%=num.toString()%></option>
+                                <%
+                                    }
+                                %>
+                            </select>
+                            <div class="product-title" style="margin-top: 10px;">Afbeelding aanpassen</div>
+                            <button class="btn btn-default" data-toggle="modal" data-target="#cropper-example-2-modal" type="button">Afbeelding bijnsnijden</button>
+                            <hr>
+                            <div class="product-title" style="margin-top: 10px;">Aantal</div>
+                            <input type="number" required=""/>
+                            <hr>
+                            <div id="Prijs" class="product-price">$ <%=basePrice%></div>
+                            <div class="product-stock">In Voorraad</div>
+                            <hr>
+                            <div class="btn-group cart">
+                                <button type="button" class="btn btn-success">
+                                    Aan winkelwagen toevoegen 
+                                </button>
+                            </div>
+                        </div>
+                    </div> 
                 </div>
                 <div class="container-fluid">		
                     <div class="col-md-12 product-info">
@@ -147,5 +195,9 @@
                 </div>
             </div>
         </div>
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/cropper.js"></script>
+        <script src="js/main.js"></script>
     </body>
 </html>

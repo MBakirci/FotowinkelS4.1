@@ -1,3 +1,4 @@
+
 $(function () {
 
   'use strict';
@@ -29,6 +30,7 @@ $(function () {
         $dataHeight = $('#dataHeight'),
         $dataWidth = $('#dataWidth'),
         $dataRotate = $('#dataRotate'),
+        $file = $('#file'),
         options = {
           // data: {
           //   x: 420,
@@ -70,7 +72,7 @@ $(function () {
           // zoomin: null,
           // zoomout: null,
 
-          aspectRatio: 16/9,
+          aspectRatio: NaN,
           preview: '.img-preview',
           crop: function (data) {
             $dataX.val(Math.round(data.x));
