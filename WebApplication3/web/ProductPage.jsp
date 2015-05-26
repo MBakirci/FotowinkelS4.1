@@ -10,6 +10,7 @@
 <jsp:include page="Masterpage_final.jsp"/>
 <%@include file="TaalSettings.jsp" %>
 
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,10 +19,12 @@
         <link href="CSS/cropper.css" rel="stylesheet">
         <link href="CSS/main.css" rel="stylesheet">
         <script src="js/productpage.js"></script>
+        <script type="text/javascript" src="js/money.js"></script>
+        <script type="text/javascript" src="js/accounting.js"></script>
 
         <title>Product Page</title>
     </head>
-    <body onload="updatePrice()">
+    <body>
         <%
             String QString = request.getParameter("fotoid").toString();
             // String QString = "213"; //For Debug
@@ -63,6 +66,7 @@
                 var sum = a + b;
                 price.innerHTML = "€" + sum;
             }
+
 
 
         </script>
@@ -151,7 +155,15 @@
                             <div class="product-title" style="margin-top: 10px;">Aantal</div>
                             <input type="number" required=""/>
                             <hr>
-                            <div id="Prijs" class="product-price">$ <%=basePrice%></div>
+                            <div id="Prijs" class="product-price"></div>
+                            <div>
+                                <select id="ddlCurr" name="ddlCurr">
+                                    <option value="EUR">EURO €</option>
+                                    <option value="USD">DOLLAR $</option>
+                                    <option value="GBP">POUND £</option>
+                                    <option value="TRY">LIRA &#8378</option>
+                                </select>
+                            </div>
                             <div class="product-stock">In Voorraad</div>
                             <hr>
                             <div class="btn-group cart">
@@ -195,6 +207,79 @@
                 </div>
             </div>
         </div>
+
+        <script>
+            $(document).ready(function () {
+                updatePrice();
+
+                fx.base = "EUR";
+                fx.settings = {
+                    from: "EUR"
+                };
+
+                var amountje = $("#Prijs").text();
+                var str = amountje.substring(1);
+                var amount = parseFloat(str);
+                alert(amount);
+
+                var EUR = fx.convert(amount, {to: "EUR"});
+                EUR = accounting.formatMoney(EUR, "€", 2, ".", ",");
+                $("#Prijs").text(EUR);
+
+
+
+                $("#ddlCurr").change(function () {
+                    var amountje = $("#Prijs").text();
+                    var str = amountje.substring(1);
+                    var amount = parseFloat(str);
+
+
+                    $.getJSON(
+                            'latest.json',
+                            function (data) {
+                                // Check money.js has finished loading:
+                                if (typeof fx !== "undefined" && fx.rates) {
+                                    fx.rates = data.rates;
+                                    fx.base = data.base;
+                                } else {
+                                    // If not, apply to fxSetup global:
+                                    var fxSetup = {
+                                        rates: data.rates,
+                                        base: data.base
+                                    }
+                                }
+
+                                // now that we have exchange rates, add a few to our page
+                                var USD = fx.convert(amount, {to: "USD"}); //13.22784197768393
+                                var GBP = fx.convert(amount, {to: "GBP"}); //8.567532636985659
+                                var TRY = fx.convert(amount, {to: "TRY"}); //1028.1670562349989
+                                var EUR = fx.convert(amount, {to: "EUR"});
+
+                                // we can now use the accounting.js library to format the numbers properly
+                                USD = accounting.formatMoney(USD, "$", 2, ",", ".");
+                                GBP = accounting.formatMoney(GBP, "£", 2, ",", ".");
+                                TRY = accounting.formatMoney(TRY, "\u20BA", 2, ".", ",");
+                                EUR = accounting.formatMoney(EUR, "€", 2, ".", ",");
+
+                                if ($("#ddlCurr").val() == 'USD') {
+                                    $("#Prijs").text(USD);
+                                }
+                                else if ($("#ddlCurr").val() == 'GBP') {
+                                    $("#Prijs").text(GBP);
+                                }
+                                else if ($("#ddlCurr").val() == 'EUR') {
+                                    $("#Prijs").text(EUR);
+                                }
+                                else if ($("#ddlCurr").val() == 'TRY') {
+                                    $("#Prijs").text(TRY);
+                                }
+                            }
+                    );
+
+                });
+            });
+
+        </script>
         <script src="js/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/cropper.js"></script>
