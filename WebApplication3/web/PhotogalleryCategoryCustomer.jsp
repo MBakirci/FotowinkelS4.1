@@ -39,18 +39,18 @@
 
                             </a>
                             <!--top:120px;left: 230px;-->
-                            <a id="All" type="submit" href="PhotogalleryCatPhotosCustomer.jsp?cat=All" style="position: absolute; text-align:center; top:115px;">
+                            <a id="All" href="PhotogalleryCatPhotosCustomer.jsp?cat=All" style="position: absolute; text-align:center; top:115px;">
                                 <b>All</b>
                             </a>
 
                         </div>
 
                         <%
-                            session.setAttribute("Name", "Dennis@dennis.nl");
+                           // session.setAttribute("Name", "Dennis@dennis.nl");
                             HashSet<String> photoList = new HashSet<String>();
                             Test.PhotoCustomer tp = new Test.PhotoCustomer();
                             if (session.getAttribute("Name") != null) {
-                                photoList = tp.getCategoriesCustomer("Dennis@dennis.nl"); //FOR DEBUG
+                                photoList = tp.getCategoriesCustomer(session.getAttribute("Name").toString()); //FOR DEBUG
 
                             }
                             //photoList = tp.getPhotos(session.getAttribute("Name").toString());     // FINAL get session name

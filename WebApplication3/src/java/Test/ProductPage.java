@@ -8,13 +8,14 @@ package Test;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
  * @author Dennis
  */
 public class ProductPage {
-    String getBasePrice(String fotoID) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException 
+    public String getBasePrice(String fotoID) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException 
     {
         Databaseconnector ts = new Databaseconnector();
         String basePrice ="";
@@ -43,22 +44,21 @@ public class ProductPage {
         return null;
     }
     
-    String getProductPrice(String productnaam) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException
+    public ArrayList<Double> getColorPrice() throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException
     {
         Databaseconnector ts = new Databaseconnector();
-        String Price ="";
+        ArrayList<Double> Price = new ArrayList<Double>();
         if (ts.verbindmetDatabase()) {
             PreparedStatement state = null;
 
             try {
                 //Update gebruiker gedeelte van fotograaf
-                String q = "SElECT PRIJS FROM FW_PRODUCT where ARTIKELNAAM = ?";
+                String q = "SElECT PRIJS FROM FW_TYPE";
                 state = ts.conn.prepareStatement(q);
-                state.setString(1, productnaam);
                 ResultSet rs = state.executeQuery();
 
-                if (rs.next()) {
-                    Price = rs.getString("PRIJS");
+                while (rs.next()) {
+                    Price.add(rs.getDouble("PRIJS"));
                 }
                 return Price;
             } catch (SQLException e) {
@@ -72,25 +72,81 @@ public class ProductPage {
         return null;
     }
     
-    String getTypePrice(String type) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException
+    public ArrayList<String> getColorName() throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException
     {
         Databaseconnector ts = new Databaseconnector();
-        String basePrice ="";
+        ArrayList<String> Price = new ArrayList<String>();
         if (ts.verbindmetDatabase()) {
             PreparedStatement state = null;
 
             try {
                 //Update gebruiker gedeelte van fotograaf
-                String q = "SElECT PRIJS FROM FW_TYPE where PTYPE = ?";
+                String q = "SElECT PTYPE FROM FW_TYPE";
                 state = ts.conn.prepareStatement(q);
-                state.setString(1, type);
                 ResultSet rs = state.executeQuery();
 
-                if (rs.next()) {
-                    basePrice = rs.getString("PRIJS");
+                while (rs.next()) {
+                    Price.add(rs.getString("PTYPE"));
+                }
+                return Price;
+            } catch (SQLException e) {
+                System.out.println(e.toString());
+            } finally {
+                if (state != null) {
+                    state.close();
+                }
+            }
+        }
+        return null;
+    }
+    
+   public ArrayList<Double> getTypePrice() throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException
+    {
+        Databaseconnector ts = new Databaseconnector();
+        ArrayList<Double> Price = new ArrayList<>();
+        if (ts.verbindmetDatabase()) {
+            PreparedStatement state = null;
+
+            try {
+                //Update gebruiker gedeelte van fotograaf
+                String q = "SElECT PRIJS FROM FW_PRODUCT";
+                state = ts.conn.prepareStatement(q);
+                ResultSet rs = state.executeQuery();
+
+                while (rs.next()) {
+                    Price.add(rs.getDouble("PRIJS"));
                     
                 }
-                return basePrice;
+                return Price;
+            } catch (SQLException e) {
+                System.out.println(e.toString());
+            } finally {
+                if (state != null) {
+                    state.close();
+                }
+            }
+        }
+        return null;
+    }
+   
+   public ArrayList<String> getTypeName() throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException
+    {
+        Databaseconnector ts = new Databaseconnector();
+        ArrayList<String> Price = new ArrayList<>();
+        if (ts.verbindmetDatabase()) {
+            PreparedStatement state = null;
+
+            try {
+                //Update gebruiker gedeelte van fotograaf
+                String q = "SElECT NAAM FROM FW_PRODUCT";
+                state = ts.conn.prepareStatement(q);
+                ResultSet rs = state.executeQuery();
+
+                while (rs.next()) {
+                    Price.add(rs.getString("NAAM"));
+                    
+                }
+                return Price;
             } catch (SQLException e) {
                 System.out.println(e.toString());
             } finally {
