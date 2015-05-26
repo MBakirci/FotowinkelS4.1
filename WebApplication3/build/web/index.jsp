@@ -8,6 +8,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="Test.NewClass" %>
 <jsp:include page="Masterpage_final.jsp"/>
+<%@include file="TaalSettings.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -45,28 +46,37 @@
             <div class="jumbotron">
                 <h1>
                     <%
-                           if (session.getAttribute("Role") != null) {
-                            out.print("U bent ingelogd als: ");
-                               out.print("<font color='green'/>"+ session.getAttribute("Role")+ "</font>");
+                        if (session.getAttribute("Role") != null) {
+                    %>
+                    <fmt:message key="loggedIn"/>
+                    <%
+                            String role = session.getAttribute("Role").toString();
+                            String lan = session.getAttribute("language").toString();
+                            if(role.equals("klant") && lan.contains("en") ){
+                                role = "customer";
+                            }
+                            else if(role.equals("fotograaf")){
+                                role = "Photographer";
+                            }
+                        out.print("<font color='green'/>" + role + "</font>");
+                    } else {
+                    %>
+                    <fmt:message key='login_mess'/>
+                    <%
                         }
-                           else {
-                               out.print("Login om uw foto's te zien!");
-                           }
                     %>
                 </h1>
                 <h2>
 
                     <%
-                        
                         if (session.getAttribute("Name") != null) {
                             out.print(session.getAttribute("Name"));
-                            
-                            
+
                         }
                     %>
                 </h2>
                 <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet.</p>
-                <p><a class="btn btn-lg btn-success" a href="Registreren.jsp" role="button">Get started today</a></p>
+                <p><a class="btn btn-lg btn-success" href="Registreren.jsp" role="button">Get started today</a></p>
             </div>
 
             <!-- Example row of columns -->

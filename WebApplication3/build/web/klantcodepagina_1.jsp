@@ -15,12 +15,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Klant Pagina</title>
+        <title><fmt:message key="KlantPageTitle"/></title>
     </head>
     <body>
         <form>
             <div class="col-lg-6 col-md-offset-3">
-                <h4 style="margin-top: 50px;">Vult hier uw persoonlijke code voor de foto's in die u wilt bekijken</h4>
+                <h4 style="margin-top: 50px;"><fmt:message key="codeInvoer"/></h4>
                 <hr>
                 <div class="form-group">
                     <label for="inputvoornaam" class="sr-only">Code</label>
@@ -30,7 +30,7 @@
                         <div class="input-group">
                             <input type="text" name="Code" class="form-control" placeholder="Code">
                             <span class="input-group-btn">
-                                <button class="btn btn-default" type="submit" name="btnCode">Bekijk uw foto's!</button>
+                                <button class="btn btn-default" type="submit" name="btnCode"><fmt:message key="btnSetCode"/></button>
                             </span>
                         </div><!-- /input-group -->
                     </div><!-- /.col-lg-6 -->

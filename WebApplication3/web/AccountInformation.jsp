@@ -12,7 +12,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title><fmt:message key='AccountInformation_Title'/></title>
+        <title><fmt:message key='AcInfoTitle'/></title>
     </head>
 
     <body>
