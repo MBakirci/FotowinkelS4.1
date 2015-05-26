@@ -82,7 +82,7 @@ public final class PhotogalleryCategoryCustomer_jsp extends org.apache.jasper.ru
       out.write("\r\n");
       out.write("                            </a>\r\n");
       out.write("                            <!--top:120px;left: 230px;-->\r\n");
-      out.write("                            <a id=\"All\" type=\"submit\" href=\"PhotogalleryCatPhotosCustomer.jsp?cat=All\" style=\"position: absolute; text-align:center; top:115px;\">\r\n");
+      out.write("                            <a id=\"All\" href=\"PhotogalleryCatPhotosCustomer.jsp?cat=All\" style=\"position: absolute; text-align:center; top:115px;\">\r\n");
       out.write("                                <b>All</b>\r\n");
       out.write("                            </a>\r\n");
       out.write("\r\n");
