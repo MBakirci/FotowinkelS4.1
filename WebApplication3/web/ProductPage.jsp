@@ -65,6 +65,7 @@
 
                 var sum = a + b;
                 price.innerHTML = "€" + sum;
+                return sum;
             }
 
 
@@ -209,6 +210,8 @@
         </div>
 
         <script>
+
+
             $(document).ready(function () {
                 updatePrice();
 
@@ -220,19 +223,14 @@
                 var amountje = $("#Prijs").text();
                 var str = amountje.substring(1);
                 var amount = parseFloat(str);
-                alert(amount);
 
                 var EUR = fx.convert(amount, {to: "EUR"});
                 EUR = accounting.formatMoney(EUR, "€", 2, ".", ",");
                 $("#Prijs").text(EUR);
 
 
-
                 $("#ddlCurr").change(function () {
-                    var amountje = $("#Prijs").text();
-                    var str = amountje.substring(1);
-                    var amount = parseFloat(str);
-
+                    amount = updatePrice();
 
                     $.getJSON(
                             'latest.json',
