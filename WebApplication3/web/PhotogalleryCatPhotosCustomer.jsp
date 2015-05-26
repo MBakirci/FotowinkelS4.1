@@ -13,7 +13,7 @@
     <!DOCTYPE html>
     <html>
         <head>
-            <title>Foto's</title>
+            <title><fmt:message key='PhotogalleryCPC_Fotos'/></title>
         </head>
         <body>
             <!-- <h1>Hello World!</h1>
@@ -29,7 +29,7 @@
                         <div class="row">
                         <% String cat = request.getParameter("cat").toString();%>
                         <div class="col-lg-12">
-                            <h1 class="page-header"><a href="PhotogalleryCategoryCustomer.jsp" style="color: #000">Gallery</a> / <%=cat%></h1>
+                            <h1 class="page-header"><a href="PhotogalleryCategoryCustomer.jsp" style="color: #000"><fmt:message key='PhotogalleryCPC_Gallery'/></a> / <%=cat%></h1>
                         </div>
 
                         <%
@@ -54,8 +54,8 @@
 
                             </a>
                                 <div style="margin-top: 10px;">                             
-                                <button class="btn btn-danger">Add to cart</button>
-                                <a href="ProductPage.jsp?fotoid=<%=es%>"><button class="btn btn-success">Customize</button></a>
+                                <button class="btn btn-danger"><fmt:message key='PhotogalleryCPC_ToCart'/></button>
+                                <a href="ProductPage.jsp?fotoid=<%=es%>"><button class="btn btn-success"><fmt:message key='PhotogalleryCPC_Customize'/></button></a>
                             </div>
                         </div>
 
@@ -78,10 +78,10 @@
                             </a>
                                     
                             <div style="margin-top: 10px;">
-                                <a><button class="btn btn-danger" name="addtocart">Add to cart</button></a>
+                                <a><button class="btn btn-danger" name="addtocart"><fmt:message key='PhotogalleryCPC_ToCart'/></button></a>
                                 <input type="hidden" class="form-control" name="fotoimage" value="<%= es.substring(es.lastIndexOf("/") + 1, es.lastIndexOf(".")) %>" id="fotoimage">
                                 <input type="hidden" class="form-control" name="cat" value="<%= request.getParameter("cat") %>" id="cat">
-                                <a href="ProductPage.jsp?fotoid=<%=es.substring(es.lastIndexOf("/") + 1, es.lastIndexOf("."))%>"><button class="btn btn-success">Customize</button></a>
+                                <a href="ProductPage.jsp?fotoid=<%=es.substring(es.lastIndexOf("/") + 1, es.lastIndexOf("."))%>"><button class="btn btn-success"><fmt:message key='PhotogalleryCPC_Customize'/></button></a>
                             </div></div>
                     </form>
                         <%
@@ -97,7 +97,7 @@
             <footer>
                 <div class="row">
                     <div class="col-lg-12">
-                        <p>Copyright &copy; Your Website 2014</p>
+                        <p><fmt:message key='footer2'/></p>
                     </div>
                 </div>
             </footer>

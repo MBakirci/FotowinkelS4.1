@@ -21,9 +21,9 @@
                 <div class="form-group col-md-12">
                     <div class="row">
                         <select id="Type" name="Type" class="btn btn-default" onchange="changeColor()">
-                            <option value="1">Normaal</option>
-                            <option value="2">Zwart-Wit</option>
-                            <option value="3">Sepia</option>
+                            <option value="1"><fmt:message key='changeColor_Normaal'/></option>
+                            <option value="2"><fmt:message key='changeColor_ZwartWit'/></option>
+                            <option value="3"><fmt:message key='changeColor_Sepia'/></option>
                         </select>
                     </div>
                 </div>

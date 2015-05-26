@@ -23,13 +23,13 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Registreren</title>
+    <title><fmt:message key='Registreren_Title'/></title>
 </head>
 
 <body>
 
     <div class="container">
-        <h1>Registeer </h1>
+        <h1><fmt:message key='Registreren_H1'/></h1>
         <hr>
     </div>
     <div class="container">
@@ -37,17 +37,17 @@
             <form class="form-signin" method="post">
 
                 <div class="col-md-6 col-md-offset-3 col-sm-6 col-xs-12">
-                    <div class="well well-sm"><strong><span class="glyphicon glyphicon-asterisk"></span>Required Field</strong>
+                    <div class="well well-sm"><strong><span class="glyphicon glyphicon-asterisk"></span><fmt:message key='Registreren_RequiredField'/></strong>
                     </div>
                     <div class="form-group col-md-12">
-                        <label for="username">Email address</label>
+                        <label for="username"><fmt:message key='Registreren_Email'/></label>
                         <div class="input-group col-md-12">
                             <input type="email" id="Name" name="username" class="form-control" placeholder="Email" required autofocus>
                             <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                         </div>
                     </div>
                     <div class="form-group col-md-12">
-                        <label for="password">Wachtwoord</label>
+                        <label for="password"><fmt:message key='Registreren_Wachtwoord'/></label>
                         <div class="input-group col-md-12">
                             <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
                             <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
@@ -55,7 +55,7 @@
                     </div>
 
                     <div class="form-group col-md-12">
-                        <label for="voornaam">Voornaam</label>
+                        <label for="voornaam"><fmt:message key='Registreren_Voornaam'/></label>
                         <div class="input-group col-md-12">
                             <input type="text" id="inputVoornaam" name="voornaam" class="form-control" placeholder="Voornaam" required>
                             <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
@@ -63,14 +63,14 @@
                     </div>
 
                     <div class="form-group col-md-4">
-                        <label for="tussenvoegsel">Tussenvoegsel</label>
+                        <label for="tussenvoegsel"><fmt:message key='Registreren_Tussenvoegsel'/></label>
                         <div class="input-group col-md-12">
                             <input type="text" id="inputTussenvoegsel" name="tussenvoegsel" class="form-control" placeholder="Tussenvoegsel">
                         </div>
                     </div>
 
                     <div class="form-group col-md-8">
-                        <label for="achternaam">Achternaam</label>
+                        <label for="achternaam"><fmt:message key='Registreren_Achternaam'/></label>
                         <div class="input-group col-md-12">
                             <input type="text" id="inputAchternaam" name="achternaam" class="form-control" placeholder="Achternaam" required>
                             <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
@@ -79,7 +79,7 @@
 
                     <div class="col-md-12">
                         <br/>
-                        <button class="btn btn-lg btn-primary " type="submit" name="btnregistreer">registreer</button>
+                        <button class="btn btn-lg btn-primary " type="submit" name="btnregistreer"><fmt:message key='Registreren_registreer'/></button>
                     </div>
             </form>
                         <%
@@ -115,7 +115,7 @@
             </div>
         </div>
         <footer class="footer">
-            <p>&copy; Company 2014</p>
+            <p><fmt:message key='footer'/></p>
         </footer>
     </div>
 

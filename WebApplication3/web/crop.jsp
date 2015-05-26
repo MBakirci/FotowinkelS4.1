@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <%@include file="TaalSettings.jsp" %>
-        <title>Cropper</title>
+        <title><fmt:message key='Crop_Cropper'/></title>
         <link href="CSS/bootstrap.min.css" rel="stylesheet">
         <link href="CSS/cropper.css" rel="stylesheet">
         <link href="CSS/main.css" rel="stylesheet">
@@ -39,9 +39,9 @@
                     </div>
 
                     <select name="ddlProducten" id="ddlProducten" onchange="changeTheme()">
-                        <option value="Images/Muismat.jpg">Muismat</option>
-                        <option value="Images/cb-coffee-mug.png">Koffie Mok</option>
-                        <option value="Images/tshirt.jpg">T-Shirt</option>
+                        <option value="Images/Muismat.jpg"><fmt:message key='Crop_Muismat'/></option>
+                        <option value="Images/cb-coffee-mug.png"><fmt:message key='Crop_KoffieMok'/></option>
+                        <option value="Images/tshirt.jpg"><fmt:message key='Crop_TShirt'/></option>
                     </select>
 
                     <script>
