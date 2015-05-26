@@ -1,0 +1,81 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Test;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import static javafx.scene.input.KeyCode.T;
+import javax.servlet.http.Cookie;
+
+/**
+ *
+ * @author asror
+ */
+public class WinkelWagen {
+
+    static ArrayList<Test.WinkelWagenItem> itemlist = new ArrayList<Test.WinkelWagenItem>();
+
+    public WinkelWagen() {
+
+    }
+
+    public void NewList(List<Test.WinkelWagenItem> item) {
+        itemlist = new ArrayList<Test.WinkelWagenItem>();
+    }
+
+    public ArrayList<Test.WinkelWagenItem> GetWinkelWage()
+    {
+        return itemlist;
+    }
+    
+    
+    public String AantalItems() {
+        if (itemlist != null) {
+            return String.valueOf(itemlist.size());
+        } else {
+            return "0";
+        }
+    }
+
+    public void DeleteItem(String fotocode) {
+        Iterator<Test.WinkelWagenItem> it = itemlist.iterator();
+        while (it.hasNext()) {
+            Test.WinkelWagenItem item = it.next();
+            if (item.getFotocode().equals(fotocode)) {
+                it.remove();
+            }
+        }
+    }
+
+    public void ChangeItem(String fotocode, int aantal)
+    {
+        Iterator<Test.WinkelWagenItem> it = itemlist.iterator();
+        while (it.hasNext()) {
+            Test.WinkelWagenItem item = it.next();
+            if (item.getFotocode().equals(fotocode)) {
+                item.setAantal(aantal);
+            }
+        }
+    }
+    
+    
+    public ArrayList<Test.WinkelWagenItem> WinkelList() {
+        return itemlist;
+    }
+
+    public void AddItem(String productnaam, Integer aantal, String kleurtype, String producttype, Double prijs, String fotocode) {
+        Test.WinkelWagenItem item = new Test.WinkelWagenItem(productnaam, aantal, kleurtype, producttype, prijs, fotocode);
+        itemlist.add(item);
+
+        for (Test.WinkelWagenItem es : itemlist) {
+            String waarde = es.getProductnaam();
+            waarde = waarde;
+        }
+
+    }
+
+}

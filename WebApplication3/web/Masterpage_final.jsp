@@ -73,7 +73,8 @@
                         <li><a href="Upload.jsp">Upload</a></li>                        
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Item : 0</a></li>
+                        <%  Test.WinkelWagen winkelwagen = new Test.WinkelWagen();  %>
+                        <li><a href="Winkelwagen.jsp"><span class="glyphicon glyphicon-shopping-cart"></span> Item : <%= winkelwagen.AantalItems() %></a></li>
                         <li><a href="logout.jsp">Logout</a></li>
                         <li><a></a></li>
                     </ul>
@@ -97,7 +98,8 @@
                         <li><a href="klantcodepagina_1.jsp">Code invoeren</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Item : 0</a></li>
+                        <%  Test.WinkelWagen winkelwagen = new Test.WinkelWagen();  %>
+                        <li><a href="Winkelwagen.jsp"><span class="glyphicon glyphicon-shopping-cart"></span> Item : <%= winkelwagen.AantalItems() %></a></li>
                         <li><a href="logout.jsp">Logout</a></li>
                         <li><a></a></li>
                     </ul>
