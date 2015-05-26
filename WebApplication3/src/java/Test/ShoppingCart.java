@@ -78,21 +78,23 @@ private RequestDispatcher rd;
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        Test.WinkelWagen winkelwagen = new Test.WinkelWagen();       
-        if(request.getParameter("typeID") != null)
-        {
-        winkelwagen.DeleteItem(request.getParameter("typeID"));
+            Test.WinkelWagen winkelwagen = new Test.WinkelWagen();
+        if (request.getParameter("typeID") != null) {
+            winkelwagen.DeleteItem(request.getParameter("typeID"));
+        } else if (request.getParameter("btnBewerkt") != null) {
+            winkelwagen.ChangeItem(request.getParameter("naam1"), Integer.parseInt(request.getParameter("details1")));
+        } else if (request.getParameter("addtocart") != null) {
+            winkelwagen.AddItem(request.getParameter("fotoimage"), 1, "normal", "foto", 20.30, request.getParameter("fotoimage"));
+        } else {
+            winkelwagen.AddItem(request.getParameter("naam"), 2, "groen", "kat", 20.30, request.getParameter("foto"));
         }
-        else if (request.getParameter("btnBewerkt") != null)
-        {   
-        winkelwagen.ChangeItem(request.getParameter("naam1"), Integer.parseInt(request.getParameter("details1")));      
-        }
-        else
-        {
-        winkelwagen.AddItem(request.getParameter("naam"), 2, "groen", "kat", 20.30, request.getParameter("foto"));
-        }
-        
+
+        if (request.getParameter("addtocart") != null) {
+            String cat = request.getParameter("cat");
+        response.sendRedirect("PhotogalleryCatPhotosCustomer.jsp?cat="+cat+ "");
+        } else {
         response.sendRedirect("Winkelwagen.jsp");
+        }
     }
 
     /**

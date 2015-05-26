@@ -122,11 +122,14 @@
             if (request.getParameter("btnregistreer") != null) {
                 Test.User newUser = new Test.User(email, pass, voornaam, tussenvoegsel, achternaam, "fotograaf");
                 if (newUser.Fotograaf(telefoon, straat, huisnr, postcode, stad)) {
+                     Test.FTPUpload ftpload = new Test.FTPUpload();
+                     ftpload.uploadDiretory(email, email);
                     out.print("<div class=\"alert alert-success col-md-8 col-md-offset-2\">registeren gelukt</div>");
                 } else {
                     out.print("<div class=\"alert alert-danger col-md-8 col-md-offset-2\">registeren mislukt</div>");
                 }
             }
+
         %>
                     <footer class="footer">
                 <p><fmt:message key='footer'/></p>

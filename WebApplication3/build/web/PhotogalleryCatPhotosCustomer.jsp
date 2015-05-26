@@ -70,16 +70,20 @@
                             photoList = tp.getCatPhotosCustomer(username, category);
 
                             for (String es : photoList) {%>
+                           <form action="ShoppingCart" method="POST">
                         <div class="col-lg-3 col-md-4 col-xs-6 thumb" style="position: relative">
-                            <a class="thumbnail" href="ProductPage.jsp?fotoid=<%=es%>">
+                            <a class="thumbnail"  href="ProductPage.jsp?fotoid=<%=es%>">
                                 <img class="img-responsive" style="position: relative; top: 0; left: 0;" alt="test" width="100" height="100" style="z-index: -1" src=<%=es%> > 
 
                             </a>
+                                    
                             <div style="margin-top: 10px;">
-                                <a><button class="btn btn-danger">Add to cart</button></a>
+                                <a><button class="btn btn-danger" name="addtocart">Add to cart</button></a>
+                                <input type="hidden" class="form-control" name="fotoimage" value="<%= es.substring(es.lastIndexOf("/") + 1, es.lastIndexOf(".")) %>" id="fotoimage">
+                                <input type="hidden" class="form-control" name="cat" value="<%= request.getParameter("cat") %>" id="cat">
                                 <a href="ProductPage.jsp?fotoid=<%=es.substring(es.lastIndexOf("/") + 1, es.lastIndexOf("."))%>"><button class="btn btn-success">Customize</button></a>
-                            </div>
-                        </div>
+                            </div></div>
+                    </form>
                         <%
                                 }
                             }

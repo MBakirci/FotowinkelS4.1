@@ -128,15 +128,26 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
                         if (session.getAttribute("Role") != null) {
                     
       out.write("\r\n");
-      out.write("                    U bent ingelogd als:\r\n");
+      out.write("                    ");
+      if (_jspx_meth_fmt_message_0(_jspx_page_context))
+        return;
+      out.write("\r\n");
       out.write("                    ");
 
-                        out.print("<font color='green'/>" + session.getAttribute("Role") + "</font>");
+                            String role = session.getAttribute("Role").toString();
+                            String lan = session.getAttribute("language").toString();
+                            if(role.equals("klant") && lan.contains("en") ){
+                                role = "customer";
+                            }
+                            else if(role.equals("fotograaf") && lan.contains("en")){
+                                role = "Photographer";
+                            }
+                        out.print("<font color='green'/>" + role + "</font>");
                     } else {
                     
       out.write("\r\n");
       out.write("                    ");
-      if (_jspx_meth_fmt_message_0(_jspx_page_context))
+      if (_jspx_meth_fmt_message_1(_jspx_page_context))
         return;
       out.write("\r\n");
       out.write("                    ");
@@ -275,13 +286,31 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
     org.apache.taglibs.standard.tag.rt.fmt.MessageTag _jspx_th_fmt_message_0 = (org.apache.taglibs.standard.tag.rt.fmt.MessageTag) _jspx_tagPool_fmt_message_key_nobody.get(org.apache.taglibs.standard.tag.rt.fmt.MessageTag.class);
     _jspx_th_fmt_message_0.setPageContext(_jspx_page_context);
     _jspx_th_fmt_message_0.setParent(null);
-    _jspx_th_fmt_message_0.setKey("login_mess");
+    _jspx_th_fmt_message_0.setKey("loggedIn");
     int _jspx_eval_fmt_message_0 = _jspx_th_fmt_message_0.doStartTag();
     if (_jspx_th_fmt_message_0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
       _jspx_tagPool_fmt_message_key_nobody.reuse(_jspx_th_fmt_message_0);
       return true;
     }
     _jspx_tagPool_fmt_message_key_nobody.reuse(_jspx_th_fmt_message_0);
+    return false;
+  }
+
+  private boolean _jspx_meth_fmt_message_1(PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  fmt:message
+    org.apache.taglibs.standard.tag.rt.fmt.MessageTag _jspx_th_fmt_message_1 = (org.apache.taglibs.standard.tag.rt.fmt.MessageTag) _jspx_tagPool_fmt_message_key_nobody.get(org.apache.taglibs.standard.tag.rt.fmt.MessageTag.class);
+    _jspx_th_fmt_message_1.setPageContext(_jspx_page_context);
+    _jspx_th_fmt_message_1.setParent(null);
+    _jspx_th_fmt_message_1.setKey("login_mess");
+    int _jspx_eval_fmt_message_1 = _jspx_th_fmt_message_1.doStartTag();
+    if (_jspx_th_fmt_message_1.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_fmt_message_key_nobody.reuse(_jspx_th_fmt_message_1);
+      return true;
+    }
+    _jspx_tagPool_fmt_message_key_nobody.reuse(_jspx_th_fmt_message_1);
     return false;
   }
 }

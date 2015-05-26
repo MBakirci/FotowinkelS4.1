@@ -70,7 +70,16 @@ public class FTPUpload {
                 return;
             }
             // Creates a directory
-            String dirToCreate = "/"+ foldername + "/" + path;
+            String dirToCreate;
+            // Creates a directory
+            if(foldername.equals(path))
+            {
+            dirToCreate = "/"+ foldername ;
+            }
+            else
+            {
+            dirToCreate = "/"+ foldername + "/" + path;
+            }
             Test.Categorieën categorieën = new Test.Categorieën();
 
             categorieën.CreateCategory(path, foldername, dirToCreate);
