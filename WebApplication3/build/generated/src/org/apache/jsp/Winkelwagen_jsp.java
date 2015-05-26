@@ -153,13 +153,80 @@ public final class Winkelwagen_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                </div>\r\n");
       out.write("            </div>\r\n");
       out.write("        </div>\r\n");
-      out.write("        <div class=\"container\">\r\n");
+      out.write("                                <div class=\"container\">\r\n");
       out.write("            <div class=\"row\">\r\n");
       out.write("                <div class=\"col-md-12\">\r\n");
-      out.write("                    <a href=\"#\" class=\"btn btn-primary\"> Afrekenen <span class=\"glyphicon glyphicon-plus-sign\"></span></a>\r\n");
-      out.write("                </div>\r\n");
+      out.write("                    <!--    Paypal Test Account\r\n");
+      out.write("        Email:      JantjeContantje@Sandbox.nl  \r\n");
+      out.write("        Password:   Sandbox013-->\r\n");
+      out.write("\r\n");
+      out.write("    <!--Paypal information-->\r\n");
+      out.write("     <form name=\"_xclick\" target=\"paypal\" action=\"https://www.sandbox.paypal.com/us/cgi-bin/webscr\" method=\"post\" >\r\n");
+      out.write("    <input type=\"hidden\" name=\"cmd\" value=\"_cart\">\r\n");
+      out.write("    <input type=\"hidden\" name=\"upload\" value=\"1\">\r\n");
+      out.write("    <input type=\"hidden\" name=\"business\" value=\"Townofsalem@Sandbox.nl\">\r\n");
+      out.write("    <input name=\"return\" type=\"hidden\" value=\"http://localhost:8080/PaypalTest/Paypal.jsp\"  ><!-- Return URL -->\r\n");
+      out.write("    <input name=\"cancel_return\" type=\"hidden\" value=\"http://localhost:8080/PaypalTest/Paypal.jsp\"> <!-- Return URL on cancelling payment --> \r\n");
+      out.write("    <input type=\"hidden\" name=\"no_shipping\" value=\"0\">\r\n");
+      out.write("    <input type=\"hidden\" name=\"no_note\" value=\"1\">\r\n");
+      out.write("    <input type=\"hidden\" name=\"currency_code\" value=\"EUR\">\r\n");
+      out.write("    <input type=\"hidden\" name=\"lc\" value=\"AU\">\r\n");
+      out.write("    <input type=\"hidden\" name=\"bn\" value=\"PP-BuyNowBF\">\r\n");
+      out.write("    <input type=\"hidden\" name=\"rm\" value=\"2\">\r\n");
+      out.write("    <!--Items will be shown in the shopping cart-->\r\n");
+      out.write("    <!--TODO: Gather items from a list:-->\r\n");
+      out.write("    ");
+  
+    int productnummer=1;
+    //ArrayList<String> Productlist = new ArrayList<String>();
+  //  Productlist.add("Book/0.01/2");
+//    Productlist.add("Cat/0.01/1");
+    
+                        
+    for(Test.WinkelWagenItem s : itemlist)
+    {
+    
+      out.write("\r\n");
+      out.write("    \r\n");
+      out.write("    <input type=\"hidden\" name=\"item_name_");
+      out.print(productnummer);
+      out.write("\" value=");
+      out.print( s.getFotocode() );
+      out.write(">  \r\n");
+      out.write("    <input type=\"hidden\" name=\"amount_");
+      out.print(productnummer);
+      out.write("\" value=");
+      out.print( s.getPrijs().toString() );
+      out.write(">\r\n");
+      out.write("    <input type=\"hidden\" name=\"quantity_");
+      out.print(productnummer);
+      out.write("\" value=");
+      out.print( s.getAantal().toString() );
+      out.write(">\r\n");
+      out.write("    \r\n");
+      out.write("<!--<input type=\"hidden\" name=\"item_name_1\" value=\"HTML book\">  \r\n");
+      out.write("    <input type=\"hidden\" name=\"amount_1\" value=\"24.99\">\r\n");
+      out.write("    <input type=\"hidden\" name=\"quantity_1\" value=\"2\">-->\r\n");
+      out.write("    \r\n");
+      out.write("<!--<input type=\"hidden\" name=\"item_name_2\" value=\"Cat\">\r\n");
+      out.write("    <input type=\"hidden\" name=\"amount_2\" value=\"19.99\">\r\n");
+      out.write("    <input type=\"hidden\" name=\"quantity_2\" value=\"2\">-->\r\n");
+      out.write("    ");
+ productnummer++;
+    
+//  Check if form has been submitted (Check if paid)
+    if("POST".equalsIgnoreCase(request.getMethod()))
+    {
+        out.print("Ik ben hier geweest");
+    }
+    }
+      out.write("\r\n");
+      out.write("    \r\n");
+      out.write("    <input type=\"image\" src=\"https://www.paypalobjects.com/en_US/i/btn/x-click-but6.gif\" border=\"0\" name=\"submit\" alt=\"PayPal - The safer, easier way to pay online.\">\r\n");
+      out.write("     </form>\r\n");
+      out.write("              </div>\r\n");
       out.write("            </div>\r\n");
-      out.write("        </div>\r\n");
+      out.write("        </div>  \r\n");
       out.write("                        \r\n");
       out.write("        <script>\r\n");
       out.write("            $('a.edit').on('click', function () {\r\n");

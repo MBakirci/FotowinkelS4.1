@@ -89,13 +89,64 @@
                 </div>
             </div>
         </div>
-        <div class="container">
+                                <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <a href="#" class="btn btn-primary"> Afrekenen <span class="glyphicon glyphicon-plus-sign"></span></a>
-                </div>
+                    <!--    Paypal Test Account
+        Email:      JantjeContantje@Sandbox.nl  
+        Password:   Sandbox013-->
+
+    <!--Paypal information-->
+     <form name="_xclick" target="paypal" action="https://www.sandbox.paypal.com/us/cgi-bin/webscr" method="post" >
+    <input type="hidden" name="cmd" value="_cart">
+    <input type="hidden" name="upload" value="1">
+    <input type="hidden" name="business" value="Townofsalem@Sandbox.nl">
+    <input name="return" type="hidden" value="http://localhost:8080/PaypalTest/Paypal.jsp"  ><!-- Return URL -->
+    <input name="cancel_return" type="hidden" value="http://localhost:8080/PaypalTest/Paypal.jsp"> <!-- Return URL on cancelling payment --> 
+    <input type="hidden" name="no_shipping" value="0">
+    <input type="hidden" name="no_note" value="1">
+    <input type="hidden" name="currency_code" value="EUR">
+    <input type="hidden" name="lc" value="AU">
+    <input type="hidden" name="bn" value="PP-BuyNowBF">
+    <input type="hidden" name="rm" value="2">
+    <!--Items will be shown in the shopping cart-->
+    <!--TODO: Gather items from a list:-->
+    <%  
+    int productnummer=1;
+    //ArrayList<String> Productlist = new ArrayList<String>();
+  //  Productlist.add("Book/0.01/2");
+//    Productlist.add("Cat/0.01/1");
+    
+                        
+    for(Test.WinkelWagenItem s : itemlist)
+    {
+    %>
+    
+    <input type="hidden" name="item_name_<%=productnummer%>" value=<%= s.getFotocode() %>>  
+    <input type="hidden" name="amount_<%=productnummer%>" value=<%= s.getPrijs().toString() %>>
+    <input type="hidden" name="quantity_<%=productnummer%>" value=<%= s.getAantal().toString() %>>
+    
+<!--<input type="hidden" name="item_name_1" value="HTML book">  
+    <input type="hidden" name="amount_1" value="24.99">
+    <input type="hidden" name="quantity_1" value="2">-->
+    
+<!--<input type="hidden" name="item_name_2" value="Cat">
+    <input type="hidden" name="amount_2" value="19.99">
+    <input type="hidden" name="quantity_2" value="2">-->
+    <% productnummer++;
+    
+//  Check if form has been submitted (Check if paid)
+    if("POST".equalsIgnoreCase(request.getMethod()))
+    {
+        out.print("Ik ben hier geweest");
+    }
+    }%>
+    
+    <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/x-click-but6.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online.">
+     </form>
+              </div>
             </div>
-        </div>
+        </div>  
                         
         <script>
             $('a.edit').on('click', function () {
