@@ -165,8 +165,8 @@ public final class Winkelwagen_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("    <input type=\"hidden\" name=\"cmd\" value=\"_cart\">\r\n");
       out.write("    <input type=\"hidden\" name=\"upload\" value=\"1\">\r\n");
       out.write("    <input type=\"hidden\" name=\"business\" value=\"Townofsalem@Sandbox.nl\">\r\n");
-      out.write("    <input name=\"return\" type=\"hidden\" value=\"http://localhost:8080/PaypalTest/Paypal.jsp\"  ><!-- Return URL -->\r\n");
-      out.write("    <input name=\"cancel_return\" type=\"hidden\" value=\"http://localhost:8080/PaypalTest/Paypal.jsp\"> <!-- Return URL on cancelling payment --> \r\n");
+      out.write("    <input name=\"return\" type=\"hidden\" value=\"http://localhost:8080/WebApplication3/SuccesfullPayment.jsp\"  ><!-- Return URL -->\r\n");
+      out.write("    <input name=\"cancel_return\" type=\"hidden\" value=\"http://localhost:8080/WebApplication3/index.jsp\"> <!-- Return URL on cancelling payment --> \r\n");
       out.write("    <input type=\"hidden\" name=\"no_shipping\" value=\"0\">\r\n");
       out.write("    <input type=\"hidden\" name=\"no_note\" value=\"1\">\r\n");
       out.write("    <input type=\"hidden\" name=\"currency_code\" value=\"EUR\">\r\n");

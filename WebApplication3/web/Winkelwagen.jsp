@@ -101,8 +101,8 @@
     <input type="hidden" name="cmd" value="_cart">
     <input type="hidden" name="upload" value="1">
     <input type="hidden" name="business" value="Townofsalem@Sandbox.nl">
-    <input name="return" type="hidden" value="http://localhost:8080/PaypalTest/Paypal.jsp"  ><!-- Return URL -->
-    <input name="cancel_return" type="hidden" value="http://localhost:8080/PaypalTest/Paypal.jsp"> <!-- Return URL on cancelling payment --> 
+    <input name="return" type="hidden" value="http://localhost:8080/WebApplication3/SuccesfulPayment.jsp"  ><!-- Return URL -->
+    <input name="cancel_return" type="hidden" value="http://localhost:8080/WebApplication3/index.jsp"> <!-- Return URL on cancelling payment --> 
     <input type="hidden" name="no_shipping" value="0">
     <input type="hidden" name="no_note" value="1">
     <input type="hidden" name="currency_code" value="EUR">
