@@ -55,7 +55,7 @@
                             if(role.equals("klant") && lan.contains("en") ){
                                 role = "customer";
                             }
-                            else if(role.equals("fotograaf")){
+                            else if(role.equals("fotograaf") && lan.contains("en")){
                                 role = "Photographer";
                             }
                         out.print("<font color='green'/>" + role + "</font>");

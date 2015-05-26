@@ -312,7 +312,7 @@ public class FTPUpload {
         if (ts.verbindmetDatabase()) {
             PreparedStatement state = null;
             try {
-                String q = "INSERT INTO FW_FOTO (UniqueCode, CatID, FotograafID, FilePath, BasisPrijs, Winstmarge, GROEPCODE) VALUES(? ,?, ?, ?, ? , ?, ?)";
+                String q = "INSERT INTO FW_FOTO (UniqueCode, CatID, FotograafID, FilePath, BasisPrijs, GROEPCODE) VALUES(?, ?, ?, ? , ?, ?)";
                 state = ts.conn.prepareStatement(q);
                 state.setString(1, Uniq);
                 state.setInt(2, Cat);
@@ -320,7 +320,6 @@ public class FTPUpload {
                 state.setInt(3, Fotograafid);
                 state.setString(4, FilePath);
                 state.setDouble(5, Basis);
-                state.setInt(6, Winst);
                     final String alphabet = "0123456789ABCDEFGHJKLMNOPQRSTUVWXYZ";
                     final int N = alphabet.length();
                     String groepcode = "";
@@ -329,7 +328,7 @@ public class FTPUpload {
                     for (int i = 0; i < 10; i++) {
                         groepcode = groepcode + alphabet.charAt(r.nextInt(N));
                     }
-                state.setString(7, groepcode);
+                state.setString(6, groepcode);
                 //state.executeQuery();
                 state.executeUpdate();
               
