@@ -46,7 +46,7 @@
         
   <p>
       Dear <h3><%=session.getAttribute("Name")+","%></h3>
-      <h2 class="form-signin-heading">Thank you for you purchase on Fotowinkel.</h2>
+  <h2 class="form-signin-heading"><fmt:message key="PaymentSucces_Thanks"/></h2>
   
   <table style="font-size:11px;color:#333333;font-family:Trebuchet MS,Verdana,Arial,Helvetica,sans-serif;" cellspacing="4" width="420">
     <tbody>
@@ -61,7 +61,7 @@
 
         
         <tr><td width="200"><div align="left"><b><%=pd.getProductnaam()%>&nbsp;&nbsp;</b></div></td>
-               <td width="202"><%=pd.getPrijs()%>EUR</td></tr>
+               <td width="202"><%=pd.getPrijs()%><fmt:message key="PaymentSucces_EUR"/></td></tr>
         
         <%
         totaal=totaal+pd.getPrijs();
@@ -74,22 +74,22 @@
       <td width="202"><hr align="left" color="#cccccc" noshade="" size="1" width="180"></td>
     </tr>
     <tr>
-      <td width="200"><div style="font-size:18px;" align="left"><b>Totaal:</b></div></td>
-      <td width="202"><span style="font-size:18px;"><%=totaal%> EUR</span></td>
+      <td width="200"><div style="font-size:18px;" align="left"><b><fmt:message key="PaymentSucces_Totaal"/>:</b></div></td>
+      <td width="202"><span style="font-size:18px;"><%=totaal%> <fmt:message key="PaymentSucces_EUR"/></span></td>
     </tr>  
     <tr>
       <td width="200">&nbsp;</td>
       <td width="202">&nbsp;</td>
     </tr>
     <tr>
-      <td width="200"><div align="left"><b>Betalingsinfo:</b></div></td>
+      <td width="200"><div align="left"><b><fmt:message key="PaymentSucces_Betalingsinfo"/>:</b></div></td>
       <td width="202">&nbsp;</td>
     </tr>
     <tr>
-      <td width="200"><div align="left"><b>PayPal&nbsp;&nbsp;</b></div></td><td width="202"><%=totaal%> EUR</td>
+      <td width="200"><div align="left"><b>PayPal&nbsp;&nbsp;</b></div></td><td width="202"><%=totaal%> <fmt:message key="PaymentSucces_EUR"/></td>
     </tr>
     <tr>
-      <td width="200"><div align="left"><b>Bevestigingsdatum:  </b></div></td>
+      <td width="200"><div align="left"><b><fmt:message key="PaymentSucces_Bevestigingsdatum"/>:  </b></div></td>
       <td id="Datum" width="202"></td>
     </tr>
             <script>

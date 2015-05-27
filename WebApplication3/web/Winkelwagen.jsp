@@ -29,7 +29,7 @@
             <div class="row-fluid">
                 <div class="col-md-10 col-lg-offset-1">
                     <fieldset>
-                        <legend>Prijzen Instellen</legend>
+                        <legend><fmt:message key="Winkelwagen_legend"/>Prijzen Instellen</legend>
                     <%
                         Test.WinkelWagen winkelwagen = new Test.WinkelWagen();
 
@@ -38,11 +38,11 @@
                     %>
                     <table class="table table-bordered">
                         <tr>
-                            <th>Foto</th>
-                            <th>Fotocode</th>
-                            <th>Product Naam</th>
-                            <th>Aantal</th>
-                            <th>Prijs €</th>
+                            <th><fmt:message key="Winkelwagen_Foto"/></th>
+                            <th><fmt:message key="Winkelwagen_Fotocode"/></th>
+                            <th><fmt:message key="Winkelwagen_ProductNaam"/></th>
+                            <th><fmt:message key="Winkelwagen_Aantal"/></th>
+                            <th><fmt:message key="Winkelwagen_Prijs"/></th>
                             <th></th>
                             <th></th>
                         </tr>
@@ -57,12 +57,12 @@
 
                             </td>
                             <td id="naam"><%= es.getFotocode()%></td>
-                            <td id="beschrijing"> "Product Type = <%= es.getProducttype()%>" <br />
-                                "Kleur Type = <%= es.getKleurtype()%>" <br />
-                                "X-coördinatie = <%= es.getXcor() %>" <br />
-                                "Y-coördinatie = <%= es.getYcor() %>" <br />
-                                "Width = <%= es.getWamnt() %>" <br />
-                                "Height <%= es.getHamnt() %>" <br />
+                            <td id="beschrijing"> "<fmt:message key="Winkelwagen_ProductType"/> = <%= es.getProducttype()%>" <br />
+                                "<fmt:message key="Winkelwagen_KleurType"/> = <%= es.getKleurtype()%>" <br />
+                                "<fmt:message key="Winkelwagen_Xcoördinatie"/> = <%= es.getXcor() %>" <br />
+                                "<fmt:message key="Winkelwagen_Ycoördinatie"/> = <%= es.getYcor() %>" <br />
+                                "<fmt:message key="Winkelwagen_Width"/> = <%= es.getWamnt() %>" <br />
+                                "<fmt:message key="Winkelwagen_Height"/> <%= es.getHamnt() %>" <br />
                             </td>
                             <td id="details"><%= es.getAantal()%></td>
                             <td id="prijs"><%= es.getPrijs()%></td>
@@ -174,37 +174,37 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Product Aanpassen</h4>
+                    <h4 class="modal-title" id="myModalLabel"><fmt:message key="Winkelwagen_ProductAanpassen"/></h4>
                 </div>
                 <div class="modal-body">
                     <form class="form-horizontal" id="editModal" action="ShoppingCart" method="Post">
                         <div class="form-group">
-                            <label class="control-label col-sm-2" for="id1">ID:</label>
+                            <label class="control-label col-sm-2" for="id1"><fmt:message key="Winkelwagen_ID"/>:</label>
                             <div class="col-sm-4">
                                 <input type="number" class="form-control" name="id1" id="id1" readonly >
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-2" for="naam1">Fotocode:</label>
+                            <label class="control-label col-sm-2" for="naam1"><fmt:message key="Winkelwagen_Fotocode"/>:</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" name="naam1" id="naam1" required>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-2" for="details1">Aantal:</label>
+                            <label class="control-label col-sm-2" for="details1"><fmt:message key="Winkelwagen_Aantal"/>:</label>
                             <div class="col-sm-10">          
                                 <input type="text" class="form-control" name="details1" id="details1">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-2" for="prijs1">Prijs:</label>
+                            <label class="control-label col-sm-2" for="prijs1"><fmt:message key="Winkelwagen_Prijs2"/>:</label>
                             <div class="col-sm-10">          
                                 <input type="number" step="0.01" class="form-control" name="prijs1" id="prijs1" required>
                             </div>
                         </div>
                         <div class="form-group">    
                             <div class="col-sm-offset-2 col-sm-10">
-                                <button type="submit" name="btnBewerkt" class="btn btn-primary">Bewerk</button>
+                                <button type="submit" name="btnBewerkt" class="btn btn-primary"><fmt:message key="Winkelwagen_Bewerk"/></button>
                             </div>
                         </div>
                     </form>
