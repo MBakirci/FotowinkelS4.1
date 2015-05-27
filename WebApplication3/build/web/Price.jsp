@@ -13,14 +13,14 @@
     <html>
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-            <title>Prijzen instellen</title>
+            <title><fmt:message key="Price_Titel"/></title>
         </head>
         <body>
             <div class="container-fluid">
                 <div class="row-fluid">
                     <div class="col-md-10 col-lg-offset-1">
                         <fieldset>
-                            <legend>Prijzen Instellen</legend>
+                            <legend><fmt:message key="Price_Legend"/></legend>
                         <%
                             PriceSettings opp = new PriceSettings();
                             ResultSet rs = opp.getallProductTypes();
@@ -28,9 +28,9 @@
                         <table class="table table-bordered">
                             <tr>
                                 <th></th>
-                                <th>Product Naam</th>
-                                <th>Details</th>
-                                <th>Prijs €</th>
+                                <th><fmt:message key="Price_ProductNaam"/></th>
+                                <th><fmt:message key="Price_Details"/></th>
+                                <th><fmt:message key="Price_PrijsEUR"/></th>
                                 <th></th>
                                 <th></th>
                             </tr>
@@ -74,7 +74,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <a href="#" class="btn btn-primary edit"> Product Prijs Toevoegen <span class="glyphicon glyphicon-plus-sign"></span></a>
+                    <a href="#" class="btn btn-primary edit"><fmt:message key="Price_PrijsToevoegen"/><span class="glyphicon glyphicon-plus-sign"></span></a>
                 </div>
             </div>
         </div>
@@ -102,37 +102,37 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">Product Aanpassen</h4>
+                        <h4 class="modal-title" id="myModalLabel"><fmt:message key="Price_ProductAanpassen"/></h4>
                     </div>
                     <div class="modal-body">
                         <form class="form-horizontal" id="editModal">
                             <div class="form-group">
-                                <label class="control-label col-sm-2" for="id1">ID:</label>
+                                <label class="control-label col-sm-2" for="id1"><fmt:message key="Price_ID"/>:</label>
                                 <div class="col-sm-4">
                                     <input type="number" class="form-control" name="id1" id="id1" readonly >
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-sm-2" for="naam1">*Naam:</label>
+                                <label class="control-label col-sm-2" for="naam1">*<fmt:message key="Price_Naam"/>:</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" name="naam1" id="naam1" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-sm-2" for="details1">Details:</label>
+                                <label class="control-label col-sm-2" for="details1"><fmt:message key="Price_Details"/>:</label>
                                 <div class="col-sm-10">          
                                     <input type="text" class="form-control" name="details1" id="details1">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-sm-2" for="prijs1">*Prijs:</label>
+                                <label class="control-label col-sm-2" for="prijs1">*<fmt:message key="Price_Prijs"/>:</label>
                                 <div class="col-sm-10">          
                                     <input type="number" step="0.01" class="form-control" name="prijs1" id="prijs1" required>
                                 </div>
                             </div>
                             <div class="form-group">        
                                 <div class="col-sm-offset-2 col-sm-10">
-                                    <button type="submit" name="btnBewerkt" class="btn btn-primary">Bewerk</button>
+                                    <button type="submit" name="btnBewerkt" class="btn btn-primary"><fmt:message key="Price_Bewerk"/></button>
                                 </div>
                             </div>
                         </form>
