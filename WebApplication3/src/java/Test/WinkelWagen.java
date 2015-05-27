@@ -10,6 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 import static javafx.scene.input.KeyCode.T;
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -90,4 +91,8 @@ public class WinkelWagen {
         }
         }
         }
+    
+    public String getURLWithContextPath(HttpServletRequest request) {
+    return request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
+    }
 }
