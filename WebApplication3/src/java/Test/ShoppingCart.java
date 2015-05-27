@@ -7,8 +7,12 @@ package Test;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -84,9 +88,58 @@ private RequestDispatcher rd;
         } else if (request.getParameter("btnBewerkt") != null) {
             winkelwagen.ChangeItem(request.getParameter("naam1"), Integer.parseInt(request.getParameter("details1")));
         } else if (request.getParameter("addtocart") != null) {
-            winkelwagen.AddItem(request.getParameter("fotoimage"), 1, "normal", "foto", 20.30, request.getParameter("fotoimage"));
+            winkelwagen.AddItem(request.getParameter("fotoimage"), 1, "Normaal", "Afdruk", 4.95, request.getParameter("fotoimage"), 0.0 , 0.0, 0.0, 0.0 );
         } else {
-            winkelwagen.AddItem(request.getParameter("naam"), 2, "groen", "kat", 20.30, request.getParameter("foto"));
+            String waarde = request.getParameter("Soort2");
+            String waarde2 = request.getParameter("Type");
+
+            String QString = request.getParameter("fotoimage").toString();
+            Test.Photo photo = new Test.Photo();
+            String link = "";
+            Test.ProductPage pp = new Test.ProductPage();
+            ArrayList<Double> typePrices = new ArrayList<Double>();
+            ArrayList<String> typeNames = new ArrayList<String>();
+            String basePrice = "";
+            ArrayList<String> colorNames = new ArrayList<String>();
+            ArrayList<Double> colorPrices = new ArrayList<Double>();
+
+            if (!QString.equals("") && !QString.equals(null)) {
+                try {
+                 
+                    typePrices = pp.getTypePrice(); //Get current type prices
+                    typeNames = pp.getTypeName();
+                    basePrice = pp.getBasePrice(QString);
+                    colorNames = pp.getColorName();
+                    colorPrices = pp.getColorPrice();
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(ShoppingCart.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InstantiationException ex) {
+                    Logger.getLogger(ShoppingCart.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(ShoppingCart.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IllegalAccessException ex) {
+                    Logger.getLogger(ShoppingCart.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+            Double Xcor = 0.0;
+            Double Ycor = 0.0;
+            Double wamnt = 0.0;
+            Double hamnt = 0.0;
+                   
+            String cropwaarde = request.getParameter("xcor");
+            if(!cropwaarde.equals("null"))
+            {
+            Xcor = Double.parseDouble(request.getParameter("xcor"));
+            Ycor = Double.parseDouble(request.getParameter("ycor"));
+            wamnt = Double.parseDouble(request.getParameter("wamnt"));
+            hamnt = Double.parseDouble(request.getParameter("hamnt"));
+            }
+            String soortprod = typeNames.get(Integer.parseInt(waarde));
+            String soortkleur = colorNames.get(Integer.parseInt(waarde2));
+            Double prijskleur = colorPrices.get(Integer.parseInt(waarde2));
+           Double prijsprod = typePrices.get(Integer.parseInt(waarde));
+          winkelwagen.AddItem(request.getParameter("fotoimage"),  Integer.parseInt(request.getParameter("aantalitems")), soortkleur, soortprod, prijskleur + prijsprod, request.getParameter("fotoimage"), Xcor, Ycor, wamnt, hamnt);
         }
 
         if (request.getParameter("addtocart") != null) {
