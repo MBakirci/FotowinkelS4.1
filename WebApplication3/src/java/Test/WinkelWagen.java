@@ -67,10 +67,12 @@ public class WinkelWagen {
         return itemlist;
     }
 
-    public void AddItem(String productnaam, Integer aantal, String kleurtype, String producttype, Double prijs, String fotocode) {
-        Test.WinkelWagenItem item = new Test.WinkelWagenItem(productnaam, aantal, kleurtype, producttype, prijs, fotocode);
-if(itemlist.size() == 0)
-        {
+    public void AddItem(String productnaam, Integer aantal, String kleurtype, String producttype, Double prijs, String fotocode, Double X, Double Y, Double wid, Double hei) {
+        Test.WinkelWagenItem item = new Test.WinkelWagenItem(productnaam, aantal, kleurtype, producttype, prijs, fotocode, X, Y, wid, hei);
+        
+        int add = 0;
+        if(itemlist.size() == 0)
+    {
             itemlist.add(item);
         }
         else
@@ -79,13 +81,13 @@ if(itemlist.size() == 0)
             if(productnaam.equals(es.getProductnaam()) && kleurtype.equals(es.getKleurtype()) && producttype.equals(es.getProducttype()))
             {
             es.setAantal(es.getAantal() + aantal);
-            }
-            else
-            {
-               itemlist.add(item); 
+            add = 1;
             }
         }
-
+        if(add== 0)
+        {
+            itemlist.add(item);
+        }
         }
         }
 }

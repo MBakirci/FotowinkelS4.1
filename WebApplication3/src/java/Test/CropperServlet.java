@@ -32,7 +32,7 @@ public class CropperServlet extends HttpServlet {
     System.out.println(x1+" "+y1+" "+w+" "+h);
     
     //Get the file name from the server
-    String file=request.getParameter("file");
+    String file= request.getParameter("file");
         
     //Get the buffered image reference
     URL url = new URL(file);
@@ -52,11 +52,15 @@ public class CropperServlet extends HttpServlet {
     
     //delete temp file after upload
     tmp.delete();
-    
+     
+    String ftppath = "Henk@yolo.nl" + "/" + name;
+    String teste = request.getParameter("photoid");
+            
     //Sending the output to the client by showing the cropped image with dimensions
     PrintWriter printer=response.getWriter();
     System.out.println("Bestand geupload met hoogte: " + h + "en breedte: " + w);
     response.setContentType("text/html");
+    response.sendRedirect("ProductPage.jsp?fotoid=" + request.getParameter("photoid") + "&cropid=" + ftppath + "&xcor=" + x1+ "&ycor=" +y1+ "&wamnt="+w+"&hamnt="+h );
   }
   
   
