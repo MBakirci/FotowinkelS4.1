@@ -19,7 +19,7 @@
         <meta name="author" content="">
         <link rel="icon" href="favicon.ico">
 
-        <title>Fotowinkel</title>
+        <title><fmt:message key='Index_Titel'/></title>
 
         <!-- Bootstrap core CSS -->
         <link href="CSS/bootstrap.min.css" rel="stylesheet" type="text/css"/>
@@ -83,7 +83,7 @@
             <div class="row">
                 <div class="col-lg-4">
                     <p>
-                        Today's date: <%=(new java.util.Date()).toLocaleString()%>
+                        <fmt:message key='Index_Date'/><%=(new java.util.Date()).toLocaleString()%>
                     </p>          
                     <h2>Safari bug warning!</h2>
                     <p class="text-danger">As of v8.0, Safari exhibits a bug in which resizing your browser horizontally causes rendering errors in the justified nav that are cleared upon refreshing.</p>
@@ -104,7 +104,7 @@
 
             <!-- Site footer -->
             <footer class="footer">
-                <p>&copy; Company 2014</p>
+                <p><fmt:message key='footer'/></p>
             </footer>
 
         </div> <!-- /container -->
