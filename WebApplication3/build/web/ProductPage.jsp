@@ -26,24 +26,40 @@
     </head>
     <body>
         <%
-            String QString = request.getParameter("fotoid").toString();
-            // String QString = "213"; //For Debug
+            String link;
+            String QString;
             Test.Photo photo = new Test.Photo();
-            String link = "";
             Test.ProductPage pp = new Test.ProductPage();
             ArrayList<Double> typePrices = new ArrayList<Double>();
             ArrayList<String> typeNames = new ArrayList<String>();
             String basePrice = "";
             ArrayList<String> colorNames = new ArrayList<String>();
             ArrayList<Double> colorPrices = new ArrayList<Double>();
+            
+            if (request.getParameter("cropid") != null) {
+                QString = request.getParameter("fotoid").toString();
+                link = "";
 
-            if (!QString.equals("") && !QString.equals(null)) {
-                link = photo.convertCodeToLink(QString); //Get http link for image source
-                typePrices = pp.getTypePrice(); //Get current type prices
-                typeNames = pp.getTypeName();
-                basePrice = pp.getBasePrice(QString);
-                colorNames = pp.getColorName();
-                colorPrices = pp.getColorPrice();
+                if (!QString.equals("") && !QString.equals(null)) {
+                    link = photo.convertCodeToLink(QString); //Get http link for image source
+                    typePrices = pp.getTypePrice(); //Get current type prices
+                    typeNames = pp.getTypeName();
+                    basePrice = pp.getBasePrice(QString);
+                    colorNames = pp.getColorName();
+                    colorPrices = pp.getColorPrice();
+                }
+            } else {
+                QString = request.getParameter("fotoid").toString();
+                link = "";
+
+                if (!QString.equals("") && !QString.equals(null)) {
+                    link = photo.convertCodeToLink(QString); //Get http link for image source
+                    typePrices = pp.getTypePrice(); //Get current type prices
+                    typeNames = pp.getTypeName();
+                    basePrice = pp.getBasePrice(QString);
+                    colorNames = pp.getColorName();
+                    colorPrices = pp.getColorPrice();
+                }
             }
         %>
         <script>
@@ -81,7 +97,8 @@
                             <div class="img-container">
                                 <img src="<%=link%>" alt="Picture">
                             </div>
-                            <form action="Cropper" method="get">             
+                            <form action="Cropper" method="get">      
+                                <input type="hidden" value="<%= QString%>" name="photoid">
                                 <!-- <h3 class="page-header">Data:</h3> -->                            
                                 <input class="form-control" id="dataX" name="dataX" type="hidden">
                                 <input class="form-control" id="dataY" name="dataY" type="hidden" >
@@ -91,32 +108,11 @@
                                 <input type="submit" class="btn btn-success" value="Crop">
                             </form>
                         </div>
-                        <div class="col-md-3">
-                        </div>
                     </div>
                 </div>
             </div>
         </div><!--<button class="btn btn-primary" data-toggle="modal" data-target="#cropper-example-2-modal" type="button">Launch the demo</button>-->
-        <script>
-            var $image = $('#cropper-example-2 > img'),
-                    cropBoxData,
-                    canvasData;
-
-            $('#cropper-example-2-modal').on('shown.bs.modal', function () {
-                $image.cropper({
-                    autoCropArea: 0.5,
-                    built: function () {
-                        // Strict mode: set crop box data first
-                        $image.cropper('setCropBoxData', cropBoxData);
-                        $image.cropper('setCanvasData', canvasData);
-                    }
-                });
-            }).on('hidden.bs.modal', function () {
-                cropBoxData = $image.cropper('getCropBoxData');
-                canvasData = $image.cropper('getCanvasData');
-                $image.cropper('destroy');
-            });
-        </script>
+        
 
         <div class="container-fluid">
             <div class="content-wrapper">	
@@ -125,7 +121,11 @@
                         <div class="col-md-4">
                             <div class="product col-md-8 service-image-left">
                                 <center>
+                                    <% if (request.getParameter("cropid") != null) {%>
+                                    <img height="200" width="200" id="productFoto" src="ftp://212.64.126.219:9942/<%= request.getParameter("cropid") %>"/>
+                                    <% } else {%>
                                     <img height="200" width="200" id="productFoto" src="<%=link%>"/>
+                                    <% } %>
                                 </center>
                             </div>
                         </div>
@@ -133,45 +133,54 @@
                             <div class="product-title">Foto: </div>
                             <div class="product-desc">U kan hier uw foto's aanpassen, en vervolgens in uw winkelwagen stoppen.</div>
                             <hr>
-                            <div class="product-title">Productsoort</div>
-                            <select id="Soort2" name="Soort2" class="btn btn-default" onchange="updatePrice()">
-                                <%for (Double es : typePrices) {%>
-                                <option value="<%=typePrices.indexOf(es)%>"><%=typeNames.get(typePrices.indexOf(es)).toString()%> + <%=es.toString()%></option>
-                                <%
+                            <form action="ShoppingCart" method="POST">
+                                <div class="product-title">Productsoort</div>
+                                <select id="Soort2" name="Soort2" class="btn btn-default" onchange="updatePrice()">
+                                    <%for (Double es : typePrices) {%>
+                                    <option value="<%=typePrices.indexOf(es)%>"><%=typeNames.get(typePrices.indexOf(es)).toString()%> + <%=es.toString()%></option>
+                                    <%
                                     }%>
-                            </select>
-                            <div class="product-title" style="margin-top: 10px">Fotokleur</div>
-                            <select id="Type" name="Type" class="btn btn-default" onchange="changeColor();
-                                    updatePrice();">
-                                <%for (Double num : colorPrices) {
-                                %>
-                                <option value="<%=colorPrices.indexOf(num)%>"><%=colorNames.get(colorPrices.indexOf(num))%> + <%=num.toString()%></option>
-                                <%
-                                    }
-                                %>
-                            </select>
-                            <div class="product-title" style="margin-top: 10px;">Afbeelding aanpassen</div>
-                            <button class="btn btn-default" data-toggle="modal" data-target="#cropper-example-2-modal" type="button">Afbeelding bijnsnijden</button>
-                            <hr>
-                            <div class="product-title" style="margin-top: 10px;">Aantal</div>
-                            <input type="number" required=""/>
-                            <hr>
-                            <div id="Prijs" class="product-price"></div>
-                            <div>
-                                <select id="ddlCurr" name="ddlCurr">
-                                    <option value="EUR">EURO €</option>
-                                    <option value="USD">DOLLAR $</option>
-                                    <option value="GBP">POUND £</option>
-                                    <option value="TRY">LIRA &#8378</option>
                                 </select>
-                            </div>
-                            <div class="product-stock">In Voorraad</div>
-                            <hr>
-                            <div class="btn-group cart">
-                                <button type="button" class="btn btn-success">
-                                    Aan winkelwagen toevoegen 
-                                </button>
-                            </div>
+                                <div class="product-title" style="margin-top: 10px">Fotokleur</div>
+                                <select id="Type" name="Type" class="btn btn-default" onchange="changeColor();
+                                    updatePrice();">
+                                    <%for (Double num : colorPrices) {
+                                    %>
+                                    <option value="<%=colorPrices.indexOf(num)%>"><%=colorNames.get(colorPrices.indexOf(num))%> + <%=num.toString()%></option>
+                                    <%
+                                        }
+                                    %>
+                                </select>
+
+                                <div class="product-title" style="margin-top: 10px;">Afbeelding aanpassen</div>
+                                <button class="btn btn-default" data-toggle="modal" data-target="#cropper-example-2-modal" type="button">Afbeelding bijnsnijden</button>
+                                <hr>
+                                <div class="product-title" style="margin-top: 10px;">Aantal</div>
+                                <input type="number" name="aantalitems" required="" value="1"/>
+                                <hr>
+                                <div id="Prijs" name="price" class="product-price"></div>
+                                <div>
+                                    <select id="ddlCurr" name="ddlCurr">
+                                        <option value="EUR">EURO €</option>
+                                        <option value="USD">DOLLAR $</option>
+                                        <option value="GBP">POUND £</option>
+                                        <option value="TRY">LIRA &#8378</option>
+                                    </select>
+                                </div>
+                                <div class="product-stock">In Voorraad</div>
+                                <hr>
+                                <div class="btn-group cart">
+                                    <input type="hidden" class="form-control" name="fotoimage" value="<%= request.getParameter("fotoid")%>" id="fotoimage">
+                                    <input type="hidden" class="form-control" name="xcor" value="<%= request.getParameter("xcor")%>" id="xcor">
+                                    <input type="hidden" class="form-control" name="ycor" value="<%= request.getParameter("ycor")%>" id="ycor">
+                                    <input type="hidden" class="form-control" name="wamnt" value="<%= request.getParameter("wamnt")%>" id="wamnt">
+                                    <input type="hidden" class="form-control" name="hamnt" value="<%= request.getParameter("hamnt")%>" id="hamnt">
+                                    
+                                    <button type="submit" class="btn btn-success">
+                                        Aan winkelwagen toevoegen 
+                                    </button>
+                                </div>
+                            </form>
                         </div>
                     </div> 
                 </div>
@@ -279,7 +288,6 @@
 
         </script>
         <script src="js/jquery.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
         <script src="js/cropper.js"></script>
         <script src="js/main.js"></script>
     </body>
