@@ -112,26 +112,7 @@
                 </div>
             </div>
         </div><!--<button class="btn btn-primary" data-toggle="modal" data-target="#cropper-example-2-modal" type="button">Launch the demo</button>-->
-        <script>
-            var $image = $('#cropper-example-2 > img'),
-                    cropBoxData,
-                    canvasData;
-
-            $('#cropper-example-2-modal').on('shown.bs.modal', function () {
-                $image.cropper({
-                    autoCropArea: 0.5,
-                    built: function () {
-                        // Strict mode: set crop box data first
-                        $image.cropper('setCropBoxData', cropBoxData);
-                        $image.cropper('setCanvasData', canvasData);
-                    }
-                });
-            }).on('hidden.bs.modal', function () {
-                cropBoxData = $image.cropper('getCropBoxData');
-                canvasData = $image.cropper('getCanvasData');
-                $image.cropper('destroy');
-            });
-        </script>
+        
 
         <div class="container-fluid">
             <div class="content-wrapper">	
@@ -307,7 +288,6 @@
 
         </script>
         <script src="js/jquery.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
         <script src="js/cropper.js"></script>
         <script src="js/main.js"></script>
     </body>
