@@ -60,88 +60,84 @@ public class PriceSettings {
     public PriceSettings() {
     }
 
-    public ResultSet getallProductTypes() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-        String sql = "select * from FW_PRODUCT";
-        Test.Databaseconnector connection = new Test.Databaseconnector();
-        try {
-            if (connection.verbindmetDatabase()) {
-                PreparedStatement state = null;
-                state = connection.conn.prepareStatement(sql);
+    public ResultSet getallProductTypes() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+        Test.Databaseconnector ts = new Test.Databaseconnector();
+
+        if (ts.verbindmetDatabase()) {
+            PreparedStatement state = null;
+            try {
+                //Update gebruiker gedeelte van fotograaf
+                String q = "select * from FW_PRODUCT";
+                state = ts.conn.prepareStatement(q);
                 return state.executeQuery();
+
+            } catch (SQLException e) {
+                System.out.println(e.toString());
+            } finally {
+                if (state != null) {
+                    state.close();
+                }
+                ts.verbindingverbrekenmetDatabase();
             }
-        } catch (SQLException e) {
-            System.out.println(e.toString());
         }
         return null;
     }
 
-    public void GetType(int typeID) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-        String sqlGet = "Select * FW_PRODUCT WHERE PRODUCTID = ?";
-        String sql = "UPDATE FW_PRODUCT SET NAAM = ?, Details = ?, Prijs = ?, WHERE PRODUCTID = ?";
-        Test.Databaseconnector connection = new Test.Databaseconnector();
-        try {
-            if (connection.verbindmetDatabase()) {
-                PreparedStatement state = null;
-                state = connection.conn.prepareStatement(sql);
-                state.setInt(1, typeID);
-                ResultSet rs = state.executeQuery();
-                
-                if(rs.next()){
-                    this.typeID = typeID;
-                    this.typeNaam = rs.getString("NAAM");
-                    this.typeDetails = rs.getString("DETAILS");
-                    this.prijs = rs.getDouble("PRIJS");
-                }
-            }
-        } catch (SQLException e) {
-            System.out.println(e.toString());
-        }
-
-    }
-
-    public void EditProductType(int typeID) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public void EditProductType(int typeID) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         String sql = "UPDATE FW_PRODUCT SET NAAM = ?, Details = ?, Prijs = ? WHERE PRODUCTID = ? ";
         Test.Databaseconnector connection = new Test.Databaseconnector();
-        try {
-            if (connection.verbindmetDatabase()) {
-                PreparedStatement state = null;
+        if (connection.verbindmetDatabase()) {
+            PreparedStatement state = null;
+            try {
+
                 state = connection.conn.prepareStatement(sql);
                 state.setString(1, this.typeNaam);
-                if(this.typeDetails.length() > 0 ){
-                state.setString(2, this.typeDetails);
-                }
-                else{
-                     state.setString(2, "  ");
+                if (this.typeDetails.length() > 0) {
+                    state.setString(2, this.typeDetails);
+                } else {
+                    state.setString(2, "  ");
                 }
                 state.setDouble(3, this.prijs);
                 state.setInt(4, typeID);
                 //state.executeQuery();
                 state.executeUpdate();
+            } catch (SQLException e) {
+                System.out.println(e.toString());
+            } finally {
+                if (state != null) {
+                    state.close();
+                }
+                connection.verbindingverbrekenmetDatabase();
             }
-        } catch (SQLException e) {
-            System.out.println(e.toString());
         }
     }
-    
-     public void AddProductType() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+
+    public void AddProductType() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         String sql = "INSERT INTO FW_PRODUCT (NAAM, DETAILS, PRIJS) VALUES (?, ?, ?)";
         Test.Databaseconnector connection = new Test.Databaseconnector();
-        try {
-            if (connection.verbindmetDatabase()) {
-                PreparedStatement state = null;
+
+        if (connection.verbindmetDatabase()) {
+            PreparedStatement state = null;
+            try {
+
                 state = connection.conn.prepareStatement(sql);
                 state.setString(1, this.typeNaam);
-                if(this.typeDetails.length()>0){
-                state.setString(2, this.typeDetails);
-                }
-                else{
-                     state.setString(2, "   ");
+                if (this.typeDetails.length() > 0) {
+                    state.setString(2, this.typeDetails);
+                } else {
+                    state.setString(2, "   ");
                 }
                 state.setDouble(3, this.prijs);
                 state.executeQuery();
+            } catch (SQLException e) {
+                System.out.println(e.toString());
+            } finally {
+                if (state != null) {
+                    state.close();
+                }
+                connection.verbindingverbrekenmetDatabase();
             }
-        } catch (SQLException e) {
-            System.out.println(e.toString());
         }
+
     }
 }

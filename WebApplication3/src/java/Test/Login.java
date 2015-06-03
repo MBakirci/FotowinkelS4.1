@@ -54,6 +54,7 @@ public class Login {
                 if (state != null) {
                     state.close();
                 }
+                ts.verbindingverbrekenmetDatabase();
             }
         }
         return false;

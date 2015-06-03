@@ -88,7 +88,7 @@ private RequestDispatcher rd;
         } else if (request.getParameter("btnBewerkt") != null) {
             winkelwagen.ChangeItem(request.getParameter("naam1"), Integer.parseInt(request.getParameter("details1")));
         } else if (request.getParameter("addtocart") != null) {
-            winkelwagen.AddItem(request.getParameter("fotoimage"), 1, "Normaal", "Afdruk", 4.95, request.getParameter("fotoimage"), 0.0 , 0.0, 0.0, 0.0 );
+            winkelwagen.AddItem(request.getParameter("fotoimage"), 1, "Normaal", "Afdruk", 4.95, request.getParameter("fotoimage"), 0 , 0, 0, 0 );
         } else {
             String waarde = request.getParameter("Soort2");
             String waarde2 = request.getParameter("Type");
@@ -122,18 +122,18 @@ private RequestDispatcher rd;
                 }
             }
             
-            Double Xcor = 0.0;
-            Double Ycor = 0.0;
-            Double wamnt = 0.0;
-            Double hamnt = 0.0;
+            int Xcor = 0;
+            int Ycor = 0;
+            int wamnt = 0;
+            int hamnt = 0;
                    
             String cropwaarde = request.getParameter("xcor");
             if(!cropwaarde.equals("null"))
             {
-            Xcor = Double.parseDouble(request.getParameter("xcor"));
-            Ycor = Double.parseDouble(request.getParameter("ycor"));
-            wamnt = Double.parseDouble(request.getParameter("wamnt"));
-            hamnt = Double.parseDouble(request.getParameter("hamnt"));
+            Xcor = Integer.parseInt(request.getParameter("xcor"));
+            Ycor = Integer.parseInt(request.getParameter("ycor"));
+            wamnt = Integer.parseInt(request.getParameter("wamnt"));
+            hamnt = Integer.parseInt(request.getParameter("hamnt"));
             }
             String soortprod = typeNames.get(Integer.parseInt(waarde));
             String soortkleur = colorNames.get(Integer.parseInt(waarde2));

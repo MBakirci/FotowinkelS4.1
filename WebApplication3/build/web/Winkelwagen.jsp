@@ -51,6 +51,9 @@
                         <tr>
                             <td width="150px">
                                 <a class="thumbnail" href=<%=es%>>
+                                    <%  String test1 = es.getFotocode();
+                                    String test2 = es.getfoto().substring(es.getfoto().lastIndexOf("/") + 1, es.getfoto().lastIndexOf(".") + 4);
+                                    %>
                                     <img id="<%= es.getFotocode()%>" class="img-responsive" style="position: relative; top: 0; left: 0;" alt="test" width="100" height="100" style="z-index: -1" src="ftp://asror:asror@212.64.126.219:9942/THUMB/<%= es.getfoto().substring(es.getfoto().lastIndexOf("/") + 1, es.getfoto().lastIndexOf(".") + 4)%>" > 
 
                                 </a>

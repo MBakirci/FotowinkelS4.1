@@ -45,6 +45,7 @@ public class Adminbasisprijs {
                 if (state != null) {
                     state.close();
                 }
+                ts.verbindingverbrekenmetDatabase();
             }
         }
         return true;
@@ -74,6 +75,7 @@ public class Adminbasisprijs {
                     if (state != null) {
                         state.close();
                     }
+                    ts.verbindingverbrekenmetDatabase();
                 }
             }
         } catch (IllegalAccessException ex) {

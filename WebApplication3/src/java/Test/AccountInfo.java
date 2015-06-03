@@ -69,6 +69,7 @@ public class AccountInfo {
                     if (state != null) {
                         state.close();
                     }
+                    ts.verbindingverbrekenmetDatabase();
                 }
             }
         } catch (IllegalAccessException ex) {
@@ -114,6 +115,7 @@ public class AccountInfo {
                         if (state != null) {
                             state.close();
                         }
+                        ts.verbindingverbrekenmetDatabase();
                     }
                 }
             } catch (IllegalAccessException ex) {
@@ -146,6 +148,7 @@ public class AccountInfo {
                     if (state != null) {
                         state.close();
                     }
+                    ts.verbindingverbrekenmetDatabase();
                 }
             }
         } catch (IllegalAccessException ex) {

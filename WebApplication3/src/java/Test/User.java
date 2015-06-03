@@ -111,16 +111,17 @@ public class User {
 
     public User(String email, String wachtwoord,
             String voornaam, String tussenvoegsel,
-            String achternaam, String type) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+            String achternaam, String type) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         String q = "INSERT INTO FW_ACCOUNT (EMAIL,WACHTWOORD, ENABLED, VOORNAAM, TUSSENVOEGSEL,"
                 + " ACHTERNAAM, ATYPE) VALUES(? ,?, ?, ?, ? , ?,?)";
         Test.Databaseconnector connection = new Test.Databaseconnector();
+        PreparedStatement state = null;
         try {
             if (connection.verbindmetDatabase()) {
-                if(tussenvoegsel == null){
+                if (tussenvoegsel == null) {
                     tussenvoegsel = "";
                 }
-                PreparedStatement state = null;
+
                 state = connection.conn.prepareStatement(q);
                 this.eMail = email;
                 state.setString(1, email);
@@ -137,6 +138,11 @@ public class User {
             }
         } catch (SQLException e) {
             System.out.println(e.toString());
+        } finally {
+            if (state != null) {
+                state.close();
+            }
+            connection.verbindingverbrekenmetDatabase();
         }
     }
 
@@ -144,12 +150,13 @@ public class User {
             String postcode, String stad)
             throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException {
         User a = new User(this.eMail);
-                String sql = "Insert into FW_ACCOUNT_GEGEVENS(ACCOUNT_ID, TELEFOON, STRAAT, HUISNUMMER," +
-                                        " POSTCODE, STAD) VALUES(?, ?, ?, ?, ?, ?) ";
+        String sql = "Insert into FW_ACCOUNT_GEGEVENS(ACCOUNT_ID, TELEFOON, STRAAT, HUISNUMMER,"
+                + " POSTCODE, STAD) VALUES(?, ?, ?, ?, ?, ?) ";
         Test.Databaseconnector connection = new Test.Databaseconnector();
+        PreparedStatement state = null;
         try {
             if (connection.verbindmetDatabase()) {
-                PreparedStatement state = null;
+
                 state = connection.conn.prepareStatement(sql);
                 state.setString(1, a.iD);
                 state.setString(2, telefoon);
@@ -165,15 +172,24 @@ public class User {
             System.out.println(e.toString());
             return false;
         }
+        finally
+        {
+            if(state!= null)
+            {
+                state.close();
+            }
+            connection.verbindingverbrekenmetDatabase();
+        }
         return false;
     }
 
     public User(String email) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException {
         String sql = "Select * from FW_ACCOUNT where EMAIL = ?";
         Test.Databaseconnector connection = new Test.Databaseconnector();
+        PreparedStatement state = null;
         try {
             if (connection.verbindmetDatabase()) {
-                PreparedStatement state = null;
+                
                 state = connection.conn.prepareStatement(sql);
                 state.setString(1, email);
                 ResultSet rs = state.executeQuery();
@@ -190,15 +206,24 @@ public class User {
         } catch (SQLException e) {
             System.out.println(e.toString());
         }
+        finally
+        {
+            if(state!= null)
+            {
+                state.close();
+            }
+            connection.verbindingverbrekenmetDatabase();
+        }
     }
 
-    public boolean UpdateUser() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public boolean UpdateUser() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         String updateUser = "Update FW_ACCOUNT set VOORNAAM = ?, TUSSENVOEGSEL = ?, ACHTERNAAM = ? "
                 + "where ACCOUNT_ID = ?";
         Test.Databaseconnector connection = new Test.Databaseconnector();
+        PreparedStatement state = null;
         try {
             if (connection.verbindmetDatabase()) {
-                PreparedStatement state = null;
+                
                 state = connection.conn.prepareStatement(updateUser);
                 state.setString(1, this.voornaam);
                 state.setString(2, this.tussenvoegsel);
@@ -214,15 +239,24 @@ public class User {
             System.out.println(e.toString());
             return false;
         }
+        finally
+        {
+            if(state!= null)
+            {
+                state.close();
+            }
+            connection.verbindingverbrekenmetDatabase();
+        }
         return false;
     }
 
-    public void AdditionalInfo() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public void AdditionalInfo() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         String sql = "Select * from FW_ACCOUNT_GEGEVENS where ACCOUNT_ID = ?";
         Test.Databaseconnector connection = new Test.Databaseconnector();
+          PreparedStatement state = null;
         try {
             if (connection.verbindmetDatabase()) {
-                PreparedStatement state = null;
+              
                 state = connection.conn.prepareStatement(sql);
                 state.setInt(1, Integer.parseInt(iD));
                 ResultSet rs = state.executeQuery();
@@ -238,15 +272,23 @@ public class User {
         } catch (SQLException e) {
             System.out.println(e.toString());
         }
+        finally
+        {
+            if(state!= null)
+            {
+                state.close();
+            }
+            connection.verbindingverbrekenmetDatabase();
+        }
     }
 
-    private boolean UpdateAdditionalInfo() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+    private boolean UpdateAdditionalInfo() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         String updateAdditional = "Update FW_ACCOUNT_GEGEVENS set TELEFOON = ?, STRAAT = ?,"
                 + " HUISNUMMER = ?, POSTCODE = ?, STAD = ? where ACCOUNT_ID = ?";
         Test.Databaseconnector connection = new Test.Databaseconnector();
+        PreparedStatement state = null;
         try {
-            if (connection.verbindmetDatabase()) {
-                PreparedStatement state = null;
+            if (connection.verbindmetDatabase()) {   
                 state = connection.conn.prepareStatement(updateAdditional);
                 state.setString(1, this.telefoon);
                 state.setString(2, this.straat);
@@ -261,16 +303,24 @@ public class User {
             System.out.println(e.toString());
             return false;
         }
+        finally
+        {
+            if(state!= null)
+            {
+                state.close();
+            }
+            connection.verbindingverbrekenmetDatabase();
+        }
         return false;
     }
 
-    public boolean changePass(String newPassword) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public boolean changePass(String newPassword) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         if (newPassword.length() > 3) {
             String updatePassword = "Update FW_ACCOUNT set WACHTWOORD = ? where EMAIL = ?";
             Test.Databaseconnector connection = new Test.Databaseconnector();
+            PreparedStatement state = null;
             try {
-                if (connection.verbindmetDatabase()) {
-                    PreparedStatement state = null;
+                if (connection.verbindmetDatabase()) { 
                     state = connection.conn.prepareStatement(updatePassword);
                     state.setString(1, newPassword);
                     state.setString(2, this.eMail);
@@ -281,45 +331,69 @@ public class User {
                 System.out.println(e.toString());
                 return false;
             }
+            finally
+            {
+                if(state!= null)
+                {
+                    state.close();
+                }
+                connection.verbindingverbrekenmetDatabase();
+            }
         }
         return false;
     }
-    
-    public void SetProfitMargin(int margin) throws ClassNotFoundException, InstantiationException, IllegalAccessException{
+
+    public void SetProfitMargin(int margin) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         //if (this.type.toLowerCase() == "fotograaf"){
-            String sql = "UPDATE FW_ACCOUNT SET WINSTMARGE = ? WHERE EMAIL = ?";
-            Test.Databaseconnector connection = new Test.Databaseconnector();
-            try {
-                if (connection.verbindmetDatabase()) {
-                    PreparedStatement state = null;
-                    state = connection.conn.prepareStatement(sql);
-                    state.setInt(1, margin);
-                    state.setString(2, this.eMail);
-                    //state.executeQuery();
-                    state.executeUpdate();
-                }
-            } catch (SQLException e) {
-                System.out.println(e.toString());
+        String sql = "UPDATE FW_ACCOUNT SET WINSTMARGE = ? WHERE EMAIL = ?";
+        Test.Databaseconnector connection = new Test.Databaseconnector();
+        PreparedStatement state = null;
+        try {
+            if (connection.verbindmetDatabase()) {
+                state = connection.conn.prepareStatement(sql);
+                state.setInt(1, margin);
+                state.setString(2, this.eMail);
+                //state.executeQuery();
+                state.executeUpdate();
             }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        finally
+        {
+            if(state != null)
+            {
+                state.close();
+            }
+            connection.verbindingverbrekenmetDatabase();
+        }
         //}
     }
-    
-    public int GetProfitMargin() throws ClassNotFoundException, InstantiationException, IllegalAccessException{
-            String sql = "SELECT WINSTMARGE FROM FW_ACCOUNT WHERE EMAIL = ?";
-            Test.Databaseconnector connection = new Test.Databaseconnector();
-            try {
-                if (connection.verbindmetDatabase()) {
-                    PreparedStatement state = null;
-                    state = connection.conn.prepareStatement(sql);
-                    state.setString(1, this.eMail);
-                    ResultSet result = state.executeQuery();
-                    if(result.next()){
-                        return result.getInt("WINSTMARGE");
-                    }
+
+    public int GetProfitMargin() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+        String sql = "SELECT WINSTMARGE FROM FW_ACCOUNT WHERE EMAIL = ?";
+        Test.Databaseconnector connection = new Test.Databaseconnector();
+        PreparedStatement state = null;
+        try {
+            if (connection.verbindmetDatabase()) {        
+                state = connection.conn.prepareStatement(sql);
+                state.setString(1, this.eMail);
+                ResultSet result = state.executeQuery();
+                if (result.next()) {
+                    return result.getInt("WINSTMARGE");
                 }
-            } catch (SQLException e) {
-                System.out.println(e.toString());
             }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        finally
+        {
+            if(state!= null)
+            {
+                state.close();
+            }
+            connection.verbindingverbrekenmetDatabase();
+        }
         return 0;
     }
 }
