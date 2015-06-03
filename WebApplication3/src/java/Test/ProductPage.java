@@ -39,6 +39,7 @@ public class ProductPage {
                 if (state != null) {
                     state.close();
                 }
+                ts.verbindingverbrekenmetDatabase();
             }
         }
         return null;
@@ -67,6 +68,7 @@ public class ProductPage {
                 if (state != null) {
                     state.close();
                 }
+                ts.verbindingverbrekenmetDatabase();
             }
         }
         return null;
@@ -95,6 +97,7 @@ public class ProductPage {
                 if (state != null) {
                     state.close();
                 }
+                ts.verbindingverbrekenmetDatabase();
             }
         }
         return null;
@@ -124,6 +127,7 @@ public class ProductPage {
                 if (state != null) {
                     state.close();
                 }
+                ts.verbindingverbrekenmetDatabase();
             }
         }
         return null;
@@ -153,6 +157,7 @@ public class ProductPage {
                 if (state != null) {
                     state.close();
                 }
+                ts.verbindingverbrekenmetDatabase();
             }
         }
         return null;

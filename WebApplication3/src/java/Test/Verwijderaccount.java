@@ -25,21 +25,27 @@ public class Verwijderaccount {
         this.Naam = naam;
 
     }
-    public Verwijderaccount(){
-        
+
+    public Verwijderaccount() {
+
     }
 
-    public ResultSet getallUsers() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public ResultSet getallUsers() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         String sql = "select * from FW_ACCOUNT";
         Test.Databaseconnector connection = new Test.Databaseconnector();
+        PreparedStatement state = null;
         try {
             if (connection.verbindmetDatabase()) {
-                PreparedStatement state = null;
                 state = connection.conn.prepareStatement(sql);
                 return state.executeQuery();
             }
         } catch (SQLException e) {
             System.out.println(e.toString());
+        } finally {
+            if (state != null) {
+                state.close();
+            }
+            connection.verbindingverbrekenmetDatabase();
         }
         return null;
     }
@@ -80,6 +86,10 @@ public class Verwijderaccount {
                 if (state != null) {
                     state.close();
                 }
+                if (state1 != null) {
+                    state1.close();
+                }
+                ts.verbindingverbrekenmetDatabase();
             }
         }
 
@@ -123,6 +133,8 @@ public class Verwijderaccount {
                 if (state != null) {
                     state.close();
                 }
+
+                ts.verbindingverbrekenmetDatabase();
             }
         }
         return false;

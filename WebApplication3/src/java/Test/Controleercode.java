@@ -41,6 +41,7 @@ public class Controleercode {
                 if (state != null) {
                     state.close();
                 }
+                ts.verbindingverbrekenmetDatabase();
             }
         }
         return true;

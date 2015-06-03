@@ -60,6 +60,7 @@ public class Photo {
                 if (state != null) {
                     state.close();
                 }
+                ts.verbindingverbrekenmetDatabase();
             }
         }
         return null;
@@ -90,6 +91,7 @@ public class Photo {
                 if (state != null) {
                     state.close();
                 }
+                ts.verbindingverbrekenmetDatabase();
             }
         }
         return null;
@@ -119,6 +121,7 @@ public class Photo {
                 if (state != null) {
                     state.close();
                 }
+                ts.verbindingverbrekenmetDatabase();
             }
         }
         return null;
@@ -151,6 +154,7 @@ public class Photo {
                 if (state != null) {
                     state.close();
                 }
+                ts.verbindingverbrekenmetDatabase();
             }
         }
         return null;
@@ -183,6 +187,7 @@ public class Photo {
                 if (state != null) {
                     state.close();
                 }
+                ts.verbindingverbrekenmetDatabase();
             }
         }
         return null;
@@ -215,6 +220,7 @@ public class Photo {
                 if (state != null) {
                     state.close();
                 }
+                ts.verbindingverbrekenmetDatabase();
             }
         }
         return null;
@@ -244,6 +250,7 @@ public class Photo {
                     if (state != null) {
                         state.close();
                     }
+                    ts.verbindingverbrekenmetDatabase();
                 }
                 if (userType.equals("fotograaf")) {
                     return true;
@@ -281,6 +288,7 @@ public class Photo {
                     if (state != null) {
                         state.close();
                     }
+                    ts.verbindingverbrekenmetDatabase();
                 }
             }
         } catch (IllegalAccessException ex) {

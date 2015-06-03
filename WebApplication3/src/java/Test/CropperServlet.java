@@ -54,7 +54,6 @@ public class CropperServlet extends HttpServlet {
     tmp.delete();
      
     String ftppath = "Henk@yolo.nl" + "/" + name;
-    String teste = request.getParameter("photoid");
             
     //Sending the output to the client by showing the cropped image with dimensions
     PrintWriter printer=response.getWriter();
