@@ -4,26 +4,27 @@
     Author     : Gebruiker
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="java.util.Map"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="Test.PriceSettings"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:include page="Masterpage_final.jsp"></jsp:include>
 <%@include file="TaalSettings.jsp" %>
-    <!DOCTYPE html>
-    <html>
-        <head>
-            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-            <title><fmt:message key="Price_Titel"/></title>
-        </head>
-        <body>
-            <div class="container-fluid">
-                <div class="row-fluid">
-                    <div class="col-md-10 col-lg-offset-1">
-                        <fieldset>
-                            <legend><fmt:message key="Price_Legend"/></legend>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title><fmt:message key="Price_Titel"/></title>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="col-md-10 col-lg-offset-1">
+                    <fieldset>
+                        <legend><fmt:message key="Price_Legend"/></legend>
                         <%
                             PriceSettings opp = new PriceSettings();
-                            ResultSet rs = opp.getallProductTypes();
                         %>
                         <table class="table table-bordered">
                             <tr>
@@ -35,20 +36,20 @@
                                 <th></th>
                             </tr>
                             <%
-                                while (rs.next()) {
+                                for (Map.Entry<Integer, List<String>> productEntry : opp.getallProductTypes().entrySet()) {
                             %>
                             <tr>
-                                <td id="id" style="color:grey;"><%=rs.getString("PRODUCTID")%></td>
-                                <td id="naam"><%=rs.getString("NAAM")%></td>
-                                <td id="details"><%=rs.getString("DETAILS")%></td>
-                                <td id="prijs"><%=rs.getString("PRIJS")%></td>
+                                <td id="id" style="color:grey;"><%= productEntry.getKey()%></td>
+                                <td id="naam"><%= productEntry.getValue().get(0)%></td>
+                                <td id="details"><%= productEntry.getValue().get(1)%></td>
+                                <td id="prijs"><%= productEntry.getValue().get(2)%></td>
                                 <td>
                                     <form action="PriceServlet" method="post">
                                         <!-- Verwijder button met request naar servlet -->
                                         <button type="submit" class="btn btn-default btn-sm btn-danger">
                                             <span class="glyphicon glyphicon-trash"></span>
                                         </button>                                        
-                                        <input type="hidden" name="typeID" value="<%=rs.getString("PRODUCTID")%>" />
+                                        <input type="hidden" name="typeID" value="<%= productEntry.getKey()%>" />
                                     </form>
                                 </td>
                                 <td>
@@ -57,7 +58,7 @@
                                     <button type="button" class="btn btn-default btn-sm btn-primary" name="btnEdit" data-toggle="modal" data-target="#myModal">
                                         <span class="glyphicon glyphicon-edit"></span>
                                     </button> 
-                                    <!--<input type="hidden" name="type" value="<%=rs.getString("PRODUCTID")%>" />
+                                    <!--<input type="hidden" name="type" value="<%= productEntry.getKey()%>" />
                                     -->
                                     <a href="#" class="btn btn-primary edit"> <span class="glyphicon glyphicon-edit"></span></a>
 
@@ -86,6 +87,10 @@
                 var naam = $(this).closest('tr').find('#naam').html();
                 var details = $(this).closest('tr').find('#details').html();
                 var prijs = $(this).closest('tr').find('#prijs').html();
+                // and check if you set a price to the item, then convert the comma to a point decimal.
+                if (prijs != undefined) {
+                    prijs = parseFloat(prijs.replace(",", "."));
+                }
                 // and set them in the modal:
                 $(".modal-body #id1").val(id);
                 $(".modal-body #naam1").val(naam);
@@ -136,31 +141,31 @@
                                 </div>
                             </div>
                         </form>
-                        <% 
-            if (request.getParameter("btnBewerkt") != null) {
-                //Get Textbox
-                String sa = request.getParameter("id1");
-                if(sa.equals("")){
-                    sa = null;
-                }
-                if (sa != null ) {
-                    opp.setTypeNaam(request.getParameter("naam1"));
-                    opp.setTypeDetails(request.getParameter("details1"));
-                    opp.setPrijs(Double.parseDouble(request.getParameter("prijs1")));
-                    opp.setTypeID(Integer.parseInt(request.getParameter("id1")));
-                    int a = Integer.parseInt(request.getParameter("id1"));
-                    opp.EditProductType(a);
-                    response.sendRedirect("Price.jsp");
-                } else {
-                    opp.setTypeNaam(request.getParameter("naam1"));
-                    opp.setTypeDetails(request.getParameter("details1"));
-                    opp.setPrijs(Double.parseDouble(request.getParameter("prijs1")));
-                    opp.AddProductType();
-                    response.sendRedirect("Price.jsp");
-                }
-            }
-                
-        %>
+                        <%
+                            if (request.getParameter("btnBewerkt") != null) {
+                                //Get Textbox
+                                String sa = request.getParameter("id1");
+                                if (sa.equals("")) {
+                                    sa = null;
+                                }
+                                if (sa != null) {
+                                    opp.setTypeNaam(request.getParameter("naam1"));
+                                    opp.setTypeDetails(request.getParameter("details1"));
+                                    opp.setPrijs(Double.parseDouble(request.getParameter("prijs1")));
+                                    opp.setTypeID(Integer.parseInt(request.getParameter("id1")));
+                                    int a = Integer.parseInt(request.getParameter("id1"));
+                                    opp.EditProductType(a);
+                                    response.sendRedirect("Price.jsp");
+                                } else {
+                                    opp.setTypeNaam(request.getParameter("naam1"));
+                                    opp.setTypeDetails(request.getParameter("details1"));
+                                    opp.setPrijs(Double.parseDouble(request.getParameter("prijs1")));
+                                    opp.AddProductType();
+                                    response.sendRedirect("Price.jsp");
+                                }
+                            }
+
+                        %>
                     </div>
                 </div>
             </div>

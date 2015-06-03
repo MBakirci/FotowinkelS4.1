@@ -20,6 +20,10 @@ public class Verwijderaccount {
     //email
     private String Naam;
 
+    public String getNaam() {
+        return Naam;
+    }
+
     //constructor
     public Verwijderaccount(String naam) {
         this.Naam = naam;
@@ -30,27 +34,38 @@ public class Verwijderaccount {
 
     }
 
-    public ResultSet getallUsers() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+    public HashMap<String,String> getallUsers() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         String sql = "select * from FW_ACCOUNT";
         Test.Databaseconnector connection = new Test.Databaseconnector();
         PreparedStatement state = null;
         try {
             if (connection.verbindmetDatabase()) {
                 state = connection.conn.prepareStatement(sql);
-                return state.executeQuery();
+                ResultSet rs = state.executeQuery();
+                HashMap<String,String> enableList = new HashMap<>();
+                while (rs.next()) {
+                    String getActief = "Actief";
+                    if (!rs.getString("ENABLED").equals("1")) {
+                        getActief = "Non-Actief";
+                        String non = "background: #009966; color: #FFF;";
+                    }
+                    this.Naam = rs.getString("EMAIL");
+                    String result = getNaam() + " | " + getActief;
+                    enableList.put(getNaam(), result);
+                }
+                return enableList;    
             }
-        } catch (SQLException e) {
+            }catch (SQLException e) {
             System.out.println(e.toString());
-        } finally {
+        }finally {
             if (state != null) {
                 state.close();
             }
             connection.verbindingverbrekenmetDatabase();
         }
-        return null;
-    }
-
-    //methode die de status op nonactief zet
+            return null;
+        }
+        //methode die de status op nonactief zet
     public boolean Zetstatusnonactief() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         //db connectie maken
         Databaseconnector ts = new Databaseconnector();

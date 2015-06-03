@@ -5,9 +5,13 @@
  */
 package Test;
 
+import com.sun.tools.ws.api.TJavaGeneratorExtension;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.*;
 
 /**
  *
@@ -60,7 +64,7 @@ public class PriceSettings {
     public PriceSettings() {
     }
 
-    public ResultSet getallProductTypes() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+    public HashMap<Integer, List<String>> getallProductTypes() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         Test.Databaseconnector ts = new Test.Databaseconnector();
 
         if (ts.verbindmetDatabase()) {
@@ -69,8 +73,22 @@ public class PriceSettings {
                 //Update gebruiker gedeelte van fotograaf
                 String q = "select * from FW_PRODUCT";
                 state = ts.conn.prepareStatement(q);
-                return state.executeQuery();
-
+                HashMap<Integer, List<String>> map = new HashMap<Integer, List<String>>();
+                ResultSet rs = state.executeQuery();
+                while (rs.next()) {
+                    List<String> valSet = new ArrayList<String>();
+                    this.typeID = rs.getInt("PRODUCTID");
+                    this.typeNaam = rs.getString("NAAM");
+                    this.typeDetails = rs.getString("DETAILS");
+                    this.prijs = rs.getDouble("PRIJS");
+                    DecimalFormat df = new DecimalFormat("#.00");
+                    String Prijs = df.format(prijs);
+                    valSet.add(typeNaam);
+                    valSet.add(typeDetails);
+                    valSet.add(Prijs);
+                    map.put(typeID, valSet);
+                }
+                return map;
             } catch (SQLException e) {
                 System.out.println(e.toString());
             } finally {
