@@ -119,12 +119,12 @@
                 <div class="item-container">
                     <div class="container">	
                         <div class="col-md-4">
-                            <div class="product col-md-8 service-image-left">
+                            <div class="img-thumbnail col-md-8">
                                 <center>
                                     <% if (request.getParameter("cropid") != null) {%>
-                                    <img height="200" width="200" id="productFoto" src="ftp://212.64.126.219:9942/<%= request.getParameter("cropid") %>"/>
+                                    <img id="productFoto" src="ftp://212.64.126.219:9942/<%= request.getParameter("cropid") %>"/>
                                     <% } else {%>
-                                    <img height="200" width="200" id="productFoto" src="<%=link%>"/>
+                                    <img id="productFoto" src="<%=link%>"/>
                                     <% } %>
                                 </center>
                             </div>
