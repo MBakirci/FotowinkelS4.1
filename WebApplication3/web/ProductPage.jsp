@@ -35,7 +35,7 @@
             String basePrice = "";
             ArrayList<String> colorNames = new ArrayList<String>();
             ArrayList<Double> colorPrices = new ArrayList<Double>();
-            
+
             if (request.getParameter("cropid") != null) {
                 QString = request.getParameter("fotoid").toString();
                 link = "";
@@ -87,6 +87,22 @@
 
 
         </script>
+        <script>
+            function changeTheme() {
+                var e = document.getElementById("Soort2");
+                var prod = e.options[e.selectedIndex].text;
+                prod = prod.toLowerCase();
+                if (prod.indexOf("muis") >= 0) {
+                    document.getElementById("previewDiv").style.backgroundImage = "url(Images/Muismat.jpg)";
+                }
+                else if (prod.indexOf("t-shirt") >= 0) {
+                    document.getElementById("previewDiv").style.backgroundImage = "url(Images/tshirt.jpg)";
+                }
+                else {
+                    document.getElementById("previewDiv").style.backgroundImage = "";
+                }
+            }
+        </script>
 
         <div class="modal fade" id="cropper-example-2-modal">
             <div class="modal-dialog">
@@ -112,38 +128,37 @@
                 </div>
             </div>
         </div><!--<button class="btn btn-primary" data-toggle="modal" data-target="#cropper-example-2-modal" type="button">Launch the demo</button>-->
-        
+
 
         <div class="container-fluid">
             <div class="content-wrapper">	
                 <div class="item-container">
                     <div class="container">	
-                        <div class="col-md-4">
-                            <div class="img-thumbnail col-md-8">
-                                <center>
+                        <div class="col-md-6" style="height:200px; width:200px;">                            
+                            <div id="previewDiv" class="img-thumbnail col-md-12" style="background-size: contain; background-repeat: no-repeat; background-position: center">
                                     <% if (request.getParameter("cropid") != null) {%>
-                                    <img id="productFoto" src="ftp://212.64.126.219:9942/<%= request.getParameter("cropid") %>"/>
+                                    <img id="productFoto" src="ftp://212.64.126.219:9942/<%= request.getParameter("cropid")%>" style="position:absolute; left:25%; top:25%"/>
                                     <% } else {%>
-                                    <img id="productFoto" src="<%=link%>"/>
+                                    <img id="productFoto" src="<%=link%>" style="position:absolute; left:30%; top:20%"/>
                                     <% } %>
-                                </center>
                             </div>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-6">
                             <div class="product-title">Foto: </div>
                             <div class="product-desc">U kan hier uw foto's aanpassen, en vervolgens in uw winkelwagen stoppen.</div>
                             <hr>
                             <form action="ShoppingCart" method="POST">
                                 <div class="product-title">Productsoort</div>
-                                <select id="Soort2" name="Soort2" class="btn btn-default" onchange="updatePrice()">
+                                <select id="Soort2" name="Soort2" class="btn btn-default" onchange="updatePrice();
+                                        changeTheme();">
                                     <%for (Double es : typePrices) {%>
                                     <option value="<%=typePrices.indexOf(es)%>"><%=typeNames.get(typePrices.indexOf(es)).toString()%> + <%=es.toString()%></option>
                                     <%
-                                    }%>
+                                        }%>
                                 </select>
                                 <div class="product-title" style="margin-top: 10px">Fotokleur</div>
                                 <select id="Type" name="Type" class="btn btn-default" onchange="changeColor();
-                                    updatePrice();">
+                                        updatePrice();">
                                     <%for (Double num : colorPrices) {
                                     %>
                                     <option value="<%=colorPrices.indexOf(num)%>"><%=colorNames.get(colorPrices.indexOf(num))%> + <%=num.toString()%></option>
@@ -158,7 +173,7 @@
                                 <div class="product-title" style="margin-top: 10px;">Aantal</div>
                                 <input type="number" name="aantalitems" required="" value="1"/>
                                 <hr>
-                                <div id="Prijs" name="price" class="product-price"></div>
+                                <div id="Prijs" class="product-price"></div>
                                 <div>
                                     <select id="ddlCurr" name="ddlCurr">
                                         <option value="EUR">EURO €</option>
@@ -175,7 +190,7 @@
                                     <input type="hidden" class="form-control" name="ycor" value="<%= request.getParameter("ycor")%>" id="ycor">
                                     <input type="hidden" class="form-control" name="wamnt" value="<%= request.getParameter("wamnt")%>" id="wamnt">
                                     <input type="hidden" class="form-control" name="hamnt" value="<%= request.getParameter("hamnt")%>" id="hamnt">
-                                    
+
                                     <button type="submit" class="btn btn-success">
                                         Aan winkelwagen toevoegen 
                                     </button>

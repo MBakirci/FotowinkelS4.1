@@ -41,7 +41,7 @@
                     <%
                         Verwijderaccount vw = new Verwijderaccount();
                     %>
-                     <select  id="Email" name="Email" data-placeholder="Kies een account..." class="chosen-select" style="width:85%;" tabindex="2">
+                     <select  id="Email" name="Email" data-placeholder="<fmt:message key='adminpage_kies'/>" class="chosen-select" style="width:85%;" tabindex="2">
                          <option value=""></option>
                          <%
                         for(Map.Entry<String, String> userEntry : vw.getallUsers().entrySet())
@@ -57,10 +57,10 @@
                 </div>
                     
                 <div class="form-group col-md-6">
-                    <button class="btn btn-lg btn-primary btn-block" type="submit" name="btnNonactief"><fmt:message key='Adminpage_button_deactiveren'/></button>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit" name="btnNonactief"><fmt:message key='adminpage_deActivate'/></button>
                 </div>
                 <div class="form-group col-md-6">
-                    <button class="btn btn-lg btn-primary btn-block" type="submit" name="btnActief"><fmt:message key='Adminpage_button_activeren'/></button>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit" name="btnActief"><fmt:message key='adminpage_activate'/></button>
                 </div>
             </form>
 
