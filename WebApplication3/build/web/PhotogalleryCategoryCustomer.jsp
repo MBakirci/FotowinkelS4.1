@@ -15,7 +15,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Fotogallerij</title>
+        <title><fmt:message key="PhotogalleryCC_Title"/></title>
     </head>
     <body>
         <!-- <h1>Hello World!</h1>
@@ -31,7 +31,7 @@
                     <div class="row">
 
                         <div class="col-lg-12">
-                            <h1 class="page-header">Gallery</h1>
+                            <h1 class="page-header"><fmt:message key="PhotogalleryCC_H1"/>Gallery</h1>
                         </div>
                         <div class="col-lg-3 col-md-4 col-xs-6 thumb" style="position: relative">
                             <a class="thumbnail" href="PhotogalleryCatPhotosCustomer.jsp?cat=All">
@@ -84,7 +84,7 @@
             <footer>
                 <div class="row">
                     <div class="col-lg-12">
-                        <p>Copyright &copy; Your Website 2014</p>
+                        <p><fmt:message key="footer2"/></p>
                     </div>
                 </div>
             </footer>

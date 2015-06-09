@@ -57,6 +57,7 @@ public class Categorieën {
                 }
                 finally{
                     if (stament != null) { stament.close();}
+                    dbhelp.verbindingverbrekenmetDatabase();
                 }
             }
             return categories;
@@ -103,6 +104,7 @@ public class Categorieën {
                 if (state != null) {
                     state.close();
                 }
+                dbhelp.verbindingverbrekenmetDatabase();
             }
         }
     }
@@ -133,6 +135,7 @@ public class Categorieën {
                     if (state != null) {
                         state.close();
                     }
+                    dbhelp.verbindingverbrekenmetDatabase();
                 }
             }
         } catch (IllegalAccessException ex) {

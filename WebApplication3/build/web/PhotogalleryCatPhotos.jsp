@@ -27,7 +27,7 @@
                     <div class="row">
                         <% String cat = request.getParameter("cat").toString();%>
                         <div class="col-lg-12">
-                            <h1 class="page-header"><a href="PhotogalleryCategory.jsp" style="color: #000">Gallery</a> / <%=cat%></h1>
+                            <h1 class="page-header"><a href="PhotogalleryCategory.jsp" style="color: #000"><fmt:message key='Photogallery_Gallery'/></a> / <%=cat%></h1>
                         </div>
 
                         <%

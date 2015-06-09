@@ -30,7 +30,6 @@ $(function () {
         $dataHeight = $('#dataHeight'),
         $dataWidth = $('#dataWidth'),
         $dataRotate = $('#dataRotate'),
-        $file = $('#file'),
         options = {
           // data: {
           //   x: 420,
@@ -39,10 +38,10 @@ $(function () {
           //   height: 360
           // },
           // strict: false,
-          // responsive: false,
-          // checkImageOrigin: false
+          // responsive: true,
+          // checkImageOrigin: true,
 
-          // modal: false,
+           modal: true,
           // guides: false,
           // highlight: false,
           // background: false,
@@ -57,12 +56,12 @@ $(function () {
           // touchDragZoom: false,
           // mouseWheelZoom: false,
 
-          // minCanvasWidth: 320,
-          // minCanvasHeight: 180,
-          // minCropBoxWidth: 160,
-          // minCropBoxHeight: 90,
-          // minContainerWidth: 320,
-          // minContainerHeight: 180,
+           // minCanvasWidth: 320,
+           // minCanvasHeight: 180,
+           // minCropBoxWidth: 160,
+           // minCropBoxHeight: 90,
+           minContainerWidth: 568,
+           minContainerHeight: 466,
 
           // build: null,
           // built: null,
@@ -73,7 +72,6 @@ $(function () {
           // zoomout: null,
 
           aspectRatio: NaN,
-          preview: '.img-preview',
           crop: function (data) {
             $dataX.val(Math.round(data.x));
             $dataY.val(Math.round(data.y));

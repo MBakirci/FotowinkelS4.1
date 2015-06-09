@@ -40,20 +40,15 @@
                     <label class="control-label"><fmt:message key='Adminpage_Account'/></label>
                     <%
                         Verwijderaccount vw = new Verwijderaccount();
-                        ResultSet rs = vw.getallUsers();
                     %>
-                     <select  id="Email" name="Email" data-placeholder="Kies een account..." class="chosen-select" style="width:85%;" tabindex="2">
+                     <select  id="Email" name="Email" data-placeholder="<fmt:message key='adminpage_kies'/>" class="chosen-select" style="width:85%;" tabindex="2">
                          <option value=""></option>
                          <%
-                            while (rs.next()) {
-                                String getActief = "Actief";
-                                if (!rs.getString("ENABLED").equals("1")) {
-                                    getActief = "Non-Actief";
-                                    String non = "background: #009966; color: #FFF;";
-                                }
+                        for(Map.Entry<String, String> userEntry : vw.getallUsers().entrySet())
+                        {
                         %>
-                        <option value="<%=rs.getString("EMAIL")%>">
-                            <%=rs.getString("EMAIL")%> | <%=getActief%>
+                        <option value="<%= userEntry.getKey() %>">
+                            <%= userEntry.getValue() %>
                         </option>
                         <%
                             }
@@ -62,10 +57,10 @@
                 </div>
                     
                 <div class="form-group col-md-6">
-                    <button class="btn btn-lg btn-primary btn-block" type="submit" name="btnNonactief"><fmt:message key='Adminpage_button_deactiveren'/></button>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit" name="btnNonactief"><fmt:message key='adminpage_deActivate'/></button>
                 </div>
                 <div class="form-group col-md-6">
-                    <button class="btn btn-lg btn-primary btn-block" type="submit" name="btnActief"><fmt:message key='Adminpage_button_activeren'/></button>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit" name="btnActief"><fmt:message key='adminpage_activate'/></button>
                 </div>
             </form>
 

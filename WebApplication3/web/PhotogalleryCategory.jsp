@@ -45,7 +45,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12">
-                            <h1 class="page-header">Gallery</h1>
+                            <h1 class="page-header"><fmt:message key="PhotogalleryCat_H1"/>Gallery</h1>
                         </div>
                         <%
                             //session.setAttribute("Name", "Henk@yolo.nl");
@@ -85,7 +85,7 @@
             <footer>
                 <div class="row">
                     <div class="col-lg-12">
-                        <p>Copyright &copy; Your Website 2014</p>
+                        <p><fmt:message key="footer2"/></p>
                     </div>
                 </div>
             </footer>

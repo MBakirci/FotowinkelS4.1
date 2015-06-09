@@ -54,6 +54,7 @@ public class KlantInfo {
                     if (state != null) {
                         state.close();
                     }
+                    ts.verbindingverbrekenmetDatabase();
                 }
             }
         } catch (IllegalAccessException ex) {

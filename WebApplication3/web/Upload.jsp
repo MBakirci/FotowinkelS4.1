@@ -31,7 +31,7 @@
         <% Test.Categorieën categorieën = new Test.Categorieën(); %>
         <% Test.Databaseconnecter dbconnect = new Test.Databaseconnecter(); %>
 
-        <title>Upload</title>
+        <title><fmt:message key="Upload_Title"/></title>
 
         <!-- Bootstrap core CSS -->
         <link href="CSS/bootstrap.min.css" rel="stylesheet" type="text/css"/>
@@ -80,7 +80,7 @@
         <div class="container">
 
 
-            <h2>Upload</h2>
+            <h2><fmt:message key="Upload_H2"/></h2>
             <hr>
             <div>
                 <ul class='nav nav-wizard'>
@@ -98,17 +98,17 @@
                         <%
                         } else if (request.getParameter("cat") == null && request.getAttribute("bla") == null) {
                         %>
-                        <li  class='active'><a href='#step1' data-toggle="tab" class="not-active">Select folder</a></li>
-                        <li><a href='#step2' data-toggle="tab" class="not-active">Upload images</a></li>
-                        <li><a href='#step3' data-toggle="tab" class="not-active">Preview</a></li>
+                        <li  class='active'><a href='#step1' data-toggle="tab" class="not-active"><fmt:message key="Upload_Select"/></a></li>
+                        <li><a href='#step2' data-toggle="tab" class="not-active"><fmt:message key="Upload_Upload"/></a></li>
+                        <li><a href='#step3' data-toggle="tab" class="not-active"><fmt:message key="Upload_Preview"/></a></li>
                         </ul>
                         <div id="myTabContent" class="tab-content">
                             <div class="tab-pane fade active in" id="step1">
                                 <% } else if (progress != null || progress != "") {
                                     if (progress.length() > 5) {%>
-                                <li><a href='#step1' data-toggle="tab" class="not-active">Select folder</a></li>
-                                <li><a href='#step2' data-toggle="tab" class="not-active">Upload images</a></li>
-                                <li  class='active'><a href='#step3' data-toggle="tab" class="not-active">Preview</a></li>
+                                <li><a href='#step1' data-toggle="tab" class="not-active"><fmt:message key="Upload_Select"/></a></li>
+                                <li><a href='#step2' data-toggle="tab" class="not-active"><fmt:message key="Upload_Upload"/></a></li>
+                                <li  class='active'><a href='#step3' data-toggle="tab" class="not-active"><fmt:message key="Upload_Preview"/></a></li>
                                 </ul> 
                                 <div id="myTabContent" class="tab-content">
                                     <div class="tab-pane fade" id="step1">
@@ -151,14 +151,14 @@
                                         <form name="form1" id="form1" action="test" method="post" enctype="multipart/form-data">
                                             <input type="hidden" name="hiddenfield1" value="ok">
                                             <fieldset>
-                                                <h2>Files to upload:</h2>
+                                                <h2><fmt:message key="Upload_ToUpload"/></h2>
                                             </fieldset>
                                             <br/>
                                             <input type="file" class="file" name="file1" accept="image/*" multiple >
                                             <div id="buttonreplacement" style="display:none;">
                                                 <h3>
                                                     <img src="Images/spinner.gif" width="50" alt=""/>
-                                                    Uploading....
+                                                    <fmt:message key="Upload_Uploading"/>
                                                 </h3>
                                             </div>
                                         </form>
@@ -169,7 +169,7 @@
                                         <div class="form-group">
                                             <form action="NewCategoryUploaded" method="post">
                                                 <fieldset>
-                                                    <h2>Maak nieuwe categorie aan:</h2>
+                                                    <h2><fmt:message key="Upload_NewCat"/></h2>
                                                 </fieldset>
                                                 <input type="text" class="file" name="FolderCategory" value=""/>    
                                                 <input type="submit" class="btn btn-primary" value="Categorie Toevoegen!" name="btnCategory" />

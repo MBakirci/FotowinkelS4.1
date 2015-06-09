@@ -5,9 +5,13 @@
  */
 package Test;
 
+import com.sun.tools.ws.api.TJavaGeneratorExtension;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.*;
 
 /**
  *
@@ -60,88 +64,98 @@ public class PriceSettings {
     public PriceSettings() {
     }
 
-    public ResultSet getallProductTypes() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-        String sql = "select * from FW_PRODUCT";
-        Test.Databaseconnector connection = new Test.Databaseconnector();
-        try {
-            if (connection.verbindmetDatabase()) {
-                PreparedStatement state = null;
-                state = connection.conn.prepareStatement(sql);
-                return state.executeQuery();
+    public HashMap<Integer, List<String>> getallProductTypes() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+        Test.Databaseconnector ts = new Test.Databaseconnector();
+
+        if (ts.verbindmetDatabase()) {
+            PreparedStatement state = null;
+            try {
+                //Update gebruiker gedeelte van fotograaf
+                String q = "select * from FW_PRODUCT";
+                state = ts.conn.prepareStatement(q);
+                HashMap<Integer, List<String>> map = new HashMap<Integer, List<String>>();
+                ResultSet rs = state.executeQuery();
+                while (rs.next()) {
+                    List<String> valSet = new ArrayList<String>();
+                    this.typeID = rs.getInt("PRODUCTID");
+                    this.typeNaam = rs.getString("NAAM");
+                    this.typeDetails = rs.getString("DETAILS");
+                    this.prijs = rs.getDouble("PRIJS");
+                    DecimalFormat df = new DecimalFormat("#.00");
+                    String Prijs = df.format(prijs);
+                    valSet.add(typeNaam);
+                    valSet.add(typeDetails);
+                    valSet.add(Prijs);
+                    map.put(typeID, valSet);
+                }
+                return map;
+            } catch (SQLException e) {
+                System.out.println(e.toString());
+            } finally {
+                if (state != null) {
+                    state.close();
+                }
+                ts.verbindingverbrekenmetDatabase();
             }
-        } catch (SQLException e) {
-            System.out.println(e.toString());
         }
         return null;
     }
 
-    public void GetType(int typeID) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-        String sqlGet = "Select * FW_PRODUCT WHERE PRODUCTID = ?";
-        String sql = "UPDATE FW_PRODUCT SET NAAM = ?, Details = ?, Prijs = ?, WHERE PRODUCTID = ?";
-        Test.Databaseconnector connection = new Test.Databaseconnector();
-        try {
-            if (connection.verbindmetDatabase()) {
-                PreparedStatement state = null;
-                state = connection.conn.prepareStatement(sql);
-                state.setInt(1, typeID);
-                ResultSet rs = state.executeQuery();
-                
-                if(rs.next()){
-                    this.typeID = typeID;
-                    this.typeNaam = rs.getString("NAAM");
-                    this.typeDetails = rs.getString("DETAILS");
-                    this.prijs = rs.getDouble("PRIJS");
-                }
-            }
-        } catch (SQLException e) {
-            System.out.println(e.toString());
-        }
-
-    }
-
-    public void EditProductType(int typeID) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public void EditProductType(int typeID) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         String sql = "UPDATE FW_PRODUCT SET NAAM = ?, Details = ?, Prijs = ? WHERE PRODUCTID = ? ";
         Test.Databaseconnector connection = new Test.Databaseconnector();
-        try {
-            if (connection.verbindmetDatabase()) {
-                PreparedStatement state = null;
+        if (connection.verbindmetDatabase()) {
+            PreparedStatement state = null;
+            try {
+
                 state = connection.conn.prepareStatement(sql);
                 state.setString(1, this.typeNaam);
-                if(this.typeDetails.length() > 0 ){
-                state.setString(2, this.typeDetails);
-                }
-                else{
-                     state.setString(2, "  ");
+                if (this.typeDetails.length() > 0) {
+                    state.setString(2, this.typeDetails);
+                } else {
+                    state.setString(2, "  ");
                 }
                 state.setDouble(3, this.prijs);
                 state.setInt(4, typeID);
                 //state.executeQuery();
                 state.executeUpdate();
+            } catch (SQLException e) {
+                System.out.println(e.toString());
+            } finally {
+                if (state != null) {
+                    state.close();
+                }
+                connection.verbindingverbrekenmetDatabase();
             }
-        } catch (SQLException e) {
-            System.out.println(e.toString());
         }
     }
-    
-     public void AddProductType() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+
+    public void AddProductType() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         String sql = "INSERT INTO FW_PRODUCT (NAAM, DETAILS, PRIJS) VALUES (?, ?, ?)";
         Test.Databaseconnector connection = new Test.Databaseconnector();
-        try {
-            if (connection.verbindmetDatabase()) {
-                PreparedStatement state = null;
+
+        if (connection.verbindmetDatabase()) {
+            PreparedStatement state = null;
+            try {
+
                 state = connection.conn.prepareStatement(sql);
                 state.setString(1, this.typeNaam);
-                if(this.typeDetails.length()>0){
-                state.setString(2, this.typeDetails);
-                }
-                else{
-                     state.setString(2, "   ");
+                if (this.typeDetails.length() > 0) {
+                    state.setString(2, this.typeDetails);
+                } else {
+                    state.setString(2, "   ");
                 }
                 state.setDouble(3, this.prijs);
                 state.executeQuery();
+            } catch (SQLException e) {
+                System.out.println(e.toString());
+            } finally {
+                if (state != null) {
+                    state.close();
+                }
+                connection.verbindingverbrekenmetDatabase();
             }
-        } catch (SQLException e) {
-            System.out.println(e.toString());
         }
+
     }
 }

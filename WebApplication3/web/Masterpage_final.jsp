@@ -42,18 +42,18 @@
                     <%if (session.getAttribute("Name") != null && session.getAttribute("Role").equals("admin")) {%>
                 <nav class="navbar navbar-default">
                     <ul class="nav navbar-nav">
-                        <li><a href="index.jsp">Home</a></li>
+                        <li><a href="index.jsp"><fmt:message key="Menu_index"/></a></li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Administrator<span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"><fmt:message key="MasterPage_Administrator"/><span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="FotograafRegister.jsp">Registreer Fotograaf</a></li>
-                                <li><a href="Adminpage.jsp">(de)Activeer account</a></li>
-                                <li><a href="Price.jsp">Prijzen Instellen</a><li>
+                                <li><a href="FotograafRegister.jsp"><fmt:message key="Menu_FotograafRegister"/></a></li>
+                                <li><a href="Adminpage.jsp"><fmt:message key="Menu_Activatie"/></a></li>
+                                <li><a href="Price.jsp"><fmt:message key="Menu_Price"/></a><li>
                             </ul>
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="logout.jsp">Logout</a></li>
+                        <li><a href="logout.jsp"><fmt:message key="Menu_Logout"/></a></li>
                         <li><a></a></li>
                     </ul>
                 </nav>
@@ -62,20 +62,20 @@
                     if (session.getAttribute("Name") != null && session.getAttribute("Role").equals("fotograaf")) {%>
                 <nav class="navbar navbar-default">
                     <ul class="nav navbar-nav">
-                        <li><a href="index.jsp">Home</a></li>
+                        <li><a href="index.jsp"><fmt:message key="Menu_index"/></a></li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Profiel<span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"><fmt:message key="MasterPage_profiel"/><span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="AccountInformation.jsp">Account Informatie</a></li>
-                                <li><a href="PhotogalleryCategory.jsp">Mijn Foto's</a></li>
+                                <li><a href="AccountInformation.jsp"><fmt:message key="Menu_AccountInformation"/></a></li>
+                                <li><a href="PhotogalleryCategory.jsp"><fmt:message key="Menu_Photogallery"/></a></li>
                             </ul>
                         </li>
-                        <li><a href="Upload.jsp">Upload</a></li>                        
+                        <li><a href="Upload.jsp"><fmt:message key="Menu_Upload"/></a></li>                        
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <%  Test.WinkelWagen winkelwagen = new Test.WinkelWagen();  %>
-                        <li><a href="Winkelwagen.jsp"><span class="glyphicon glyphicon-shopping-cart"></span> Item : <%= winkelwagen.AantalItems() %></a></li>
-                        <li><a href="logout.jsp">Logout</a></li>
+                        <li><a href="Winkelwagen.jsp"><span class="glyphicon glyphicon-shopping-cart"></span> <fmt:message key="MasterPage_Item"/> : <%= winkelwagen.AantalItems() %></a></li>
+                        <li><a href="logout.jsp"><fmt:message key="Menu_Logout"/></a></li>
                         <li><a></a></li>
                     </ul>
                 </nav>
@@ -87,20 +87,20 @@
                 %>
                 <nav class="navbar navbar-default">
                     <ul class="nav navbar-nav">
-                        <li><a href="index.jsp">Home</a></li>
+                        <li><a href="index.jsp"><fmt:message key="Menu_index"/></a></li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Profiel<span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"><fmt:message key="MasterPage_profiel"/><span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="AccountInformation.jsp">Account Informatie</a></li>
+                                <li><a href="AccountInformation.jsp"><fmt:message key="Menu_AccountInformation"/></a></li>
                             </ul>
                         </li>
-                        <li><a href="PhotogalleryCategoryCustomer.jsp">Mijn Foto's</a></li>
-                        <li><a href="klantcodepagina_1.jsp">Code invoeren</a></li>
+                        <li><a href="PhotogalleryCategoryCustomer.jsp"><fmt:message key="Menu_Photogallery"/></a></li>
+                        <li><a href="klantcodepagina_1.jsp"><fmt:message key="Menu_Klantcodepagina"/></a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <%  Test.WinkelWagen winkelwagen = new Test.WinkelWagen();  %>
-                        <li><a href="Winkelwagen.jsp"><span class="glyphicon glyphicon-shopping-cart"></span> Item : <%= winkelwagen.AantalItems() %></a></li>
-                        <li><a href="logout.jsp">Logout</a></li>
+                        <li><a href="Winkelwagen.jsp"><span class="glyphicon glyphicon-shopping-cart"></span> <fmt:message key="MasterPage_Item"/> : <%= winkelwagen.AantalItems() %></a></li>
+                        <li><a href="logout.jsp"><fmt:message key="Menu_Logout"/></a></li>
                         <li><a></a></li>
                     </ul>
                 </nav>
@@ -110,7 +110,7 @@
                 %>
                 <nav class="navbar navbar-default">
                     <ul class="nav navbar-nav">
-                        <li><a href="index.jsp">Home</a></li>
+                        <li><a href="index.jsp"><fmt:message key='Menu_index'/></a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="Registreren.jsp"><fmt:message key='Menu_Registreren'/></a></li>
