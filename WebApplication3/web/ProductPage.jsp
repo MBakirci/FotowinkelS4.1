@@ -136,11 +136,11 @@
                     <div class="container">	
                         <div class="col-md-6" style="height:200px; width:200px;">                            
                             <div id="previewDiv" class="img-thumbnail col-md-12" style="background-size: contain; background-repeat: no-repeat; background-position: center">
-                                    <% if (request.getParameter("cropid") != null) {%>
-                                    <img id="productFoto" src="ftp://212.64.126.219:9942/<%= request.getParameter("cropid")%>" style="position:absolute; left:25%; top:25%"/>
-                                    <% } else {%>
-                                    <img id="productFoto" src="<%=link%>" style="position:absolute; left:30%; top:20%"/>
-                                    <% } %>
+                                <% if (request.getParameter("cropid") != null) {%>
+                                <img id="productFoto" src="ftp://212.64.126.219:9942/<%= request.getParameter("cropid")%>" style="position:absolute; left:25%; top:25%"/>
+                                <% } else {%>
+                                <img id="productFoto" src="<%=link%>" style="position:absolute; left:30%; top:20%"/>
+                                <% } %>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -148,7 +148,9 @@
                             <div class="product-desc">U kan hier uw foto's aanpassen, en vervolgens in uw winkelwagen stoppen.</div>
                             <hr>
                             <form action="ShoppingCart" method="POST">
-                                <div class="product-title">Productsoort</div>
+                                 <div class="product-title" style="margin-top: 10px;">Afbeelding aanpassen</div>
+                                <button class="btn btn-default" data-toggle="modal" data-target="#cropper-example-2-modal" type="button"><span class="glyphicon glyphicon-scissors"></span> Afbeelding bijnsnijden</button>
+                                <div class="product-title" style="margin-top: 10px">Productsoort</div>
                                 <select id="Soort2" name="Soort2" class="btn btn-default" onchange="updatePrice();
                                         changeTheme();">
                                     <%for (Double es : typePrices) {%>
@@ -167,8 +169,7 @@
                                     %>
                                 </select>
 
-                                <div class="product-title" style="margin-top: 10px;">Afbeelding aanpassen</div>
-                                <button class="btn btn-default" data-toggle="modal" data-target="#cropper-example-2-modal" type="button">Afbeelding bijnsnijden</button>
+                               
                                 <hr>
                                 <div class="product-title" style="margin-top: 10px;">Aantal</div>
                                 <input type="number" name="aantalitems" required="" value="1"/>
@@ -198,37 +199,6 @@
                             </form>
                         </div>
                     </div> 
-                </div>
-                <div class="container-fluid">		
-                    <div class="col-md-12 product-info">
-                        <ul id="myTab" class="nav nav-tabs nav_tabs">
-
-                            <li class="active"><a href="#service-one" data-toggle="tab">DESCRIPTION</a></li>
-                            <li><a href="#service-two" data-toggle="tab">PRODUCT INFO</a></li>
-                            <li><a href="#service-three" data-toggle="tab">REVIEWS</a></li>
-
-                        </ul>
-                        <div id="myTabContent" class="tab-content">
-                            <div class="tab-pane fade in active" id="service-one">
-
-                                <section class="container product-info">
-
-                                </section>
-
-                            </div>
-                            <div class="tab-pane fade" id="service-two">
-
-                                <section class="container">
-
-                                </section>
-
-                            </div>
-                            <div class="tab-pane fade" id="service-three">
-
-                            </div>
-                        </div>
-                        <hr>
-                    </div>
                 </div>
             </div>
         </div>
