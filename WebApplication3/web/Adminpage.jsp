@@ -13,6 +13,7 @@
 <%--<%@page import= "Test.Databaseconnector"%>--%>
 <%@page import="Test.Login" %>
 <%@page import="java.sql.*"%>
+<%@page import="Test.SQL"%>
 <%@page import= "Test.Databaseconnector"%>
 <%@page import = "Test.registreer"%>
 <%@page import = "Test.Verwijderaccount"%>
@@ -28,6 +29,7 @@
     <head>
         <title><fmt:message key='Adminpage_Title'/></title>
         <link href="CSS/chosen.css" rel="stylesheet" type="text/css"/>
+       
     </head>
     <body>
         <div class="container">
@@ -111,6 +113,10 @@
                 $(selector).chosen(config[selector]);
             }
         </script>
+        <%
+           int  test = new Test.SQL().AantalBezoekers();
+        %>
+         <p>Total number of visits: <%=test%></p>
     </body>
 </html>
 

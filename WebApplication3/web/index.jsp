@@ -5,6 +5,9 @@
 --%>
 
 
+<%@page import="java.sql.Connection"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="Test.NewClass" %>
 <jsp:include page="Masterpage_final.jsp"/>
@@ -42,6 +45,7 @@
 
         <div class="container">
 
+           
             <!-- Jumbotron -->
             <div class="jumbotron">
                 <h1>
@@ -50,14 +54,13 @@
                     %>
                     <fmt:message key="loggedIn"/>
                     <%
-                            String role = session.getAttribute("Role").toString();
-                            String lan = session.getAttribute("language").toString();
-                            if(role.equals("klant") && lan.contains("en") ){
-                                role = "customer";
-                            }
-                            else if(role.equals("fotograaf") && lan.contains("en")){
-                                role = "Photographer";
-                            }
+                        String role = session.getAttribute("Role").toString();
+                        String lan = session.getAttribute("language").toString();
+                        if (role.equals("klant") && lan.contains("en")) {
+                            role = "customer";
+                        } else if (role.equals("fotograaf") && lan.contains("en")) {
+                            role = "Photographer";
+                        }
                         out.print("<font color='green'/>" + role + "</font>");
                     } else {
                     %>
