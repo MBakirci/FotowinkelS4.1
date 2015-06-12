@@ -62,13 +62,13 @@ public class PhotoCustomer {
 
             try {
                 //Update gebruiker gedeelte van fotograaf
-                String q = "SELECT FOTOCODE FROM FW_FOTO_KLANT where KLANTID = ?";
+                String q = "SElECT FILEPATH FROM FW_FOTO WHERE UNIQUECODE IN (SELECT FOTOCODE FROM FW_KLANT_FOTO WHERE KLANTID = ?)";
                 state = ts.conn.prepareStatement(q);
                 state.setString(1, klantID);
                 ResultSet rs = state.executeQuery();
 
                 while (rs.next()) {
-                    String filepathString = rs.getString("FOTOCODE");
+                    String filepathString = rs.getString("FILEPATH");
                     String thumbPath = filepathString.substring(filepathString.lastIndexOf("/"));
                     photoList.add("ftp://212.64.126.219:9942/Thumb" + thumbPath);
                 }
