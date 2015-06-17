@@ -24,7 +24,11 @@ public class WinkelWagen {
 
     }
 
-    public void NewList(List<Test.WinkelWagenItem> item) {
+    public WinkelWagen(ArrayList<Test.WinkelWagenItem> item) {
+        itemlist = item;
+    }
+
+    public void NewList() {
         itemlist = new ArrayList<Test.WinkelWagenItem>();
     }
 
@@ -40,22 +44,22 @@ public class WinkelWagen {
         }
     }
 
-    public void DeleteItem(String fotocode) {
+    public void DeleteItem(String fotocode, String product, String kleur, Integer xcor, Integer ycor, Integer wamnt, Integer hamnt) {
         Iterator<Test.WinkelWagenItem> it = itemlist.iterator();
         while (it.hasNext()) {
             Test.WinkelWagenItem item = it.next();
-            if (item.getFotocode().equals(fotocode)) {
+            if (item.getFotocode().equals(fotocode) && item.getProducttype().equals(product) && item.getKleurtype().equals(kleur) && item.getXcor() == xcor && item.getYcor() == ycor && item.getWamnt() == wamnt && item.getHamnt() == hamnt) {
                 it.remove();
             }
         }
     }
 
-    public void ChangeItem(String fotocode, int aantal) {
+    public void ChangeItem(String fotocode, int aantal, String product, String kleur, Integer xcor, Integer ycor, Integer wamnt, Integer hamnt) {
         Iterator<Test.WinkelWagenItem> it = itemlist.iterator();
         while (it.hasNext()) {
             Test.WinkelWagenItem item = it.next();
-            if (item.getFotocode().equals(fotocode)) {
-                item.setAantal(item.getAantal() + aantal);
+            if (item.getFotocode().equals(fotocode) && item.getProducttype().equals(product) && item.getKleurtype().equals(kleur) && item.getXcor() == xcor && item.getYcor() == ycor && item.getWamnt() == wamnt && item.getHamnt() == hamnt) {
+                item.setAantal(aantal);
             }
         }
     }

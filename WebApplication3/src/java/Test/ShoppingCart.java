@@ -25,8 +25,8 @@ import javax.servlet.http.HttpServletResponse;
  * @author asror
  */
 public class ShoppingCart extends HttpServlet {
-    
-private RequestDispatcher rd;
+
+    private RequestDispatcher rd;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -45,7 +45,7 @@ private RequestDispatcher rd;
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ShoppingCart</title>");            
+            out.println("<title>Servlet ShoppingCart</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ShoppingCart at " + request.getContextPath() + "</h1>");
@@ -66,6 +66,7 @@ private RequestDispatcher rd;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         processRequest(request, response);
     }
 
@@ -77,18 +78,56 @@ private RequestDispatcher rd;
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-            Test.WinkelWagen winkelwagen = new Test.WinkelWagen();
+
+        Test.WinkelWagen winkelwagen = new Test.WinkelWagen();
         if (request.getParameter("typeID") != null) {
-            winkelwagen.DeleteItem(request.getParameter("typeID"));
+
+                String soortprod = request.getParameter("Soort2");
+                String soortkleur = request.getParameter("Type");            
+                Test.Photo photo = new Test.Photo();
+                Test.ProductPage pp = new Test.ProductPage();
+                int Xcor = 0;
+                int Ycor = 0;
+                int wamnt = 0;
+                int hamnt = 0;
+                
+                String cropwaarde = request.getParameter("xcor");
+                if (!cropwaarde.equals("null")) {
+                    Xcor = Integer.parseInt(request.getParameter("xcor"));
+                    Ycor = Integer.parseInt(request.getParameter("ycor"));
+                    wamnt = Integer.parseInt(request.getParameter("wamnt"));
+                    hamnt = Integer.parseInt(request.getParameter("hamnt"));
+                }
+                
+                winkelwagen.DeleteItem(request.getParameter("typeID"), soortprod, soortkleur, Xcor, Ycor, wamnt, hamnt );
+            
         } else if (request.getParameter("btnBewerkt") != null) {
-            winkelwagen.ChangeItem(request.getParameter("naam1"), Integer.parseInt(request.getParameter("details1")));
+            
+            
+            
+            String soortprod = request.getParameter("Soort2");
+                String soortkleur = request.getParameter("Type");            
+                Test.Photo photo = new Test.Photo();
+                Test.ProductPage pp = new Test.ProductPage();
+                int Xcor = 0;
+                int Ycor = 0;
+                int wamnt = 0;
+                int hamnt = 0;
+                
+                String cropwaarde = request.getParameter("xcor");
+                if (!cropwaarde.equals("null")) {
+                    Xcor = Integer.parseInt(request.getParameter("xcor"));
+                    Ycor = Integer.parseInt(request.getParameter("ycor"));
+                    wamnt = Integer.parseInt(request.getParameter("wamnt"));
+                    hamnt = Integer.parseInt(request.getParameter("hamnt"));
+                }
+                
+            winkelwagen.ChangeItem(request.getParameter("naam1"), Integer.parseInt(request.getParameter("details1")), soortprod, soortkleur, Xcor, Ycor, wamnt, hamnt);
         } else if (request.getParameter("addtocart") != null) {
-            winkelwagen.AddItem(request.getParameter("fotoimage"), 1, "Normaal", "Afdruk", 4.95, request.getParameter("fotoimage"), 0 , 0, 0, 0 );
+            winkelwagen.AddItem(request.getParameter("fotoimage"), 1, "Normaal", "Afdruk", 5.0, request.getParameter("fotoimage"), 0, 0, 0, 0);
         } else {
             String waarde = request.getParameter("Soort2");
             String waarde2 = request.getParameter("Type");
@@ -105,7 +144,7 @@ private RequestDispatcher rd;
 
             if (!QString.equals("") && !QString.equals(null)) {
                 try {
-                 
+
                     typePrices = pp.getTypePrice(); //Get current type prices
                     typeNames = pp.getTypeName();
                     basePrice = pp.getBasePrice(QString);
@@ -121,32 +160,31 @@ private RequestDispatcher rd;
                     Logger.getLogger(ShoppingCart.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            
+
             int Xcor = 0;
             int Ycor = 0;
             int wamnt = 0;
             int hamnt = 0;
-                   
+
             String cropwaarde = request.getParameter("xcor");
-            if(!cropwaarde.equals("null"))
-            {
-            Xcor = Integer.parseInt(request.getParameter("xcor"));
-            Ycor = Integer.parseInt(request.getParameter("ycor"));
-            wamnt = Integer.parseInt(request.getParameter("wamnt"));
-            hamnt = Integer.parseInt(request.getParameter("hamnt"));
+            if (!cropwaarde.equals("null")) {
+                Xcor = Integer.parseInt(request.getParameter("xcor"));
+                Ycor = Integer.parseInt(request.getParameter("ycor"));
+                wamnt = Integer.parseInt(request.getParameter("wamnt"));
+                hamnt = Integer.parseInt(request.getParameter("hamnt"));
             }
             String soortprod = typeNames.get(Integer.parseInt(waarde));
             String soortkleur = colorNames.get(Integer.parseInt(waarde2));
             Double prijskleur = colorPrices.get(Integer.parseInt(waarde2));
-           Double prijsprod = typePrices.get(Integer.parseInt(waarde));
-          winkelwagen.AddItem(request.getParameter("fotoimage"),  Integer.parseInt(request.getParameter("aantalitems")), soortkleur, soortprod, prijskleur + prijsprod, request.getParameter("fotoimage"), Xcor, Ycor, wamnt, hamnt);
+            Double prijsprod = typePrices.get(Integer.parseInt(waarde));
+            winkelwagen.AddItem(request.getParameter("cropid"), Integer.parseInt(request.getParameter("aantalitems")), soortkleur, soortprod, prijskleur + prijsprod, request.getParameter("fotoimage"), Xcor, Ycor, wamnt, hamnt);
         }
 
         if (request.getParameter("addtocart") != null) {
             String cat = request.getParameter("cat");
-        response.sendRedirect("PhotogalleryCatPhotosCustomer.jsp?cat="+cat+ "");
+            response.sendRedirect("PhotogalleryCatPhotosCustomer.jsp?cat=" + cat + "");
         } else {
-        response.sendRedirect("Winkelwagen.jsp");
+            response.sendRedirect("Winkelwagen.jsp");
         }
     }
 
