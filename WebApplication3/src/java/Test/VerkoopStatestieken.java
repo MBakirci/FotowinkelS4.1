@@ -69,9 +69,9 @@ public class VerkoopStatestieken {
         return null;
     }
     
-    public static HashMap<String, Object> FotograafMaandVerkoop(Calendar maand, User user){
-        return FotograafMaandVerkoop(maand, user.geteMail());
-    }
+//    public static HashMap<String, Object> FotograafMaandVerkoop(Calendar maand, User user){
+//        return FotograafMaandVerkoop(maand, user.geteMail());
+//    }
     
     public static HashMap<String, Object> FotograafMaandVerkoop(Calendar maand, String email){
         Calendar firstDay = new GregorianCalendar();
@@ -81,9 +81,9 @@ public class VerkoopStatestieken {
         return FotograafVerkoop(firstDay, lastDay, email);
     }
     
-    public static HashMap<String, Object> FotograafJaarVerkoop(Calendar jaar, User user){
-        return FotograafJaarVerkoop(jaar, user.geteMail());
-    }
+//    public static HashMap<String, Object> FotograafJaarVerkoop(Calendar jaar, User user){
+//        return FotograafJaarVerkoop(jaar, user.geteMail());
+//    }
     
     public static HashMap<String, Object> FotograafJaarVerkoop(Calendar jaar, String email){
         Calendar firstDay = new GregorianCalendar();

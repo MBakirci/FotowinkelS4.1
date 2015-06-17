@@ -1,9 +1,8 @@
 <%-- 
     Document   : FotograafVerkoopStatestieken
-    Created on : 17-Jun-2015, 13:25:54
+    Created on : 17-Jun-2015, 09:46:46
     Author     : Coen
 --%>
-
 <jsp:include page="Masterpage_final.jsp"/>
 <%@include file="TaalSettings.jsp" %>
 <%@page import="java.util.Calendar"%>
@@ -19,7 +18,7 @@
     </head>
     <body>
         <%
-            if (session.getAttribute("Role").equals("fotogaaf")) {
+            if (session.getAttribute("Role").equals("fotograaf")) {
         %>
         <div class="container">
             <form>
@@ -56,7 +55,7 @@
                                 int eJaar = 1900 + today.getYear();
                                 while (iJaar <= eJaar) {
                             %>
-                            <option value=<%=iJaar%>><%=iJaar%></option>
+                            <option value="<%=iJaar%>"><%=iJaar%></option>
                             <%
                                     iJaar = iJaar + 1;
                                 }
@@ -68,14 +67,14 @@
                     <button class="btn btn-default" name="maandbtn"><fmt:message key="AdminOverzicht_Get_Maand"/></button>
                     <%
                         if (request.getParameter("maandbtn") != null) {
-                            response.sendRedirect("adminVerkoopStatestieken.jsp?maand=" + request.getParameter("maandMenu") + "&jaar=" + request.getParameter("jaarMenu"));
+                            response.sendRedirect("FotograafVerkoopStatestieken.jsp?maand=" + request.getParameter("maandMenu") + "&jaar=" + request.getParameter("jaarMenu"));
                         }
 
                     %>
 
                     <button class="btn btn-default" name="jaarbtn"><fmt:message key="AdminOverzicht_Get_Jaar"/></button>
-                    <%                    if (request.getParameter("jaarbtn") != null) {
-                            response.sendRedirect("adminVerkoopStatestieken.jsp?jaar=" + request.getParameter("jaarMenu"));
+                    <%                        if (request.getParameter("jaarbtn") != null) {
+                            response.sendRedirect("FotograafVerkoopStatestieken.jsp?jaar=" + request.getParameter("jaarMenu"));
                         }
 
                     %>
@@ -86,12 +85,13 @@
         <div class="container">
             <% Calendar cal = new GregorianCalendar();
                 cal.set(Integer.parseInt(request.getParameter("jaar")), 1, 1);
-                HashMap<String, Object> JaarData = VerkoopStatestieken.JaarVerkoop(cal);
+                String s = session.getAttribute("Name").toString();
+                HashMap<String, Object> JaarData = VerkoopStatestieken.FotograafJaarVerkoop(cal,  "Henk@yolo.nl");
             %>
             <h3><fmt:message key="AdminOverzicht_Jaar"/><%=request.getParameter("jaar")%></h3>
             <table class="table">
                 <tr>
-                    <td>><b><fmt:message key="AdminOverzicht_TotaalVerkoop"/></b></td>
+                    <td><b><fmt:message key="AdminOverzicht_TotaalVerkoop"/></b></td>
                     <td><b><fmt:message key="AdminOverzicht_Omzet"/></b></td>
                     <td><b><fmt:message key="AdminOverzicht_BTW"/></b></td>
                 </tr>
@@ -108,14 +108,15 @@
             <%
                 Calendar cal = new GregorianCalendar();
                 cal.set(Integer.parseInt(request.getParameter("jaar")), Integer.parseInt(request.getParameter("maand")), 1);
-                HashMap<String, Object> MaandData = VerkoopStatestieken.MaandVerkoop(cal);
+                String s = session.getAttribute("Name").toString();
+                HashMap<String, Object> MaandData = VerkoopStatestieken.FotograafMaandVerkoop(cal, "Henk@yolo.nl");
             %>
             <h3><fmt:message key="AdminOverzicht_Maand"/><%=request.getParameter("maand")%> - <%=request.getParameter("jaar")%></h3>
             <table class="table">
                 <tr>
-                    <td><fmt:message key="AdminOverzicht_TotaalVerkoop"/></b></td>
-                    <td><fmt:message key="AdminOverzicht_Omzet"/></b></td>
-                    <td><fmt:message key="AdminOverzicht_BTW"/></b></td>
+                    <td><b><fmt:message key="AdminOverzicht_TotaalVerkoop"/></b></td>
+                    <td><b><fmt:message key="AdminOverzicht_Omzet"/></b></td>
+                    <td><b><fmt:message key="AdminOverzicht_BTW"/></b></td>
                 </tr>
                 <tr>
                     <td><%=MaandData.get("items")%></td>
@@ -124,6 +125,11 @@
                 </tr>
             </table>
         </div>
+        <%
+            }
+        } else {
+        %>
+        <fmt:message key="NoPermsision"/>
         <%
             }
         %>

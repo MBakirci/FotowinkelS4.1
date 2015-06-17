@@ -55,7 +55,7 @@
                                 int eJaar = 1900 + today.getYear();
                                 while (iJaar <= eJaar) {
                             %>
-                            <option value=<%=iJaar%>><%=iJaar%></option>
+                            <option value="<%=iJaar%>"><%=iJaar%></option>
                             <%
                                     iJaar = iJaar + 1;
                                 }
@@ -112,9 +112,9 @@
             <h3><fmt:message key="AdminOverzicht_Maand"/><%=request.getParameter("maand")%> - <%=request.getParameter("jaar")%></h3>
             <table class="table">
                 <tr>
-                    <td><fmt:message key="AdminOverzicht_TotaalVerkoop"/></b></td>
-                    <td><fmt:message key="AdminOverzicht_Omzet"/></b></td>
-                    <td><fmt:message key="AdminOverzicht_BTW"/></b></td>
+                    <td><b><fmt:message key="AdminOverzicht_TotaalVerkoop"/></b></td>
+                    <td><b><fmt:message key="AdminOverzicht_Omzet"/></b></td>
+                    <td><b><fmt:message key="AdminOverzicht_BTW"/></b></td>
                 </tr>
                 <tr>
                     <td><%=MaandData.get("items")%></td>

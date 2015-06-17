@@ -14,9 +14,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>adminVerkoopStatestieken</title>
     </head>
     <body>
+        <%
+            if (session.getAttribute("Role").equals("admin")) {
+        %>
         <div class="container">
             <form>
                 <div class="col-xs-3">
@@ -52,7 +55,7 @@
                                 int eJaar = 1900 + today.getYear();
                                 while (iJaar <= eJaar) {
                             %>
-                            <option value=<%=iJaar%>><%=iJaar%></option>
+                            <option value="<%=iJaar%>"><%=iJaar%></option>
                             <%
                                     iJaar = iJaar + 1;
                                 }
@@ -70,7 +73,7 @@
                     %>
 
                     <button class="btn btn-default" name="jaarbtn"><fmt:message key="AdminOverzicht_Get_Jaar"/></button>
-                    <%                    if (request.getParameter("jaarbtn") != null) {
+                    <%                        if (request.getParameter("jaarbtn") != null) {
                             response.sendRedirect("adminVerkoopStatestieken.jsp?jaar=" + request.getParameter("jaarMenu"));
                         }
 
@@ -87,7 +90,7 @@
             <h3><fmt:message key="AdminOverzicht_Jaar"/><%=request.getParameter("jaar")%></h3>
             <table class="table">
                 <tr>
-                    <td>><b><fmt:message key="AdminOverzicht_TotaalVerkoop"/></b></td>
+                    <td><b><fmt:message key="AdminOverzicht_TotaalVerkoop"/></b></td>
                     <td><b><fmt:message key="AdminOverzicht_Omzet"/></b></td>
                     <td><b><fmt:message key="AdminOverzicht_BTW"/></b></td>
                 </tr>
@@ -109,9 +112,9 @@
             <h3><fmt:message key="AdminOverzicht_Maand"/><%=request.getParameter("maand")%> - <%=request.getParameter("jaar")%></h3>
             <table class="table">
                 <tr>
-                    <td><fmt:message key="AdminOverzicht_TotaalVerkoop"/></b></td>
-                    <td><fmt:message key="AdminOverzicht_Omzet"/></b></td>
-                    <td><fmt:message key="AdminOverzicht_BTW"/></b></td>
+                    <td><b><fmt:message key="AdminOverzicht_TotaalVerkoop"/></b></td>
+                    <td><b><fmt:message key="AdminOverzicht_Omzet"/></b></td>
+                    <td><b><fmt:message key="AdminOverzicht_BTW"/></b></td>
                 </tr>
                 <tr>
                     <td><%=MaandData.get("items")%></td>
@@ -120,6 +123,11 @@
                 </tr>
             </table>
         </div>
+        <%
+            }
+        } else {
+        %>
+        <fmt:message key="NoPermsision"/>
         <%
             }
         %>
