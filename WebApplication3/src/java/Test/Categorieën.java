@@ -83,7 +83,7 @@ public class Categorieën {
     }
         
     //create new categorie
-    public void CreateCategory(String category, String fotograaf, String Path) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException{
+    public void CreateCategory(String fotograaf, String category, String Path) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException{
         Databaseconnector ts = new Databaseconnector();
         if (ts.verbindmetDatabase()) {
             PreparedStatement state = null;
@@ -104,7 +104,7 @@ public class Categorieën {
                 if (state != null) {
                     state.close();
                 }
-                dbhelp.verbindingverbrekenmetDatabase();
+               ts.verbindingverbrekenmetDatabase();
             }
         }
     }
@@ -135,7 +135,7 @@ public class Categorieën {
                     if (state != null) {
                         state.close();
                     }
-                    dbhelp.verbindingverbrekenmetDatabase();
+                    ts.verbindingverbrekenmetDatabase();
                 }
             }
         } catch (IllegalAccessException ex) {

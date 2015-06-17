@@ -148,7 +148,7 @@
                             <div class="product-desc">U kan hier uw foto's aanpassen, en vervolgens in uw winkelwagen stoppen.</div>
                             <hr>
                             <form action="ShoppingCart" method="POST">
-                                 <div class="product-title" style="margin-top: 10px;">Afbeelding aanpassen</div>
+                                <div class="product-title" style="margin-top: 10px;">Afbeelding aanpassen</div>
                                 <button class="btn btn-default" data-toggle="modal" data-target="#cropper-example-2-modal" type="button"><span class="glyphicon glyphicon-scissors"></span> Afbeelding bijnsnijden</button>
                                 <div class="product-title" style="margin-top: 10px">Productsoort</div>
                                 <select id="Soort2" name="Soort2" class="btn btn-default" onchange="updatePrice();
@@ -169,7 +169,7 @@
                                     %>
                                 </select>
 
-                               
+
                                 <hr>
                                 <div class="product-title" style="margin-top: 10px;">Aantal</div>
                                 <input type="number" name="aantalitems" required="" value="1"/>
@@ -191,7 +191,8 @@
                                     <input type="hidden" class="form-control" name="ycor" value="<%= request.getParameter("ycor")%>" id="ycor">
                                     <input type="hidden" class="form-control" name="wamnt" value="<%= request.getParameter("wamnt")%>" id="wamnt">
                                     <input type="hidden" class="form-control" name="hamnt" value="<%= request.getParameter("hamnt")%>" id="hamnt">
-
+                                    <input type="hidden" class="form-control" name="cropid" value="<%= request.getParameter("cropid")%>" id="hamnt">
+                                    
                                     <button type="submit" class="btn btn-success">
                                         Aan winkelwagen toevoegen 
                                     </button>
