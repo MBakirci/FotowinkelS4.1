@@ -24,8 +24,6 @@ public class VerkoopStatestieken {
         Calendar lastDay = new GregorianCalendar();
         firstDay.set(maand.get(maand.YEAR), maand.get(maand.MONTH)-1, 1);
         lastDay.set(maand.get(maand.YEAR), maand.get(maand.MONTH)-1, maand.getInstance().getActualMaximum(maand.DAY_OF_MONTH));
-        System.out.print("firstday = " + firstDay.getTime().toString());
-        System.out.print("lastday = " +lastDay.getTime().toString());
         return Verkoop(firstDay, lastDay);
     }
     
@@ -34,8 +32,6 @@ public class VerkoopStatestieken {
         Calendar lastDay = new GregorianCalendar();
         firstDay.set(jaar.get(jaar.YEAR), 0, 1);
         lastDay.set(jaar.get(jaar.YEAR), 11, 31);
-        System.out.print("firstday = " + firstDay.getTime().toString());
-        System.out.print("lastday = " + lastDay.getTime().toString());
         return Verkoop(firstDay, lastDay);
     }
     
@@ -82,8 +78,6 @@ public class VerkoopStatestieken {
         Calendar lastDay = new GregorianCalendar();
         firstDay.set(maand.get(maand.YEAR), maand.get(maand.MONTH)-1, 1);
         lastDay.set(maand.get(maand.YEAR), maand.get(maand.MONTH)-1, maand.getInstance().getActualMaximum(maand.DAY_OF_MONTH));
-        System.out.print("firstday = " + firstDay.getTime().toString());
-        System.out.print("lastday = " +lastDay.getTime().toString());
         return FotograafVerkoop(firstDay, lastDay, email);
     }
     
@@ -96,8 +90,6 @@ public class VerkoopStatestieken {
         Calendar lastDay = new GregorianCalendar();
         firstDay.set(jaar.get(jaar.YEAR), 0, 1);
         lastDay.set(jaar.get(jaar.YEAR), 11, 31);
-        System.out.print("firstday = " + firstDay.getTime().toString());
-        System.out.print("lastday = " + lastDay.getTime().toString());
         return FotograafVerkoop(firstDay, lastDay, email);
     }
     
