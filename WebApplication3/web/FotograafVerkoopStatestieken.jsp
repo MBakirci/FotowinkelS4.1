@@ -1,8 +1,9 @@
 <%-- 
-    Document   : adminVerkoopStatestieken
-    Created on : 17-Jun-2015, 09:46:46
+    Document   : FotograafVerkoopStatestieken
+    Created on : 17-Jun-2015, 13:25:54
     Author     : Coen
 --%>
+
 <jsp:include page="Masterpage_final.jsp"/>
 <%@include file="TaalSettings.jsp" %>
 <%@page import="java.util.Calendar"%>
@@ -14,11 +15,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>adminVerkoopStatestieken</title>
+        <title>FotograafVerkoopStatestieken</title>
     </head>
     <body>
         <%
-            if (session.getAttribute("Role").equals("admin")) {
+            if (session.getAttribute("Role").equals("fotogaaf")) {
         %>
         <div class="container">
             <form>
@@ -73,7 +74,7 @@
                     %>
 
                     <button class="btn btn-default" name="jaarbtn"><fmt:message key="AdminOverzicht_Get_Jaar"/></button>
-                    <%                        if (request.getParameter("jaarbtn") != null) {
+                    <%                    if (request.getParameter("jaarbtn") != null) {
                             response.sendRedirect("adminVerkoopStatestieken.jsp?jaar=" + request.getParameter("jaarMenu"));
                         }
 
@@ -90,7 +91,7 @@
             <h3><fmt:message key="AdminOverzicht_Jaar"/><%=request.getParameter("jaar")%></h3>
             <table class="table">
                 <tr>
-                    <td><b><fmt:message key="AdminOverzicht_TotaalVerkoop"/></b></td>
+                    <td>><b><fmt:message key="AdminOverzicht_TotaalVerkoop"/></b></td>
                     <td><b><fmt:message key="AdminOverzicht_Omzet"/></b></td>
                     <td><b><fmt:message key="AdminOverzicht_BTW"/></b></td>
                 </tr>
@@ -123,11 +124,6 @@
                 </tr>
             </table>
         </div>
-        <%
-            }
-        } else {
-        %>
-        <fmt:message key="NoPermsision"/>
         <%
             }
         %>
