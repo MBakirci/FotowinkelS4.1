@@ -154,7 +154,7 @@
                         <tr>
                             <td align="left">Totaal prijs :</td> 
                             <td id="price" align="right">
-                                <p id="Prijs" align="right"><%= prijs%></p> 
+                                <p id="Prijs" align="right"><%= prijs %></p> 
 
                                 <div>
                                     <select id="ddlCurr" name="ddlCurr">
@@ -194,7 +194,7 @@
                     <input name="cancel_return" type="hidden" value="http://localhost:8080/WebApplication3/index.jsp"> <!-- Return URL on cancelling payment --> 
                     <input type="hidden" name="no_shipping" value="0">
                     <input type="hidden" name="no_note" value="1">
-                    <input type="hidden" name="currency_code" value="EUR">
+                    <input type="hidden" name="currency_code" value="<%= (String) session.getAttribute("valuta")  %>">
                     <input type="hidden" name="lc" value="AU">
                     <input type="hidden" name="bn" value="PP-BuyNowBF">
                     <input type="hidden" name="rm" value="2">
@@ -205,12 +205,12 @@
                         //ArrayList<String> Productlist = new ArrayList<String>();
                         //  Productlist.add("Book/0.01/2");
                         //    Productlist.add("Cat/0.01/1");
-
-                        for (Test.WinkelWagenItem s : itemlist) {
+                        
+                        for (Test.WinkelWagenItem s : winkelwagen.GetWinkelWageValuta((String) session.getAttribute("valuta"))) {
                     %>
 
                     <input type="hidden" name="item_name_<%=productnummer%>" value=<%= s.getFotocode()%>>  
-                    <input type="hidden" name="amount_<%=productnummer%>" value=<%= s.getPrijs().toString()%>>
+                    <input type="hidden" name="amount_<%=productnummer%>" value=<%= Math.round(s.getPrijs() * 100.0) / 100.0 %>>
                     <input type="hidden" name="quantity_<%=productnummer%>" value=<%= s.getAantal().toString()%>>
 
                     <!--<input type="hidden" name="item_name_1" value="HTML book">  
