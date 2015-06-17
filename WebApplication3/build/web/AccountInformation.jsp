@@ -26,9 +26,7 @@
                 //if no button was pressed, this is the first time loading this page
                 String SessionEmail = (String) session.getAttribute("Name");
                 Test.User user = new Test.User(SessionEmail);
-                if (session.getAttribute("Role").equals("fotograaf")) {
-                    user.AdditionalInfo();
-                }
+                user.AdditionalInfo();
 
                 if (request.getParameter("btnSaveEmailPass") != null) {
                     if (request.getParameter("passv").length() > 4) {
@@ -101,6 +99,8 @@
                     </div>
                 </form>
 
+
+                <%if (session.getAttribute("Role").equals("fotograaf")) {%>
                 <form>
                     <div class="col-md-8 col-sm-6 col-xs-12">
                         <h3>Winstmarge aanpassen</h3>
@@ -112,9 +112,9 @@
                         </div>
                     </div>
                 </form>
-
+                <%}%>
                 <hr>
-                
+
                 <form>
                     <div class="col-md-8 col-sm-6 col-xs-12">
                         <h3><fmt:message key='AccountInformation_H3_2'/></h3>
@@ -130,7 +130,6 @@
                             <label for="Achternaam"><fmt:message key='AccountInformation_Lastname'/></label>
                             <input type="text" name="lname" class="form-control" id="Achternaam" value="<%=user.getAchternaam()%> " required >
                         </div>
-                        <%if (session.getAttribute("Role").equals("fotograaf")) {%>
                         <div class="form-group col-md-6 col-sm-6 col-xs-12">
                             <label for="Straat"><fmt:message key='AccountInformation_Street'/></label>
                             <input type="text" name="street" class="form-control" id="Straat" value="<%=user.getStraat()%> " >
@@ -152,8 +151,6 @@
                             <label for="Telefoon"><fmt:message key='AccountInformation_Telefoonnummer'/></label>
                             <input type="tel" name="telnr" class="form-control bfh-phone" id="Telefoon" value="<%=user.getTelefoon()%>"  data-format="+31 (ddd) dddddd" required>
                         </div>
-
-                        <%}%>
 
                         <div class="col-md-6 col-sm-6 col-xs-12"> 
                             <button type="submit" name="btnSave" class="btn btn-default"><fmt:message key='AccountInformation_Save'/></button>
