@@ -21,3 +21,7 @@ img.desaturate
   -webkit-filter: grayscale(100%);
   filter: grayscale(100%);
 }
+#Modal_currUser .modal-body {height: 800px;}
+.progress-bar.animate {
+   width: 100%;
+}

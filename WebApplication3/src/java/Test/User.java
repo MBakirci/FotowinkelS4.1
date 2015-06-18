@@ -8,6 +8,7 @@ package Test;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.*;
 
 /**
  *
@@ -108,6 +109,10 @@ public class User {
     public void setStad(String stad) {
         this.stad = stad;
     }
+    
+    public User(){
+        
+    }
 
     public User(String email, String wachtwoord,
             String voornaam, String tussenvoegsel,
@@ -171,11 +176,8 @@ public class User {
         } catch (SQLException e) {
             System.out.println(e.toString());
             return false;
-        }
-        finally
-        {
-            if(state!= null)
-            {
+        } finally {
+            if (state != null) {
                 state.close();
             }
             connection.verbindingverbrekenmetDatabase();
@@ -189,7 +191,7 @@ public class User {
         PreparedStatement state = null;
         try {
             if (connection.verbindmetDatabase()) {
-                
+
                 state = connection.conn.prepareStatement(sql);
                 state.setString(1, email);
                 ResultSet rs = state.executeQuery();
@@ -205,11 +207,8 @@ public class User {
             }
         } catch (SQLException e) {
             System.out.println(e.toString());
-        }
-        finally
-        {
-            if(state!= null)
-            {
+        } finally {
+            if (state != null) {
                 state.close();
             }
             connection.verbindingverbrekenmetDatabase();
@@ -223,7 +222,7 @@ public class User {
         PreparedStatement state = null;
         try {
             if (connection.verbindmetDatabase()) {
-                
+
                 state = connection.conn.prepareStatement(updateUser);
                 state.setString(1, this.voornaam);
                 state.setString(2, this.tussenvoegsel);
@@ -238,11 +237,8 @@ public class User {
         } catch (SQLException e) {
             System.out.println(e.toString());
             return false;
-        }
-        finally
-        {
-            if(state!= null)
-            {
+        } finally {
+            if (state != null) {
                 state.close();
             }
             connection.verbindingverbrekenmetDatabase();
@@ -253,10 +249,10 @@ public class User {
     public void AdditionalInfo() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         String sql = "Select * from FW_ACCOUNT_GEGEVENS where ACCOUNT_ID = ?";
         Test.Databaseconnector connection = new Test.Databaseconnector();
-          PreparedStatement state = null;
+        PreparedStatement state = null;
         try {
             if (connection.verbindmetDatabase()) {
-              
+
                 state = connection.conn.prepareStatement(sql);
                 state.setInt(1, Integer.parseInt(iD));
                 ResultSet rs = state.executeQuery();
@@ -271,11 +267,8 @@ public class User {
             }
         } catch (SQLException e) {
             System.out.println(e.toString());
-        }
-        finally
-        {
-            if(state!= null)
-            {
+        } finally {
+            if (state != null) {
                 state.close();
             }
             connection.verbindingverbrekenmetDatabase();
@@ -288,7 +281,7 @@ public class User {
         Test.Databaseconnector connection = new Test.Databaseconnector();
         PreparedStatement state = null;
         try {
-            if (connection.verbindmetDatabase()) {   
+            if (connection.verbindmetDatabase()) {
                 state = connection.conn.prepareStatement(updateAdditional);
                 state.setString(1, this.telefoon);
                 state.setString(2, this.straat);
@@ -302,11 +295,8 @@ public class User {
         } catch (SQLException e) {
             System.out.println(e.toString());
             return false;
-        }
-        finally
-        {
-            if(state!= null)
-            {
+        } finally {
+            if (state != null) {
                 state.close();
             }
             connection.verbindingverbrekenmetDatabase();
@@ -320,7 +310,7 @@ public class User {
             Test.Databaseconnector connection = new Test.Databaseconnector();
             PreparedStatement state = null;
             try {
-                if (connection.verbindmetDatabase()) { 
+                if (connection.verbindmetDatabase()) {
                     state = connection.conn.prepareStatement(updatePassword);
                     state.setString(1, newPassword);
                     state.setString(2, this.eMail);
@@ -330,11 +320,8 @@ public class User {
             } catch (SQLException e) {
                 System.out.println(e.toString());
                 return false;
-            }
-            finally
-            {
-                if(state!= null)
-                {
+            } finally {
+                if (state != null) {
                     state.close();
                 }
                 connection.verbindingverbrekenmetDatabase();
@@ -358,11 +345,8 @@ public class User {
             }
         } catch (SQLException e) {
             System.out.println(e.toString());
-        }
-        finally
-        {
-            if(state != null)
-            {
+        } finally {
+            if (state != null) {
                 state.close();
             }
             connection.verbindingverbrekenmetDatabase();
@@ -375,7 +359,7 @@ public class User {
         Test.Databaseconnector connection = new Test.Databaseconnector();
         PreparedStatement state = null;
         try {
-            if (connection.verbindmetDatabase()) {        
+            if (connection.verbindmetDatabase()) {
                 state = connection.conn.prepareStatement(sql);
                 state.setString(1, this.eMail);
                 ResultSet result = state.executeQuery();
@@ -385,15 +369,61 @@ public class User {
             }
         } catch (SQLException e) {
             System.out.println(e.toString());
-        }
-        finally
-        {
-            if(state!= null)
-            {
+        } finally {
+            if (state != null) {
                 state.close();
             }
             connection.verbindingverbrekenmetDatabase();
         }
         return 0;
+    }
+
+    public HashMap<String, List<String>> getUsers(String AType) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+        Test.Databaseconnector ts = new Test.Databaseconnector();
+
+        if (ts.verbindmetDatabase()) {
+            PreparedStatement state = null;
+            try {
+                //Update gebruiker gedeelte van fotograaf
+                String q = "select * from FW_ACCOUNT WHERE ATYPE = ?";
+                state = ts.conn.prepareStatement(q);
+                state.setString(1, AType);
+                HashMap<String, List<String>> map = new HashMap<>();
+                ResultSet rs = state.executeQuery();
+                while (rs.next()) {
+                    String enable = "";
+                    List<String> valSet = new ArrayList<>();
+                    this.iD = rs.getString("ACCOUNT_ID");
+                    this.eMail = rs.getString("EMAIL");
+                    this.voornaam = rs.getString("VOORNAAM");
+                    this.tussenvoegsel = rs.getString("TUSSENVOEGSEL");
+                    if (tussenvoegsel.equals("null")) {
+                        this.tussenvoegsel = "";
+                    }
+                    this.Achternaam = rs.getString("ACHTERNAAM");
+                    int enabled = rs.getInt("ENABLED");
+                    if (enabled == 1) {
+                        enable = "ACTIEF";
+                    } else {
+                        enable = "NON-ACTIEF";
+                    }
+                    valSet.add(eMail);
+                    valSet.add(voornaam);
+                    valSet.add(tussenvoegsel);
+                    valSet.add(Achternaam);
+                    valSet.add(enable);
+                    map.put(iD, valSet);
+                }
+                return map;
+            } catch (SQLException e) {
+                System.out.println(e.toString());
+            } finally {
+                if (state != null) {
+                    state.close();
+                }
+                ts.verbindingverbrekenmetDatabase();
+            }
+        }
+        return null;
     }
 }
