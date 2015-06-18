@@ -85,8 +85,8 @@
         <div class="container">
             <% Calendar cal = new GregorianCalendar();
                 cal.set(Integer.parseInt(request.getParameter("jaar")), 1, 1);
-                String s = session.getAttribute("Name").toString();
-                HashMap<String, Object> JaarData = VerkoopStatestieken.FotograafJaarVerkoop(cal,  "Henk@yolo.nl");
+                String fotegraaf = session.getAttribute("Name").toString();
+                HashMap<String, Object> JaarData = VerkoopStatestieken.FotograafJaarVerkoop(cal, fotegraaf);
             %>
             <h3><fmt:message key="AdminOverzicht_Jaar"/><%=request.getParameter("jaar")%></h3>
             <table class="table">
@@ -108,8 +108,8 @@
             <%
                 Calendar cal = new GregorianCalendar();
                 cal.set(Integer.parseInt(request.getParameter("jaar")), Integer.parseInt(request.getParameter("maand")), 1);
-                String s = session.getAttribute("Name").toString();
-                HashMap<String, Object> MaandData = VerkoopStatestieken.FotograafMaandVerkoop(cal, "Henk@yolo.nl");
+                String fotegraaf = session.getAttribute("Name").toString();
+                HashMap<String, Object> MaandData = VerkoopStatestieken.FotograafMaandVerkoop(cal, fotegraaf);
             %>
             <h3><fmt:message key="AdminOverzicht_Maand"/><%=request.getParameter("maand")%> - <%=request.getParameter("jaar")%></h3>
             <table class="table">
