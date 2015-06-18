@@ -49,6 +49,7 @@
                                 <li><a href="FotograafRegister.jsp"><fmt:message key="Menu_FotograafRegister"/></a></li>
                                 <li><a href="Adminpage.jsp"><fmt:message key="Menu_Activatie"/></a></li>
                                 <li><a href="Price.jsp"><fmt:message key="Menu_Price"/></a><li>
+                                <li><a href="adminVerkoopStatestieken.jsp"><fmt:message key="Menu_VerkoopStat"/></a></li>
                             </ul>
                         </li>
                     </ul>
@@ -68,6 +69,7 @@
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="AccountInformation.jsp"><fmt:message key="Menu_AccountInformation"/></a></li>
                                 <li><a href="PhotogalleryCategory.jsp"><fmt:message key="Menu_Photogallery"/></a></li>
+                                <li><a href="FotograafVerkoopStatestieken.jsp"><fmt:message key="Menu_VerkoopStat"/></a></li>
                             </ul>
                         </li>
                         <li><a href="Upload.jsp"><fmt:message key="Menu_Upload"/></a></li>                        
