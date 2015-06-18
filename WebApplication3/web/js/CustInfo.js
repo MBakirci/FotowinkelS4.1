@@ -12,21 +12,17 @@ this.$('.js-loading-bar').modal({
 $('a.edit').click(function () {
     var $modal = $('.js-loading-bar'),
             $bar = $modal.find('.progress-bar');
-
     $modal.modal('show');
     $bar.addClass('animate');
-
     setTimeout(function () {
         $bar.removeClass('animate');
         $modal.modal('hide');
-    }, 1500);
+    }, 1400);
 });
-
 //Ajax request en backend interactie
 $('a.edit').click(function (e) {
     e.preventDefault();
-    var myModal = $('#Modal_currUser');
-
+    //var myModal = $('#Modal_currUser');
     var td_email = $(this).closest('tr').find('#td_email').html();
     $.ajax({
         url: 'UserController',
@@ -36,16 +32,18 @@ $('a.edit').click(function (e) {
         ,
         type: 'get',
         success: function (data) {
-            var result = data;
-            myModal.find('.modal-body').html(result);
-            myModal.modal({
-                show: true
-            });
+          /*  $('.modal-body').load('CustomerInfoDetails.jsp', function (result) {
+                $('#Modal_currUser').modal({show: true});
+            });*/
+
+
+             $('#Modal_currUser').find('.modal-body').html(data);
+             $('#Modal_currUser').modal({
+             show: true
+             });
         }
     }
     );
     return false;
 }
 );
-
-
