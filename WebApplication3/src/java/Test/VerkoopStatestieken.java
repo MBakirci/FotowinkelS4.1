@@ -66,7 +66,10 @@ public class VerkoopStatestieken {
         From FW_Bestelling b, FW_PRODUCT_FOTO pf
         Where b.BESTELLINGID = pf.FK_BESTELLINGID
         and b.BESTELDATUM between ? and ?*/
-        return null;
+        stats.put("items", "xxx");
+        stats.put("omzet", "xxx");
+        stats.put("btw", "xxx");
+        return stats;
     }
     
 //    public static HashMap<String, Object> FotograafMaandVerkoop(Calendar maand, User user){
@@ -131,7 +134,10 @@ public class VerkoopStatestieken {
         and a.ACCOUNT_ID = f.FOTOGRAAFID
         and b.BESTELDATUM between ? and ?
         and a.EMAIL = ?;*/
-        return null;
+        stats.put("items", "xxx");
+        stats.put("omzet", "xxx");
+        stats.put("btw", "xxx");
+        return stats;
     }
     
     public static java.sql.Date ToSQLDate(Calendar input){
