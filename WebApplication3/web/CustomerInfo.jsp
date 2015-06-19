@@ -18,11 +18,15 @@ Author     : Gebruiker
         </title>
         <%
             User user = new User();
-            Map<String, List<String>> userMap = user.getUsers("fotograaf");
+            String type = request.getParameter("ddltype");
+            if (type == null) {
+                type = "all";
+            }
+            Map<String, List<String>> userMap = user.getUsers(type);
         %>
+        <script src="js/list.min.js" type="text/javascript"></script>
     </head>
     <body>
-
         <div class="col-lg-10 col-lg-offset-1">
             <h1>
                 <i class="fa fa-users">
@@ -30,49 +34,47 @@ Author     : Gebruiker
                 User Administration
             </h1>
             <hr/>
-            <div class="table-responsive">
-                <table class="table table-bordered table-striped">
-                    <thead>
-                        <tr>
-                            <th>
-                                Email
-                            </th>
-                            <th>
-                                Naam
-                            </th>
-                            <th>
-                                Geactiveerd
-                            </th>
-                            <th>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <%
-                            for (Map.Entry<String, List<String>> userEntry : userMap.entrySet()) {
-                        %>
-                        <tr>
-                            <td id="td_email"><%=userEntry.getValue().get(0)%></td>
-                            <td id="td_naam">
-                                <%= userEntry.getValue().get(1) + " " + userEntry.getValue().get(2) + " " + userEntry.getValue().get(3)%>
-                            </td>
-                            <td >
-                                <%= userEntry.getValue().get(4)%>
-                            </td>
-                            <td>
-                                <a href="" class="btn btn-info pull-left edit" style="margin-right: 3px;">
-                                    Edit
-                                </a>
-                                <a href="" class="btn btn-info pull-left" style="margin-right: 3px;">
-                                    Foto's
-                                </a>
-                            </td>
-                        </tr>
-                        <%
-                            }
-                        %>
-                    </tbody>
-                </table>
+            <form name="formtype" onchange="submit()">
+                <div class="form-group">
+                    <label for="ddltype">Kies gebruikerstype:</label>
+                    <select name="ddltype" class="form-control" id="ddltype">
+                        <option value="x"></option>
+                        <option value="all">All</option>
+                        <option value="klant">Klant</option>
+                        <option value="fotograaf">Fotograaf</option>
+                    </select> 
+                </div>
+            </form>
+
+            <div id="payload">
+                <input id="search" class="search form-control" placeholder="Search" />
+                <hr/>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                        <th>Email</th>
+                        <th>Naam</th>
+                        <th>Geactiveerd</th>
+                        <th></th>
+                        </thead>
+                        <tbody class="list">
+                            <%for (Map.Entry<String, List<String>> userEntry : userMap.entrySet()) {%>
+                            <tr>
+                                <td class="email" id="td_email"><%=userEntry.getValue().get(0)%></td>
+                                <td class="name" id="td_naam"><%= userEntry.getValue().get(1) + " " + userEntry.getValue().get(2) + " " + userEntry.getValue().get(3)%></td>
+                                <td class="activated"><%= userEntry.getValue().get(4)%></td>
+                                <td><a href="" class="btn btn-info pull-left edit" style="margin-right: 3px;">Edit</a>
+                                    <a href="" class="btn btn-info pull-left" style="margin-right: 3px;">
+                                        Foto's
+                                    </a>
+                                </td>
+                            </tr>
+                            <%
+                                }
+                            %>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <div class="modal fade" id="Modal_currUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -82,6 +84,8 @@ Author     : Gebruiker
                             <h3><fmt:message key='AccountInformation_H3_1'/></h3>
                         </div>
                         <div class="modal-body">
+                        </div>
+                        <div class="modal-footer" id="CustDetails">
                         </div>
                     </div>
                 </div>

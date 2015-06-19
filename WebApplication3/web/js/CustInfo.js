@@ -19,10 +19,36 @@ $('a.edit').click(function () {
         $modal.modal('hide');
     }, 1400);
 });
+
+$('#btnSave').click(function () {
+    var fname = $('#Voornaam').val();
+    var tname = $('#Tussenvoegsel').val();
+    var lname = $('#Achternaam').val();
+    var street = $('#Straat').val();
+    var housenumber = $('#Huisnr').val();
+    var zipcode = $('#Postcode').val();
+    var city = $('#Stad').val();
+    var telnr = $('#Telefoon').val();
+
+    $.ajax({
+        url: 'UserController',
+        data: {fname: fname, tname: tname, lname: lname,
+            street: street, housenumber: housenumber, zipcode: zipcode, city: city,
+            telnr: telnr},
+        type: 'post',
+        success: function (data) {
+            $('#CustDetails').append('<div class="alert alert-success" role="alert">Uw wijzigingen zijn doorgevoerd!</div>');
+            setTimeout(function () {
+                window.location.reload(1);
+            }, 3000);
+        }
+    });
+    return false;
+});
+
 //Ajax request en backend interactie
 $('a.edit').click(function (e) {
     e.preventDefault();
-    //var myModal = $('#Modal_currUser');
     var td_email = $(this).closest('tr').find('#td_email').html();
     $.ajax({
         url: 'UserController',
@@ -32,18 +58,18 @@ $('a.edit').click(function (e) {
         ,
         type: 'get',
         success: function (data) {
-          /*  $('.modal-body').load('CustomerInfoDetails.jsp', function (result) {
-                $('#Modal_currUser').modal({show: true});
-            });*/
-
-
-             $('#Modal_currUser').find('.modal-body').html(data);
-             $('#Modal_currUser').modal({
-             show: true
-             });
+            $('#Modal_currUser').find('.modal-body').html(data);
+            $('#Modal_currUser').modal({
+                show: true
+            });
         }
-    }
-    );
+    });
     return false;
-}
-);
+});
+
+//onze Searchbox
+var options = {
+    valueNames: ['email', 'name', 'activated']
+};
+
+var userList = new List('payload', options);

@@ -61,19 +61,21 @@ public class UserController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String eMail = request.getParameter("eMail");
-        if (eMail == null) {
-            eMail = "asrorwali@asror.nl";
+        if (request.getParameter("eMail") != null) {
+            String eMail = request.getParameter("eMail");
+            if (eMail == null) {
+                eMail = "asrorwali@asror.nl";
+            }
+            try {
+                HttpSession session = request.getSession();
+                //request.setAttribute("getUser", getUserInfo(eMail));
+                User user = getUserInfo(eMail);
+                session.setAttribute("CurrentUser", user);
+            } catch (ClassNotFoundException | InstantiationException | SQLException | IllegalAccessException ex) {
+                Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            request.getRequestDispatcher("CustomerInfoDetails.jsp").forward(request, response);
         }
-        try {
-            HttpSession session = request.getSession();
-            //request.setAttribute("getUser", getUserInfo(eMail));
-            User user = getUserInfo(eMail);
-            session.setAttribute("CurrentUser", user);
-        } catch (ClassNotFoundException | InstantiationException | SQLException | IllegalAccessException ex) {
-            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        request.getRequestDispatcher("CustomerInfoDetails.jsp").forward(request, response);
     }
 
     /**
@@ -87,7 +89,26 @@ public class UserController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //UPDATE
+        if (request.getParameter("btnSave") != null) {
+            try {
+                User user = (User) request.getSession().getAttribute("CurrentUser");
+                user.setVoornaam(request.getParameter("fname"));
+                user.setTussenvoegsel(request.getParameter("tname"));
+                user.setAchternaam(request.getParameter("lname"));
+                user.setStraat(request.getParameter("street"));
+                user.setHuisnr(request.getParameter("housenumber"));
+                user.setPostcode(request.getParameter("zipcode"));
+                user.setStad(request.getParameter("city"));
+                user.setTelefoon(request.getParameter("telnr"));
+                user.UpdateUser();
+                processRequest(request, response);
+            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
+                Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        //CHANGE SELECT QUERY
+
     }
 
     private User getUserInfo(String EMail) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException {

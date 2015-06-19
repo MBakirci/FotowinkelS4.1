@@ -109,9 +109,9 @@ public class User {
     public void setStad(String stad) {
         this.stad = stad;
     }
-    
-    public User(){
-        
+
+    public User() {
+
     }
 
     public User(String email, String wachtwoord,
@@ -385,9 +385,14 @@ public class User {
             PreparedStatement state = null;
             try {
                 //Update gebruiker gedeelte van fotograaf
-                String q = "select * from FW_ACCOUNT WHERE ATYPE = ?";
-                state = ts.conn.prepareStatement(q);
-                state.setString(1, AType);
+                if (AType.equals("all")) {
+                    String q = "select * from FW_ACCOUNT";
+                    state = ts.conn.prepareStatement(q);
+                } else {
+                    String q = "select * from FW_ACCOUNT WHERE ATYPE = ?";
+                    state = ts.conn.prepareStatement(q);
+                    state.setString(1, AType);
+                }
                 HashMap<String, List<String>> map = new HashMap<>();
                 ResultSet rs = state.executeQuery();
                 while (rs.next()) {
