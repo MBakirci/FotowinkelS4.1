@@ -8,7 +8,7 @@
 <%@include file="TaalSettings.jsp" %>
 <%@include file="TaalToggle.jsp" %>
 <!DOCTYPE html>
-<html lang="${language}">
+<html>
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -40,6 +40,7 @@
             <div class="masthead">
                 <h3 class="text-muted"><img class="img-responsive" width="300" src="Images/professional-camera-logo-for-company-vector-217607-[Converted].gif" alt=""/></h3>
                     <%if (session.getAttribute("Name") != null && session.getAttribute("Role").equals("admin")) {%>
+                <div class="row"><p class="col-md-3 col-md-offset-9" align="right">Ingelogd als <font color="green">admin</font></p></div>
                 <nav class="navbar navbar-default">
                     <ul class="nav navbar-nav">
                         <li><a href="index.jsp"><fmt:message key="Menu_index"/></a></li>
@@ -61,6 +62,7 @@
                 <%
                     }
                     if (session.getAttribute("Name") != null && session.getAttribute("Role").equals("fotograaf")) {%>
+                <div class="row"><p class="col-md-3 col-md-offset-9" align="right">Ingelogd als <font color="green">fotograaf</font></p></div>
                 <nav class="navbar navbar-default">
                     <ul class="nav navbar-nav">
                         <li><a href="index.jsp"><fmt:message key="Menu_index"/></a></li>
@@ -75,8 +77,8 @@
                         <li><a href="Upload.jsp"><fmt:message key="Menu_Upload"/></a></li>                        
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <%  Test.WinkelWagen winkelwagen = new Test.WinkelWagen();  %>
-                        <li><a href="Winkelwagen.jsp"><span class="glyphicon glyphicon-shopping-cart"></span> <fmt:message key="MasterPage_Item"/> : <%= winkelwagen.AantalItems() %></a></li>
+                        <%  Test.WinkelWagen winkelwagen = new Test.WinkelWagen();%>
+                        <li><a href="Winkelwagen.jsp"><span class="glyphicon glyphicon-shopping-cart"></span> <fmt:message key="MasterPage_Item"/> : <%= winkelwagen.AantalItems()%></a></li>
                         <li><a href="logout.jsp"><fmt:message key="Menu_Logout"/></a></li>
                         <li><a></a></li>
                     </ul>
@@ -87,6 +89,7 @@
                     }
                     if (session.getAttribute("Name") != null && session.getAttribute("Role").equals("klant")) {
                 %>
+                <div class="row"><p class="col-md-3 col-md-offset-9" align="right">Ingelogd als <font color="green">klant</font></p></div>
                 <nav class="navbar navbar-default">
                     <ul class="nav navbar-nav">
                         <li><a href="index.jsp"><fmt:message key="Menu_index"/></a></li>
@@ -100,8 +103,8 @@
                         <li><a href="klantcodepagina_1.jsp"><fmt:message key="Menu_Klantcodepagina"/></a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <%  Test.WinkelWagen winkelwagen = new Test.WinkelWagen();  %>
-                        <li><a href="Winkelwagen.jsp"><span class="glyphicon glyphicon-shopping-cart"></span> <fmt:message key="MasterPage_Item"/> : <%= winkelwagen.AantalItems() %></a></li>
+                        <%  Test.WinkelWagen winkelwagen = new Test.WinkelWagen();%>
+                        <li><a href="Winkelwagen.jsp"><span class="glyphicon glyphicon-shopping-cart"></span> <fmt:message key="MasterPage_Item"/> : <%= winkelwagen.AantalItems()%></a></li>
                         <li><a href="logout.jsp"><fmt:message key="Menu_Logout"/></a></li>
                         <li><a></a></li>
                     </ul>

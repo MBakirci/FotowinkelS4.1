@@ -63,9 +63,6 @@ public class UserController extends HttpServlet {
             throws ServletException, IOException {
         if (request.getParameter("eMail") != null) {
             String eMail = request.getParameter("eMail");
-            if (eMail == null) {
-                eMail = "asrorwali@asror.nl";
-            }
             try {
                 HttpSession session = request.getSession();
                 //request.setAttribute("getUser", getUserInfo(eMail));

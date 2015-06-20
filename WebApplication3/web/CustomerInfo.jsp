@@ -38,7 +38,7 @@ Author     : Gebruiker
                 <div class="form-group">
                     <label for="ddltype">Kies gebruikerstype:</label>
                     <select name="ddltype" class="form-control" id="ddltype">
-                        <option value="x"></option>
+                        <option value="x" selected disabled>Kies gebruikerstype:</option>
                         <option value="all">All</option>
                         <option value="klant">Klant</option>
                         <option value="fotograaf">Fotograaf</option>
