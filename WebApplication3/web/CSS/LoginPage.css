@@ -8,7 +8,7 @@ and open the template in the editor.
     Author     : Gebruiker
 */
 body {
-    background: url("Images/groepsfotografie-3.jpg")no-repeat center center fixed; 
+    background: url('../Images/groepsfotografie-3.jpg')no-repeat center center fixed; 
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -56,3 +56,4 @@ body {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
+

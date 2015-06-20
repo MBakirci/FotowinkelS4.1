@@ -65,7 +65,6 @@ public class UserController extends HttpServlet {
             String eMail = request.getParameter("eMail");
             try {
                 HttpSession session = request.getSession();
-                //request.setAttribute("getUser", getUserInfo(eMail));
                 User user = getUserInfo(eMail);
                 session.setAttribute("CurrentUser", user);
             } catch (ClassNotFoundException | InstantiationException | SQLException | IllegalAccessException ex) {

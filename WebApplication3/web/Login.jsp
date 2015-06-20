@@ -28,14 +28,14 @@
         </header>
 
         <div class="wrapper" >
-            <form class="form-signin">       
+            <form id="frmLogin" class="form-signin" action="LoginController">       
                 <h2 class="form-signin-heading">Please login</h2>
                 <input type="text" class="form-control" id="Email" name="username" placeholder="Email Address" required="" autofocus="" />
                 <input type="password" class="form-control" id="Password" name="password" placeholder="Password" required=""/>      
                 <label class="checkbox">
                     <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"> Remember me
                 </label>
-                <button type="button" name="btnLogin" id="btnLogin" class="btn btn-primary">Login</button>
+                <button type="submit" name="btnLogin" id="btnLogin" class="btn btn-primary">Login</button>
                 <div id="loginAlert" style="display: none;" class="alert alert-danger" role="alert"></div>
                 <br/>
                 <br/>

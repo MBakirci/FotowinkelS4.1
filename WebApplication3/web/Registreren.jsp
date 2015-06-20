@@ -1,125 +1,50 @@
-
-
 <%-- 
     Document   : Inlogscherm
     Created on : 11-mrt-2015, 10:56:11
     Author     : hsm
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import= "java.util.*"%>
-
-<jsp:include page="Masterpage_final.jsp"/>
-<%@include file="TaalSettings.jsp" %>
-
-<%--<%@page import= "Test.Databaseconnector"%>--%>
-<%@page import="Test.Login" %>
+<%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.*"%>
-<%@page import= "Test.Databaseconnector"%>
-<%@page import = "Test.registreer"%>
-<%@page import = "Test.Verwijderaccount"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@include file="TaalSettings.jsp" %>
+<%@include file="TaalToggle.jsp" %>
+
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title><fmt:message key='Registreren_Title'/></title>
-</head>
-
-<body>
-
-    <div class="container">
-        <h1><fmt:message key='Registreren_H1'/></h1>
-        <hr>
-    </div>
-    <div class="container">
-        <div class="row">
-            <form class="form-signin" method="post">
-
-                <div class="col-md-6 col-md-offset-3 col-sm-6 col-xs-12">
-                    <div class="well well-sm"><strong><span class="glyphicon glyphicon-asterisk"></span><fmt:message key='Registreren_RequiredField'/></strong>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <label for="username"><fmt:message key='Registreren_Email'/></label>
-                        <div class="input-group col-md-12">
-                            <input type="email" id="Name" name="username" class="form-control" placeholder="Email" required autofocus>
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <label for="password"><fmt:message key='Registreren_Wachtwoord'/></label>
-                        <div class="input-group col-md-12">
-                            <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                        </div>
-                    </div>
-
-                    <div class="form-group col-md-12">
-                        <label for="voornaam"><fmt:message key='Registreren_Voornaam'/></label>
-                        <div class="input-group col-md-12">
-                            <input type="text" id="inputVoornaam" name="voornaam" class="form-control" placeholder="Voornaam" required>
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                        </div>
-                    </div>
-
-                    <div class="form-group col-md-4">
-                        <label for="tussenvoegsel"><fmt:message key='Registreren_Tussenvoegsel'/></label>
-                        <div class="input-group col-md-12">
-                            <input type="text" id="inputTussenvoegsel" name="tussenvoegsel" class="form-control" placeholder="Tussenvoegsel">
-                        </div>
-                    </div>
-
-                    <div class="form-group col-md-8">
-                        <label for="achternaam"><fmt:message key='Registreren_Achternaam'/></label>
-                        <div class="input-group col-md-12">
-                            <input type="text" id="inputAchternaam" name="achternaam" class="form-control" placeholder="Achternaam" required>
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                        </div>
-                    </div>
-
-                    <div class="col-md-12">
-                        <br/>
-                        <button class="btn btn-lg btn-primary " type="submit" name="btnregistreer"><fmt:message key='Registreren_registreer'/></button>
-                    </div>
-            </form>
-                        <%
-                            //  int id = 1;
-                            String naam = request.getParameter("username");
-                            String pass = request.getParameter("password");
-                            String voornaam = request.getParameter("voornaam");
-                            String tussenvoegsel = request.getParameter("tussenvoegsel");
-                            String achternaam = request.getParameter("achternaam");
-                            int actief = 1;
-                            String error = "";
-                            if (request.getParameter("btnregistreer") != null) {
-                                Test.registreer reg = new Test.registreer(naam, pass, voornaam, tussenvoegsel, achternaam, actief);
-
-                                if (!reg.Verbind()) {
-                                    error = "registeren is mislukt uw email adres is al bekend bij ons";
-                                    //response.addHeader("labelmislukt", "inloggen is mislukt");
-                                } //response.sendRedirect("Inlogscherm.jsp");}
-                                else {
-                                    Test.Login login = new Test.Login(naam, pass);
-                                    if (login.Verbind()) {
-                                     session.setAttribute("Name", naam);
-                                     session.setAttribute("Role", login.getRole());
-                                     response.sendRedirect("klantcodepagina_1.jsp");
-                            }
-                                }
-
-                            }
-
-                        %>
-                        <font color="red"><%=error%></font>
-
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+        <link href="CSS/LoginPage.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <header class="navbar" role="banner">
+            <div class="container form-inline">
+                <br/>
+                <img width="300" class="img-responsive" src="Images/professional-camera-logo-for-company-vector-217607-[Converted].gif" alt=""/>
+                <div class="pull-right padding-top">
+                </div>              
             </div>
+        </header>
+
+        <div class="wrapper" >
+            <form id="frmRegist" class="form-signin" action="LoginController">       
+                <h2 class="form-signin-heading">Please register</h2>
+                <input type="email" id="Name" name="username" class="form-control" placeholder="Email" required autofocus>
+                <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
+                <input type="text" id="inputVoornaam" name="voornaam" class="form-control" placeholder="Voornaam" required>
+                <input type="text" id="inputTussenvoegsel" name="tussenvoegsel" class="form-control" placeholder="Tussenvoegsel">
+                <input type="text" id="inputAchternaam" name="achternaam" class="form-control" placeholder="Achternaam" required>
+                <br/>
+                <button class="btn btn-primary " type="submit" name="btnRegister"><fmt:message key='Registreren_registreer'/></button>
+                <div id="RegisterAlert" style="display: none;" class="alert alert-danger" role="alert"></div>
+                <br/>
+                <p>Al een account bij FotoWinkelS4?   <a href="Login.jsp">Nu inloggen.</a></p>
+            </form>
         </div>
-        <footer class="footer">
-            <p><fmt:message key='footer'/></p>
-        </footer>
-    </div>
 
-</body>
-
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/Login.js" type="text/javascript"></script>
+    </body>
 </html>
-

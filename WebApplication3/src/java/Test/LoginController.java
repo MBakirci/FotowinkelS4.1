@@ -7,6 +7,7 @@ package Test;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.System.out;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -75,7 +76,9 @@ public class LoginController extends HttpServlet {
             throws ServletException, IOException {
         String naam = request.getParameter("Email");
         String pass = request.getParameter("Pass");
-        //int id = request.getParameter("inputid".);
+        String voornaam = request.getParameter("voornaam");
+        String tussenvoegsel = request.getParameter("tussenvoegsel");
+        String achternaam = request.getParameter("achternaam");
 
         if (request.getParameter("btnLogin") != null) {
             Test.Login login = new Test.Login(naam, pass);
@@ -87,12 +90,38 @@ public class LoginController extends HttpServlet {
                     response.setContentType("text/plain");
                     response.getWriter().write("admin");
                     response.sendRedirect("index.jsp");
+                    return;
                 } else {
                     response.setContentType("text/plain");
                     response.getWriter().write("unsuccess");
                 }
             } catch (Exception ex) {
                 Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        if (request.getParameter("btnRegister") != null) {
+            naam = request.getParameter("username");
+            pass = request.getParameter("password");
+            int actief = 1;
+            String error = "";
+            if (request.getParameter("btnRegister") != null) {
+                Test.registreer reg = new Test.registreer(naam, pass, voornaam, tussenvoegsel, achternaam, actief);
+
+                try {
+                    if (!reg.Verbind()) {
+                        error = "registeren is mislukt uw email adres is al bekend bij ons";
+                        response.setContentType("text/plain");
+                        response.getWriter().write("unsuccess");
+                    } 
+                    else {
+                        response.setContentType("text/plain");
+                        response.getWriter().write("success");
+                    }
+                } catch (Exception ex) {
+                    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
             }
         }
     }
