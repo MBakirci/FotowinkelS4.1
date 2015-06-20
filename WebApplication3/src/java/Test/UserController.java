@@ -107,7 +107,22 @@ public class UserController extends HttpServlet {
                 Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        //CHANGE SELECT QUERY
+        if(request.getParameter("btnActive") != null){
+            Verwijderaccount activeer = new Verwijderaccount(request.getParameter("eMail"));
+            try {
+                activeer.Zetstatusactief();
+            } catch (Exception ex) {
+                Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        if(request.getParameter("btnDisable") != null){
+            Verwijderaccount disable = new Verwijderaccount(request.getParameter("eMail"));
+            try {
+                disable.Zetstatusnonactief();
+            } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+                Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
 
     }
 

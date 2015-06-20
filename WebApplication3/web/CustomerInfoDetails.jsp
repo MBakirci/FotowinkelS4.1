@@ -17,6 +17,7 @@
         <div>
             <form>
                 <div class="col-md-6">
+                    <input type="hidden" name="email" class="form-control" id="Email" value="<%=user.geteMail()%>">
                     <div class="form-group col-md-12 col-sm-12 col-xs-12">
                         <label for="Voornaam"><fmt:message key='AccountInformation_firstname'/></label>
                         <input type="text" name="fname" class="form-control" id="Voornaam" value="<%=user.getVoornaam()%>" required>
@@ -28,6 +29,17 @@
                     <div class="form-group col-md-6 col-sm-6 col-xs-12">
                         <label for="Achternaam"><fmt:message key='AccountInformation_Lastname'/></label>
                         <input type="text" name="lname" class="form-control" id="Achternaam" value="<%=user.getAchternaam()%> " required >
+                    </div>
+                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                        <label><fmt:message key='Adminpage_h2'/></label>
+                        <button class="btn btn-success" type="button" id="btnActive" name="btnActief"> 
+                            <fmt:message key='adminpage_activate'/>
+                            <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
+                        </button>
+                        <button class="btn btn-danger" type="button" id="btnDisable" name="btnNonactief">
+                            <fmt:message key='adminpage_deActivate'/>
+                            <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+                        </button>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -54,12 +66,12 @@
                     </div>
 
                     <div class="col-md-6 col-sm-6 col-xs-12"> 
-                        <button type="button" name="btnSave" id="btnSave" class="btn btn-default"><fmt:message key='AccountInformation_Save'/></button>
+                        <button type="button" name="btnSave" id="btnSave" class="btn btn-primary"><fmt:message key='AccountInformation_Save'/></button>
                     </div>
                 </div>
             </form>
         </div>
-                    
+
         <script src="js/CustInfo.js" type="text/javascript"></script>
     </body>
 </html>

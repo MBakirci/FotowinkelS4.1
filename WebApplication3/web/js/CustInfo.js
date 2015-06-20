@@ -21,6 +21,7 @@ $('a.edit').click(function () {
 });
 
 $('#btnSave').click(function () {
+    var btn = $('#btnSave').val();
     var fname = $('#Voornaam').val();
     var tname = $('#Tussenvoegsel').val();
     var lname = $('#Achternaam').val();
@@ -32,9 +33,44 @@ $('#btnSave').click(function () {
 
     $.ajax({
         url: 'UserController',
-        data: {fname: fname, tname: tname, lname: lname,
+        data: {btnSave: btn, fname: fname, tname: tname, lname: lname,
             street: street, housenumber: housenumber, zipcode: zipcode, city: city,
             telnr: telnr},
+        type: 'post',
+        success: function (data) {
+            $('#CustDetails').append('<div class="alert alert-success" role="alert">Uw wijzigingen zijn doorgevoerd!</div>');
+            setTimeout(function () {
+                window.location.reload(1);
+            }, 3000);
+        }
+    });
+    return false;
+});
+$('#btnActive').click(function () {
+    var btn = $('#btnActive').val();
+    var eMail = $('#Email').val();
+
+    $.ajax({
+        url: 'UserController',
+        data: {btnActive: btn, eMail: eMail},
+        type: 'post',
+        success: function (data) {
+            $('#CustDetails').append('<div class="alert alert-success" role="alert">Uw wijzigingen zijn doorgevoerd!</div>');
+            setTimeout(function () {
+                window.location.reload(1);
+            }, 3000);
+        }
+    });
+    return false;
+});
+
+$('#btnDisable').click(function () {
+    var btn = $('#btnDisable').val();
+    var eMail = $('#Email').val();
+
+    $.ajax({
+        url: 'UserController',
+        data: {btnDisable: btn, eMail: eMail},
         type: 'post',
         success: function (data) {
             $('#CustDetails').append('<div class="alert alert-success" role="alert">Uw wijzigingen zijn doorgevoerd!</div>');

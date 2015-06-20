@@ -63,8 +63,12 @@ Author     : Gebruiker
                                 <td class="email" id="td_email"><%=userEntry.getValue().get(0)%></td>
                                 <td class="name" id="td_naam"><%= userEntry.getValue().get(1) + " " + userEntry.getValue().get(2) + " " + userEntry.getValue().get(3)%></td>
                                 <td class="activated"><%= userEntry.getValue().get(4)%></td>
-                                <td><a href="" class="btn btn-info pull-left edit" style="margin-right: 3px;">Edit</a>
-                                    <a href="" class="btn btn-info pull-left" style="margin-right: 3px;">
+                                <td><a href="" class="btn btn-info edit">
+                                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                        Edit
+                                    </a>
+                                    <a href="" class="btn btn-info" style="margin-right: 3px;">
+                                        <span class="glyphicon glyphicon-camera" aria-hidden="true"></span>
                                         Foto's
                                     </a>
                                 </td>
