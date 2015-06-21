@@ -14,7 +14,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title><fmt:message key='Inlogscherm_Title'/></title>
         <link href="CSS/LoginPage.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
@@ -29,17 +29,16 @@
 
         <div class="wrapper" >
             <form id="frmLogin" class="form-signin" action="LoginController">       
-                <h2 class="form-signin-heading">Please login</h2>
-                <input type="text" class="form-control" id="Email" name="username" placeholder="Email Address" required="" autofocus="" />
-                <input type="password" class="form-control" id="Password" name="password" placeholder="Password" required=""/>      
+                <h2 class="form-signin-heading"><fmt:message key='Inlogscherm_H2'/></h2>
+                <input type="text" class="form-control" id="Email" name="username" placeholder="<fmt:message key='Inlogscherm_email'/>" required="" autofocus="" />
+                <input type="password" class="form-control" id="Password" name="password" placeholder="<fmt:message key='Inlogscherm_Password'/>" required=""/>      
                 <label class="checkbox">
-                    <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"> Remember me
-                </label>
+                    <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"><fmt:message key='Inlogscherm_Remember'/></label>
                 <button type="submit" name="btnLogin" id="btnLogin" class="btn btn-primary">Login</button>
-                <div id="loginAlert" style="display: none;" class="alert alert-danger" role="alert"></div>
+                <div id="loginAlert" style="display: none;" class="alert alert-danger" role="alert"><fmt:message key='Login_error'/></div>
                 <br/>
                 <br/>
-                <p>Nieuw bij FotoWinkelS4?   <a href="Registreren.jsp">Nu registreren.</a></p>
+                <p><fmt:message key='Login_to_register'/><a href="Registreren.jsp"><fmt:message key='Login_to_register_link'/></a></p>
             </form>
             <%                int b = 0;
                 Integer count = new Integer(0);

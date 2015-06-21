@@ -14,7 +14,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Registreren</title>
         <link href="CSS/LoginPage.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
@@ -30,16 +30,16 @@
         <div class="wrapper" >
             <form id="frmRegist" class="form-signin" action="LoginController">       
                 <h2 class="form-signin-heading">Please register</h2>
-                <input type="email" id="Name" name="username" class="form-control" placeholder="Email" required autofocus>
-                <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
-                <input type="text" id="inputVoornaam" name="voornaam" class="form-control" placeholder="Voornaam" required>
-                <input type="text" id="inputTussenvoegsel" name="tussenvoegsel" class="form-control" placeholder="Tussenvoegsel">
-                <input type="text" id="inputAchternaam" name="achternaam" class="form-control" placeholder="Achternaam" required>
+                <input type="email" id="Name" name="username" class="form-control" placeholder="<fmt:message key='Inlogscherm_email'/>" required autofocus>
+                <input type="password" id="inputPassword" name="password" class="form-control" placeholder="<fmt:message key='Inlogscherm_Password'/>" required>
+                <input type="text" id="inputVoornaam" name="voornaam" class="form-control" placeholder="<fmt:message key='FotograafRegister_Naam'/>" required>
+                <input type="text" id="inputTussenvoegsel" name="tussenvoegsel" class="form-control" placeholder="<fmt:message key='FotograafRegister_Tussenvoegsel'/>">
+                <input type="text" id="inputAchternaam" name="achternaam" class="form-control" placeholder="<fmt:message key='FotograafRegister_Achternaam'/>" required>
                 <br/>
                 <button class="btn btn-primary " type="submit" name="btnRegister"><fmt:message key='Registreren_registreer'/></button>
-                <div id="RegisterAlert" style="display: none;" class="alert alert-danger" role="alert"></div>
+                <div id="RegisterAlert" style="display: none;" class="alert alert-danger" role="alert"><fmt:message key='Registreren_error'/></div>
                 <br/>
-                <p>Al een account bij FotoWinkelS4?   <a href="Login.jsp">Nu inloggen.</a></p>
+                <p><fmt:message key='Register_to_login'/><a href="Login.jsp"><fmt:message key='Register_to_login_link'/></a></p>
             </form>
         </div>
 

@@ -110,7 +110,6 @@ public class LoginController extends HttpServlet {
 
                 try {
                     if (!reg.Verbind()) {
-                        error = "registeren is mislukt uw email adres is al bekend bij ons";
                         response.setContentType("text/plain");
                         response.getWriter().write("unsuccess");
                     } 
