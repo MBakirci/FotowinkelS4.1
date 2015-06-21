@@ -8,17 +8,18 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    String role = (String) session.getAttribute("Role");
-    if(role == null){
-        role = "";
-    }
-    if (role.equals("admin")) {
-        response.sendRedirect("Adminpage.jsp");
-    } else if (role.equals("fotograaf")) {
-        response.sendRedirect("Upload.jsp");
-    } else if (role.equals("klant")) {
-        response.sendRedirect("PhotogalleryCategoryCustomer.jsp");
-    } else if(role.equals("")) {
+    try {
+        String role = (String) session.getAttribute("Role");
+        if (role.equals("admin")) {
+            response.sendRedirect("Adminpage.jsp");
+        } else if (role.equals("fotograaf")) {
+            response.sendRedirect("Upload.jsp");
+        } else if (role.equals("klant")) {
+            response.sendRedirect("PhotogalleryCategoryCustomer.jsp");
+        } else if (role.equals("")) {
+            response.sendRedirect("Login.jsp");
+        }
+    } catch (NullPointerException e) {
         response.sendRedirect("Login.jsp");
     }
 %>
