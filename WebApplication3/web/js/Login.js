@@ -13,7 +13,7 @@ $('#frmLogin').submit(function (e) {
                 $('#loginAlert').show();
             }
             else {
-                window.location.replace("index.jsp");
+                location.href = "index.jsp";
             }
         }
     });

@@ -5,23 +5,20 @@
 --%>
 
 
-<%@page import="java.sql.Connection"%>
-<%@page import="java.sql.DriverManager"%>
-<%@page import="java.sql.*"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="Test.NewClass" %>
-<jsp:include page="Masterpage_final.jsp"/>
-<%@include file="TaalSettings.jsp" %>
 <%
-    if (session.getAttribute("Role").equals("admin")) {
+    String role = (String) session.getAttribute("Role");
+    if(role == null){
+        role = "";
+    }
+    if (role.equals("admin")) {
         response.sendRedirect("Adminpage.jsp");
-    } else if (session.getAttribute("Role").equals("fotograaf")) {
+    } else if (role.equals("fotograaf")) {
         response.sendRedirect("Upload.jsp");
-    } else if (session.getAttribute("Role").equals("klant")) {
+    } else if (role.equals("klant")) {
         response.sendRedirect("PhotogalleryCategoryCustomer.jsp");
-    } else if (session.getAttribute("Role") == null) {
-        response.sendRedirect("Login.jsp");
-    } else {
+    } else if(role.equals("")) {
         response.sendRedirect("Login.jsp");
     }
 %>

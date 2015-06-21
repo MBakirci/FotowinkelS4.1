@@ -88,9 +88,8 @@ public class LoginController extends HttpServlet {
                     session.setAttribute("Name", naam);
                     session.setAttribute("Role", login.getRole());
                     response.setContentType("text/plain");
-                    response.getWriter().write("admin");
+                    response.getWriter().write("success");
                     response.sendRedirect("index.jsp");
-                    return;
                 } else {
                     response.setContentType("text/plain");
                     response.getWriter().write("unsuccess");
