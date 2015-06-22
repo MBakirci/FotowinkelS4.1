@@ -28,10 +28,11 @@
         </header>
 
         <div class="wrapper" >
-            <form id="frmRegist" class="form-signin" action="LoginController">       
+            <form id="frmRegist" class="form-signup" action="LoginController">       
                 <h2 class="form-signin-heading">Please register</h2>
                 <input type="email" id="Name" name="username" class="form-control" placeholder="<fmt:message key='Inlogscherm_email'/>" required autofocus>
                 <input type="password" id="inputPassword" name="password" class="form-control" placeholder="<fmt:message key='Inlogscherm_Password'/>" required>
+                <br/>
                 <input type="text" id="inputVoornaam" name="voornaam" class="form-control" placeholder="<fmt:message key='FotograafRegister_Naam'/>" required>
                 <input type="text" id="inputTussenvoegsel" name="tussenvoegsel" class="form-control" placeholder="<fmt:message key='FotograafRegister_Tussenvoegsel'/>">
                 <input type="text" id="inputAchternaam" name="achternaam" class="form-control" placeholder="<fmt:message key='FotograafRegister_Achternaam'/>" required>
