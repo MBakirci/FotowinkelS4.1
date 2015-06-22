@@ -63,12 +63,8 @@ public class UserController extends HttpServlet {
             throws ServletException, IOException {
         if (request.getParameter("eMail") != null) {
             String eMail = request.getParameter("eMail");
-            if (eMail == null) {
-                eMail = "asrorwali@asror.nl";
-            }
             try {
                 HttpSession session = request.getSession();
-                //request.setAttribute("getUser", getUserInfo(eMail));
                 User user = getUserInfo(eMail);
                 session.setAttribute("CurrentUser", user);
             } catch (ClassNotFoundException | InstantiationException | SQLException | IllegalAccessException ex) {
@@ -107,7 +103,22 @@ public class UserController extends HttpServlet {
                 Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        //CHANGE SELECT QUERY
+        if(request.getParameter("btnActive") != null){
+            Verwijderaccount activeer = new Verwijderaccount(request.getParameter("eMail"));
+            try {
+                activeer.Zetstatusactief();
+            } catch (Exception ex) {
+                Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        if(request.getParameter("btnDisable") != null){
+            Verwijderaccount disable = new Verwijderaccount(request.getParameter("eMail"));
+            try {
+                disable.Zetstatusnonactief();
+            } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+                Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
 
     }
 

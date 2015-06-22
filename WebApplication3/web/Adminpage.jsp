@@ -1,122 +1,112 @@
-
-
-<%@page import="javax.persistence.Convert"%>
 <%-- 
-    Document   : Inlogscherm
-    Created on : 11-mrt-2015, 10:56:11
-    Author     : hsm
+Document   : newjsp
+Created on : 10-jun-2015, 9:26:56
+Author     : Gebruiker
 --%>
 
+<%@page import="java.util.*"%>
+<%@page import="Test.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import= "java.util.*"%>
-
-<%--<%@page import= "Test.Databaseconnector"%>--%>
-<%@page import="Test.Login" %>
-<%@page import="java.sql.*"%>
-<%@page import="Test.SQL"%>
-<%@page import= "Test.Databaseconnector"%>
-<%@page import = "Test.registreer"%>
-<%@page import = "Test.Verwijderaccount"%>
-<jsp:include page="Masterpage_final.jsp"></jsp:include>
-    <%@include file="TaalSettings.jsp" %>
-<%if (session.getAttribute("Role") == null || !session.getAttribute("Role").equals("admin")) {
-        response.sendRedirect("index.jsp");
-    }
-%>
-
+<jsp:include page="Masterpage_final.jsp"/>
+<%@include file="TaalSettings.jsp" %>
 <!DOCTYPE html>
 <html>
     <head>
-        <title><fmt:message key='Adminpage_Title'/></title>
-        <link href="CSS/chosen.css" rel="stylesheet" type="text/css"/>
-       
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>
+            User Administration
+        </title>
+        <%
+            User user = new User();
+            String type = request.getParameter("ddltype");
+            if (type == null) {
+                type = "all";
+            }
+            Map<String, List<String>> userMap = user.getUsers(type);
+        %>
+        <script src="js/list.min.js" type="text/javascript"></script>
     </head>
     <body>
-        <div class="container">
-            <h2 class="form-signin-heading"><fmt:message key='Adminpage_h2'/></h2>
-            <hr>
-
-            <form class="col-md-6" method="post">
-
-                <div class="form-group col-md-12">
-                    <label class="control-label"><fmt:message key='Adminpage_Account'/></label>
-                    <%
-                        Verwijderaccount vw = new Verwijderaccount();
-                    %>
-                     <select  id="Email" name="Email" data-placeholder="<fmt:message key='adminpage_kies'/>" class="chosen-select" style="width:85%;" tabindex="2">
-                         <option value=""></option>
-                         <%
-                        for(Map.Entry<String, String> userEntry : vw.getallUsers().entrySet())
-                        {
-                        %>
-                        <option value="<%= userEntry.getKey() %>">
-                            <%= userEntry.getValue() %>
-                        </option>
-                        <%
-                            }
-                        %>
-                    </select>
-                </div>
-                    
-                <div class="form-group col-md-6">
-                    <button class="btn btn-lg btn-primary btn-block" type="submit" name="btnNonactief"><fmt:message key='adminpage_deActivate'/></button>
-                </div>
-                <div class="form-group col-md-6">
-                    <button class="btn btn-lg btn-primary btn-block" type="submit" name="btnActief"><fmt:message key='adminpage_activate'/></button>
+        <div class="col-lg-10 col-lg-offset-1">
+            <h1>
+                <i class="fa fa-users">
+                </i>
+                User Administration
+            </h1>
+            <hr/>
+            <form name="formtype" onchange="submit()">
+                <div class="form-group">
+                    <label for="ddltype">Kies gebruikerstype:</label>
+                    <select name="ddltype" class="form-control" id="ddltype">
+                        <option value="x" selected disabled>Kies gebruikerstype:</option>
+                        <option value="all">All</option>
+                        <option value="klant">Klant</option>
+                        <option value="fotograaf">Fotograaf</option>
+                    </select> 
                 </div>
             </form>
 
+            <div id="payload">
+                <input id="search" class="search form-control" placeholder="Search" />
+                <hr/>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                        <th>Email</th>
+                        <th>Naam</th>
+                        <th>Geactiveerd</th>
+                        <th></th>
+                        </thead>
+                        <tbody class="list">
+                            <%for (Map.Entry<String, List<String>> userEntry : userMap.entrySet()) {%>
+                            <tr>
+                                <td class="email" id="td_email"><%=userEntry.getValue().get(0)%></td>
+                                <td class="name" id="td_naam"><%= userEntry.getValue().get(1) + " " + userEntry.getValue().get(2) + " " + userEntry.getValue().get(3)%></td>
+                                <td class="activated"><%= userEntry.getValue().get(4)%></td>
+                                <td><a href="" class="btn btn-info edit">
+                                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                        Edit
+                                    </a>
+                                    <a href="" class="btn btn-info" style="margin-right: 3px;">
+                                        <span class="glyphicon glyphicon-camera" aria-hidden="true"></span>
+                                        Foto's
+                                    </a>
+                                </td>
+                            </tr>
+                            <%
+                                }
+                            %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal fade" id="Modal_currUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h3><fmt:message key='AccountInformation_H3_1'/></h3>
+                        </div>
+                        <div class="modal-body">
+                        </div>
+                        <div class="modal-footer" id="CustDetails">
+                        </div>
+                    </div>
+                </div>
+            </div>  
+            <div class="modal js-loading-bar">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="progress progress-popup">
+                                <div class="progress-bar"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <%                 // de email
-            String naam = request.getParameter("Email");
-
-            //als iemand op de btn non actief drukt van roep je de methode
-            //uit verwijder acccount aan die de status op non actief zet\
-            //als het goed is dan ga je weer naar de start pagina
-            //als het niet goed dan krijg en een waarschuwing
-            if (request.getParameter("btnNonactief") != null) {
-                Test.Verwijderaccount nonactief = new Test.Verwijderaccount(naam);
-                if (nonactief.Zetstatusnonactief()) {
-                    out.print("<div class=\"alert alert-success col-md-8 col-md-offset-2\">Account succesvol gedeactiveerd!</div>");
-                    response.setHeader("Refresh", "1;url=Adminpage.jsp");
-                } else {
-                    out.print("<div class=\"alert alert-danger col-md-8 col-md-offset-2\">Er is een fout opgetreden!</div>");
-                }
-
-            }
-            //als iemand op de btn actief drukt van roep je de methode
-            //uit verwijderacccount aan die de status op actief zet\
-            //als het goed is dan ga je weer naar de start pagina
-            //als het niet goed dan krijg en een waarschuwing
-            if (request.getParameter("btnActief") != null) {
-                Test.Verwijderaccount actief = new Test.Verwijderaccount(naam);
-                if (actief.Zetstatusactief()) {
-                    out.print("<div class=\"alert alert-success col-md-8 col-md-offset-2\">Account succesvol geactiveerd!</div>");
-                    response.setHeader("Refresh", "1;url=Adminpage.jsp");
-                } else {
-                    out.print("<div class=\"alert alert-danger col-md-8 col-md-offset-2\">Er is een fout opgetreden!</div>");
-                }
-            }
-        %>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript"></script>
-        <script src="js/chosen.jquery.js" type="text/javascript"></script>
-        <script type="text/javascript">
-            var config = {
-                '.chosen-select': {},
-                '.chosen-select-deselect': {allow_single_deselect: true},
-                '.chosen-select-no-single': {disable_search_threshold: 10},
-                '.chosen-select-no-results': {no_results_text: 'Oops, nothing found!'},
-                '.chosen-select-width': {width: "95%"}
-            }
-            for (var selector in config) {
-                $(selector).chosen(config[selector]);
-            }
-        </script>
-        <%
-           int  test = new Test.SQL().AantalBezoekers();
-        %>
-         <p>Total number of visits: <%=test%></p>
+        <!--Jquery voor laadscherm en ajax response-->
+        <script src="js/CustInfo.js" type="text/javascript"></script>
     </body>
 </html>
-

@@ -2,4 +2,13 @@ WebApplication3/nbproject/private/private.properties
 WebApplication3/nbproject/private/private.xml
 WebApplication3/build/
 /WebApplication3/dist/
+<<<<<<< HEAD
 /WebApplication3/nbproject/private/
+=======
+WebApplication3/nbproject/private/private.xml
+/WebApplication3/nbproject/private/
+WebApplication3/nbproject/project.xml
+WebApplication3/nbproject/project.properties
+WebApplication3/nbproject/project.properties
+WebApplication3/nbproject/build-impl.xml
+>>>>>>> b10ac66b1395fb0bfbd87508c850379aa07814e3
