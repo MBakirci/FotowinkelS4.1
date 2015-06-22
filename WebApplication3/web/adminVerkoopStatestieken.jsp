@@ -3,6 +3,10 @@
     Created on : 17-Jun-2015, 09:46:46
     Author     : Coen
 --%>
+<%@page import="java.util.List"%>
+<%@page import="Test.Verwijderaccount"%>
+<%@page import="java.util.Map"%>
+<%@page import="java.util.Date"%>
 <jsp:include page="Masterpage_final.jsp"/>
 <%@include file="TaalSettings.jsp" %>
 <%@page import="java.util.Calendar"%>
@@ -17,6 +21,22 @@
         <title>adminVerkoopStatestieken</title>
     </head>
     <body>
+        <script>
+            function setSelectedIndex(s, valsearch)
+            {
+            // Loop through all the items in drop down list
+                for (i = 0; i < s.options.length; i++)
+                {
+                    if (s.options[i].value == valsearch)
+                    {
+                    // Item is found. Set its property and exit
+                        s.options[i].selected = true;
+                        break;
+                    }
+                }
+                return;
+            }
+        </script>
         <%
             if (session.getAttribute("Role").equals("admin")) {
         %>
@@ -28,7 +48,7 @@
                             <fmt:message key="AdminOverzicht_Select_Maand"/>
                         </div>
                         <div class="container">
-                            <select name="maandMenu">
+                            <select id="maandMenu" name="maandMenu">
                                 <option value="1"><fmt:message key="Januari"/></option>
                                 <option value="2"><fmt:message key="Februari"/></option>
                                 <option value="3"><fmt:message key="Maart"/></option>
@@ -42,6 +62,17 @@
                                 <option value="11"><fmt:message key="November"/></option>
                                 <option value="12"><fmt:message key="December"/></option>
                             </select>
+                            <% String maand;
+                            if (request.getParameter("maand") == null) {
+                                java.util.Date today = new Date();
+                                Integer m = today.getMonth() + 1;
+                                maand = m.toString();
+                            } else {
+                                maand = request.getParameter("maand");
+                            }%>
+                        <script>
+                            setSelectedIndex(document.getElementById("maandMenu"), <%=maand%>);
+                        </script>
                         </div>
                     </div>
                     <div class="col-xs-3">
@@ -49,7 +80,7 @@
                             <fmt:message key="AdminOverzicht_Select_Jaar"/>
                         </div>
                         <div class="container">
-                            <select name="jaarMenu">
+                            <select id="jaarMenu" name="jaarMenu">
                                 <%
                                     int iJaar = 2000;
                                     java.util.Date today = new java.util.Date();
@@ -62,6 +93,16 @@
                                     }
                                 %>
                             </select>
+                            <% String jaar;
+                            if (request.getParameter("maand") == null) {
+                                Integer j = (Integer) eJaar;
+                                jaar = j.toString();
+                            } else {
+                                jaar = request.getParameter("jaar");
+                            }%>
+                        <script>
+                            setSelectedIndex(document.getElementById("jaarMenu"), <%=eJaar%>);
+                        </script>
                         </div>
                     </div>
                     <div class="col-xs-3">
@@ -82,19 +123,42 @@
                     </div>
                 </div>
                 <div class="row">
-                    <input type="text" id="username" name="username" class="form-control" placeholder="fotograaf">
+                    <div class="col-xs-3">
+                    <select id="username" name="username">
+                        <% List<String> fotografen = VerkoopStatestieken.getAlleFotograven();
+                        for(String fotograaf : fotografen){
+                        %>
+                        <option value="<%=fotograaf%>"><%=fotograaf%></option>
+                        <%
+                        }
+                        %>
+                    </select>
+                    <%if (request.getParameter("fotograaf") != null){
+                    String huidigeFotograaf = request.getParameter("fotograaf");
+                    %>
+                    <script>
+                        setSelectedIndex(document.getElementById("username"), "<%=huidigeFotograaf%>");
+                    </script>
+                    <%
+                    }
+                    %>
+                    </div>
+                    <div class="col-xs-3">
                     <button class="btn btn-default" name="fotograafmaandbtn"><fmt:message key="AdminOverzicht_Get_Fotograaf_Maand"/></button>
                     <%if (request.getParameter("fotograafmaandbtn") != null) {
                             response.sendRedirect("adminVerkoopStatestieken.jsp?maand=" + request.getParameter("maandMenu") + "&jaar=" + request.getParameter("jaarMenu") + "&fotograaf=" + request.getParameter("username"));
                         }
 
                     %>
+                    </div>
+                    <div class="col-xs-3">
                     <button class="btn btn-default" name="fotograafjaarbtn"><fmt:message key="AdminOverzicht_Get_Fotograaf_Jaar"/></button>
                     <%if (request.getParameter("fotograafjaarbtn") != null) {
                             response.sendRedirect("adminVerkoopStatestieken.jsp?jaar=" + request.getParameter("jaarMenu") + "&fotograaf=" + request.getParameter("username"));
                         }
 
                     %>
+                    </div>
                 </div>
             </form>
         </div>
@@ -109,6 +173,10 @@
                 } else {
                     JaarData = VerkoopStatestieken.JaarVerkoop(cal);
                 }
+                Double omzet = (Double) JaarData.get("omzet");
+                String strOmzet = String.format("%.2f", omzet);
+                Double btw = (Double) JaarData.get("btw");
+                String strBtw = String.format("%.2f", btw);
             %>
             <h3><fmt:message key="AdminOverzicht_Jaar"/><%=request.getParameter("jaar")%>
                 <%if (request.getParameter("fotograaf") != null) {%>
@@ -123,8 +191,8 @@
                 </tr>
                 <tr>
                     <td><%=JaarData.get("items")%></td>
-                    <td><%=JaarData.get("omzet")%></td>
-                    <td><%=JaarData.get("btw")%></td>
+                    <td><%=strOmzet%></td>
+                    <td><%=strBtw%></td>
                 </tr>
             </table>
         </div>
@@ -141,6 +209,10 @@
                 } else {
                     MaandData = VerkoopStatestieken.MaandVerkoop(cal);
                 }
+                Double omzet = (Double) MaandData.get("omzet");
+                String strOmzet = String.format("%.2f", omzet);
+                Double btw = (Double) MaandData.get("btw");
+                String strBtw = String.format("%.2f", btw);
             %>
             <h3><fmt:message key="AdminOverzicht_Maand"/><%=request.getParameter("maand")%> - <%=request.getParameter("jaar")%>
                 <%if (request.getParameter("fotograaf") != null) {%>
@@ -154,8 +226,8 @@
                 </tr>
                 <tr>
                     <td><%=MaandData.get("items")%></td>
-                    <td><%=MaandData.get("omzet")%></td>
-                    <td><%=MaandData.get("btw")%></td>
+                    <td><%=strOmzet%></td>
+                    <td><%=strBtw%></td>
                 </tr>
             </table>
         </div>

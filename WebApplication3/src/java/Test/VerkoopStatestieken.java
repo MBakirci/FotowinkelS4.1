@@ -5,22 +5,30 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  *
  * @author Coen
  */
 public class VerkoopStatestieken {
-
-    //Haalt totole verkoop informatie een gekozen maand
-    //Invoer:   Calender met het maand en jaar
-    //uitvoer:  hashmap met <key, Valeus> voor:
-    //          key: items, Value: totaal aantal verkochte items
-    //          key: omzet, Value: omzet
-    //          key: btw, Value: BTW over de omzet 
+    /**
+     * 
+     * Haalt totole verkoop informatie een gekozen maand
+     * @param maand Calender met het maand en jaar
+     * @return hashmap met <key, Valeus> voor:
+     * key: items, Value: totaal aantal verkochte items
+     * key: omzet, Value: omzet
+     * key: btw, Value: BTW over de omzet 
+     * @throws ClassNotFoundException
+     * @throws InstantiationException
+     * @throws SQLException
+     * @throws IllegalAccessException 
+     */
     public static HashMap<String, Object> MaandVerkoop(Calendar maand) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException {
         //eerste en laaste datum van opgegeven maand instellen
         Calendar firstDay = new GregorianCalendar();
@@ -32,12 +40,20 @@ public class VerkoopStatestieken {
         return Verkoop(firstDay, lastDay);
     }
     
-    //Haalt totole verkoop informatie een gekozen jaar
-    //Invoer:   Calender met het jaar
-    //uitvoer:  hashmap met <key, Valeus> voor:
-    //          key: items, Value: totaal aantal verkochte items
-    //          key: omzet, Value: omzet
-    //          key: btw, Value: BTW over de omzet 
+    /**
+     * 
+     * Haalt totole verkoop informatie een gekozen jaar
+     * @param jaar Calender met het jaar
+     * @return hashmap met <key, Valeus> voor:
+     * key: items, Value: totaal aantal verkochte items
+     * key: omzet, Value: omzet
+     * key: btw, Value: BTW over de omzet 
+     * @throws ClassNotFoundException
+     * @throws InstantiationException
+     * @throws InstantiationException
+     * @throws SQLException
+     * @throws IllegalAccessException 
+     */
     public static HashMap<String, Object> JaarVerkoop(Calendar jaar) throws ClassNotFoundException, InstantiationException, InstantiationException, SQLException, IllegalAccessException {
         //eerste en laaste dag van een jaar instellen
         Calendar firstDay = new GregorianCalendar();
@@ -48,13 +64,22 @@ public class VerkoopStatestieken {
         return Verkoop(firstDay, lastDay);
     }
     
-    //methode haalt verkoop informatie van de totale verkoop in een gewenste periode uit de database
-    //invoer:   Calander met startdatum van de gewenste periode
-    //          Calander met einddatum van de gewenst periode
-    //uitvoer:  hashmap met <key, Valeus> voor:
-    //          key: items, Value: totaal aantal verkochte items in de gevraagde periode
-    //          key: omzet, Value: omzet in de gevraade periode
-    //          key: btw, Value: BTW over de omzet in de gevraagde periode
+    /**
+     * 
+     * methode haalt verkoop informatie van de totale verkoop in een gewenste periode uit de database
+     * @param StartDate Calander met startdatum van de gewenste periode
+     * @param EndDate Calander met einddatum van de gewenst periode
+     * @return hashmap met <key, Valeus> voor:
+     * key: items, Value: totaal aantal verkochte items in de gevraagde periode
+     * key: omzet, Value: omzet in de gevraade periode
+     * key: btw, Value: BTW over de omzet in de gevraagde periode
+     * @throws ClassNotFoundException
+     * @throws ClassNotFoundException
+     * @throws InstantiationException
+     * @throws SQLException
+     * @throws SQLException
+     * @throws IllegalAccessException 
+     */
     private static HashMap<String, Object> Verkoop(Calendar StartDate, Calendar EndDate) throws ClassNotFoundException, ClassNotFoundException, InstantiationException, SQLException, SQLException, IllegalAccessException {
         //return varibale
         HashMap<String, Object> stats = new HashMap<>();
@@ -73,8 +98,8 @@ public class VerkoopStatestieken {
                 ResultSet result = state.executeQuery();
                 if (result.next()) {
                     stats.put("items", result.getInt("items"));
-                    stats.put("omzet", result.getInt("omzet"));
-                    stats.put("btw", result.getInt("btw"));
+                    stats.put("omzet", result.getDouble("omzet"));
+                    stats.put("btw", result.getDouble("btw"));
                 }
                 //als de querry succesvol is uitgevoerd worden de gevonden resulteren gereturned
                 return stats;
@@ -85,21 +110,24 @@ public class VerkoopStatestieken {
             ts.close();
         }
         //als er een fout optreed bij het uitvoeren van de querry,
-        //wordt de hashmap ingesteld met de keys die worden gebruikt met als values xxx. 
+        //wordt de hashmap ingesteld met de keys die worden gebruikt met als values xxx en 00.00. 
         //Dit is om een nullpointer excetion te verkomen bij het visualerzen van de data.
         stats.put("items", "xxx");
-        stats.put("omzet", "xxx");
-        stats.put("btw", "xxx");
+        stats.put("omzet", (Double) 00.00);
+        stats.put("btw", (Double) 00.00);
         return stats;
     }
     
-    //Haalt verkoop informatie van fotograaf op van een gekozen maand
-    //Invoer:   Calender met het maand en jaar
-    //          String met email adres
-    //uitvoer:  hashmap met <key, Valeus> voor:
-    //          key: items, Value: totaal aantal verkochte items
-    //          key: omzet, Value: omzet
-    //          key: btw, Value: BTW over de omzet 
+    /**
+     * 
+     * Haalt verkoop informatie van fotograaf op van een gekozen maand
+     * @param maand Calender met het maand en jaar
+     * @param email String met email adres
+     * @return hashmap met <key, Valeus> voor:
+     * key: items, Value: totaal aantal verkochte items
+     * key: omzet, Value: omzet
+     * key: btw, Value: BTW over de omzet 
+     */
     public static HashMap<String, Object> FotograafMaandVerkoop(Calendar maand, String email) {
         //eerste en laaste datum van opgegeven maand instellen
         Calendar firstDay = new GregorianCalendar();
@@ -111,13 +139,16 @@ public class VerkoopStatestieken {
         return FotograafVerkoop(firstDay, lastDay, email);
     }
     
-    //Haalt verkoop informatie van fotograaf op van een gekozen jaar
-    //Invoer:   Calender met het jaar
-    //          String met email adres
-    //uitvoer:  hashmap met <key, Valeus> voor:
-    //          key: items, Value: totaal aantal verkochte items
-    //          key: omzet, Value: omzet
-    //          key: btw, Value: BTW over de omzet 
+    /**
+     * 
+     * Haalt verkoop informatie van fotograaf op van een gekozen jaar
+     * @param jaar Calender met het jaar
+     * @param email String met email adres
+     * @return hashmap met <key, Valeus> voor:
+     * key: items, Value: totaal aantal verkochte items
+     * key: omzet, Value: omzet
+     * key: btw, Value: BTW over de omzet 
+     */
     public static HashMap<String, Object> FotograafJaarVerkoop(Calendar jaar, String email) {
         //eerste en laaste dag van een jaar instellen
         Calendar firstDay = new GregorianCalendar();
@@ -128,14 +159,17 @@ public class VerkoopStatestieken {
         return FotograafVerkoop(firstDay, lastDay, email);
     }
 
-    //methode haalt verkoop informatie van een fotograaf in gewenste periode op uit de datebase
-    //invoer:   Calander met startdatum van de gewenste periode
-    //          Calander met einddatum van de gewenst periode
-    //          String met geweste mail adres
-    //uitvoer:  hashmap met <key, Valeus> voor:
-    //          key: items, Value: totaal aantal verkochte items in de gevraagde periode
-    //          key: omzet, Value: omzet in de gevraade periode
-    //          key: btw, Value: BTW over de omzet in de gevraagde periode
+    /**
+     * 
+     * methode haalt verkoop informatie van een fotograaf in gewenste periode op uit de datebase
+     * @param StartDate Calander met startdatum van de gewenste periodec
+     * @param EndDate Calander met einddatum van de gewenst periode
+     * @param email String met geweste mail adres
+     * @return hashmap met <key, Valeus> voor:
+     * key: items, Value: totaal aantal verkochte items in de gevraagde periode
+     * key: omzet, Value: omzet in de gevraade periode
+     * key: btw, Value: BTW over de omzet in de gevraagde periode
+     */
     private static HashMap<String, Object> FotograafVerkoop(Calendar StartDate, Calendar EndDate, String email) {
         //return varibale
         HashMap<String, Object> stats = new HashMap<>();
@@ -160,8 +194,8 @@ public class VerkoopStatestieken {
                     ResultSet result = state.executeQuery();
                     if (result.next()) {
                         stats.put("items", result.getInt("items"));
-                        stats.put("omzet", result.getInt("omzet"));
-                        stats.put("btw", result.getInt("btw"));
+                        stats.put("omzet", result.getDouble("omzet"));
+                        stats.put("btw", result.getDouble("btw"));
                     }
                     //als de querry succesvol is uitgevoerd worden de gevonden resulteren gereturned
                     return stats;
@@ -173,28 +207,34 @@ public class VerkoopStatestieken {
             }
         }
         //als er een fout optreed bij het uitvoeren van de querry of het email adres niet bestaat,
-        //wordt de hashmap ingesteld met de keys die worden gebruikt met als values xxx. 
+        //wordt de hashmap ingesteld met de keys die worden gebruikt met als values xxx en 00.00. 
         //Dit is om een nullpointer excetion te verkomen bij het visualerzen van de data.
         stats.put("items", "xxx");
-        stats.put("omzet", "xxx");
-        stats.put("btw", "xxx");
+        stats.put("omzet", (Double) 00.00);
+        stats.put("btw", (Double) 00.00);
         return stats;
     }
     
-    //methode zet Calander object om in een dat data object dat te gebruiken is 
-    //in een prepared statement
-    //invoer: Calander
-    //uitvoer: java.sql.Date
+    /**
+     * 
+     * methode zet Calander object om in een dat data object dat te gebruiken is 
+     * in een prepared statement
+     * @param input Calendar
+     * @return java.sql.Date met zelfde datum als invoer
+     */
     private static java.sql.Date ToSQLDate(Calendar input) {
         java.util.Date date = input.getTime();
         return new java.sql.Date(date.getTime());
     }
 
-    //Methode die check of email bestaat in de database
-    //invoer: String die email adres bevat
-    //uitvoer: booleaan
-    //      true: email adres bestaat
-    //      false: email adres bestaat niet
+    /**
+     * 
+     * Methode die check of email bestaat in de database
+     * @param email String die email adres bevat
+     * @return booleaan
+     * true: email adres bestaat
+     * false: email adres bestaat niet
+     */ 
     private static boolean checkEmail(String email) {
         //aantal keer dat het eamil adres voorkomt, als er een fout optreed in het 
         //uitvoeren van de methode word er false gereturned
@@ -222,5 +262,32 @@ public class VerkoopStatestieken {
         }
         //als het email adres voorkomt return true
         return aantal > 0;
+    }
+    
+    /**
+     * 
+     * @return ArrayList met alle fotograven
+     */
+    public static List<String> getAlleFotograven() {
+        List<String> output = new ArrayList<>();
+        Databaseconnector ts = new Databaseconnector();
+        try {
+            if (ts.verbindmetDatabase()) {
+                PreparedStatement state = null;
+                String querry = "Select a.email as email " +
+                        "from FW_ACCOUNT a " +
+                        "where a.ATYPE = 'fotograaf'";
+                state = ts.conn.prepareStatement(querry);
+                ResultSet result = state.executeQuery();
+                while (result.next()) {
+                    output.add(result.getString("email"));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            ts.close();
+        }
+        return output;
     }
 }
