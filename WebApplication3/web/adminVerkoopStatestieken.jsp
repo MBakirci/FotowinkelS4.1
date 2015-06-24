@@ -239,5 +239,9 @@
         <%
             }
         %>
+        <%
+           int  test = new Test.SQL().AantalBezoekers();
+        %>
+         <p>Total number of visits: <%=test%></p>
     </body>
 </html>
