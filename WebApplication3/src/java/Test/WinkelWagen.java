@@ -47,13 +47,10 @@ public class WinkelWagen {
             Test.WinkelWagenItem item = it.next();
             Double value = item.getPrijs() * 1 / getRates("EUR");
             Double rates;
-            if( valuta != null)
-            {
-            rates = getRates(valuta);
-            }
-            else
-            {
-            rates = getRates("EUR");
+            if (valuta != null) {
+                rates = getRates(valuta);
+            } else {
+                rates = getRates("EUR");
             }
             value = value * rates;
             Test.WinkelWagenItem itemval = new Test.WinkelWagenItem(item.getProductnaam(), item.getAantal(), item.getKleurtype(), item.getProducttype(), value, item.getFotocode(), item.getXcor(), item.getYcor(), item.getWamnt(), item.getHamnt());
@@ -275,7 +272,13 @@ public class WinkelWagen {
     }
 
     public void AddItem(String productnaam, Integer aantal, String kleurtype, String producttype, Double prijs, String fotocode, int X, int Y, int wid, int hei) {
-        Test.WinkelWagenItem item = new Test.WinkelWagenItem(productnaam, aantal, kleurtype, producttype, prijs, fotocode, X, Y, wid, hei);
+                Test.WinkelWagenItem item;
+        if (X != 0 && Y != 0 && wid != 0 && hei != 0) {
+             item = new Test.WinkelWagenItem(productnaam, aantal, kleurtype, producttype, prijs, fotocode, X, Y, wid, hei);
+        } else {
+             item = new Test.WinkelWagenItem(productnaam, aantal, kleurtype, producttype, prijs, fotocode , X, Y, wid, hei);
+
+        }
 
         int add = 0;
         if (itemlist.size() == 0) {

@@ -53,18 +53,17 @@
         <%
         Test.WinkelWagen winkelwagen = new Test.WinkelWagen();
         double totaal=0;    
-        ArrayList<Test.WinkelWagenItem> itemlist = winkelwagen.WinkelList();
+        ArrayList<Test.WinkelWagenItem> itemlist = winkelwagen.GetWinkelWageValuta((String) session.getAttribute("valuta"));
          
         for(Test.WinkelWagenItem pd : itemlist)
         {
         %>
 
-        
-        <tr><td width="200"><div align="left"><b><%=pd.getProductnaam()%>&nbsp;&nbsp;</b></div></td>
-               <td width="202"><%=pd.getPrijs()%><fmt:message key="PaymentSucces_EUR"/></td></tr>
+        <tr><td width="200"><div align="left"><b><%=pd.getProductnaam() %> &nbsp;&nbsp;</b></div></td>
+               <td width="202"><%=Math.round(pd.getPrijs()*pd.getAantal()* 100.0)/ 100.0%><fmt:message key="PaymentSucces_EUR"/></td></tr>
         
         <%
-        totaal=totaal+pd.getPrijs();
+        totaal=totaal+(pd.getPrijs() * pd.getAantal());
         }
             %>
                        
@@ -75,7 +74,7 @@
     </tr>
     <tr>
       <td width="200"><div style="font-size:18px;" align="left"><b><fmt:message key="PaymentSucces_Totaal"/>:</b></div></td>
-      <td width="202"><span style="font-size:18px;"><%=totaal%> <fmt:message key="PaymentSucces_EUR"/></span></td>
+     <td width="202"><span style="font-size:18px;"><%=Math.round(totaal *100.0)/100.0%> <fmt:message key="PaymentSucces_EUR"/></span></td>
     </tr>  
     <tr>
       <td width="200">&nbsp;</td>
@@ -86,8 +85,7 @@
       <td width="202">&nbsp;</td>
     </tr>
     <tr>
-      <td width="200"><div align="left"><b>PayPal&nbsp;&nbsp;</b></div></td><td width="202"><%=totaal%> <fmt:message key="PaymentSucces_EUR"/></td>
-    </tr>
+<td width="200"><div align="left"><b>PayPal&nbsp;&nbsp;</b></div></td><td width="202"><%=Math.round(totaal*100.0)/100.0%> <fmt:message key="PaymentSucces_EUR"/></td>    </tr>
     <tr>
       <td width="200"><div align="left"><b><fmt:message key="PaymentSucces_Bevestigingsdatum"/>:  </b></div></td>
       <td id="Datum" width="202"></td>
