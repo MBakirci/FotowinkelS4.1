@@ -23,7 +23,7 @@
                 <h4 style="margin-top: 50px;"><fmt:message key="codeInvoer"/></h4>
                 <hr>
                 <div class="form-group">
-                    <label for="inputvoornaam" class="sr-only">Code</label>
+                    <label for="inputvoornaam" class="sr-only">Individuele code</label>
                 </div>
                 <div class="row">
                     <div class="col-lg-6">
@@ -31,6 +31,19 @@
                             <input type="text" name="Code" class="form-control" placeholder="Code">
                             <span class="input-group-btn">
                                 <button class="btn btn-default" type="submit" name="btnCode"><fmt:message key="btnSetCode"/></button>
+                            </span>
+                        </div><!-- /input-group -->
+                    </div><!-- /.col-lg-6 -->
+                </div>
+                <div class="form-group">
+                    <label for="inputvoornaam2" class="sr-only">Groeps Code</label>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <input type="text" name="GroepsCode" class="form-control" placeholder="Code">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="submit" name="btnGroepsCode"><fmt:message key="btnSetCode"/></button>
                             </span>
                         </div><!-- /input-group -->
                     </div><!-- /.col-lg-6 -->
@@ -45,6 +58,7 @@
 
                         // Test.Controleercode reg = new Test.Controleercode(code);
                         if (src.equals("")) {
+                            //HIER WAS IK GEBLEVEN !!! PROBEER GROEPSCODE HIER
                             //error = "De code bestaat niet controleer deze en probeer het opnieuw";
                 %>
                 <div style="margin-top: 10px" class="alert alert-danger" role="alert"><b><i><%=code%></i></b> - Deze code bestaat niet, controleer deze en probeer het opnieuw</div>
@@ -58,9 +72,15 @@
                     //out.print("het is gelukt");
                     Test.Photo idcode = new Test.Photo();
                     String a = idcode.getID(session.getAttribute("Name").toString());
-                    int b = Integer.parseInt(a);
+                    String Groepscode = request.getParameter("GroepsCode");
+                    int id = Integer.parseInt(a);
                     Test.SQL sql = new Test.SQL();
-                    sql.koppeling(b, code);
+                    if (sql.koppeling(id, code)) {
+                        //Code was een individuele code
+                    } else {
+                        //Code is een groepscode
+                        sql.koppelingGroepsCode(Groepscode, id);
+                    }
                 %>
                 <div style="margin-top: 10px" class="alert alert-success" role="alert"><%=code%> is succesvol toegevoegd aan uw foto's</div>
                 <%
@@ -68,12 +88,19 @@
                             //   response.sendRedirect("index.jsp");                     }
                         }
                     }
+                    if (request.getParameter("btnGroepsCode") != null) {
+                        String Groepscode = request.getParameter("GroepsCode");
+                        Test.Photo photo = new Test.Photo();
+                        int id = Integer.parseInt(photo.getID(session.getAttribute("Name").toString()));
+                        Test.SQL sql = new Test.SQL();
+                        sql.koppelingGroepsCode(Groepscode, id);
+                    }
                     // if(request.getParameter("Code") != null)   
                     // {
                     //      response.sendRedirect("Inlogscherm.jsp");
                     // }
 %>
-                <img src="<%=request.getAttribute("image")%>">
+                <img alt="deze zeer mooie platje" src="<%=request.getAttribute("image")%>">
             </div>
         </form>
 
