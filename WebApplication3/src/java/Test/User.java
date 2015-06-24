@@ -151,7 +151,7 @@ public class User {
         }
     }
 
-    public boolean Fotograaf(String telefoon, String straat, String huisnr,
+    public boolean UserInfo(String telefoon, String straat, String huisnr,
             String postcode, String stad)
             throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException {
         User a = new User(this.eMail);

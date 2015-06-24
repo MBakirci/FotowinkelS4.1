@@ -8,6 +8,7 @@ package Test;
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.System.out;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -60,7 +61,7 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
     }
 
     /**
@@ -74,12 +75,13 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         String naam = request.getParameter("Email");
         String pass = request.getParameter("Pass");
         String voornaam = request.getParameter("voornaam");
         String tussenvoegsel = request.getParameter("tussenvoegsel");
         String achternaam = request.getParameter("achternaam");
-
+        //LOGIN
         if (request.getParameter("btnLogin") != null) {
             Test.Login login = new Test.Login(naam, pass);
             try {
@@ -98,28 +100,50 @@ public class LoginController extends HttpServlet {
                 Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-
+        //Register met email en password User wordt aangemaakt op Database
         if (request.getParameter("btnRegister") != null) {
             naam = request.getParameter("username");
             pass = request.getParameter("password");
             int actief = 1;
             String error = "";
-            if (request.getParameter("btnRegister") != null) {
-                Test.registreer reg = new Test.registreer(naam, pass, voornaam, tussenvoegsel, achternaam, actief);
 
-                try {
-                    if (!reg.Verbind()) {
-                        response.setContentType("text/plain");
-                        response.getWriter().write("unsuccess");
-                    } 
-                    else {
-                        response.setContentType("text/plain");
-                        response.getWriter().write("success");
-                    }
-                } catch (Exception ex) {
-                    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+            Test.registreer reg = new Test.registreer(naam, pass, voornaam, tussenvoegsel, achternaam, actief);
+
+            try {
+                if (!reg.Verbind()) {
+                    response.setContentType("text/plain");
+                    response.getWriter().write("unsuccess");
+                } else {
+                    HttpSession session = request.getSession();
+                    User user = new User();
+                    user.seteMail(naam);
+                    session.setAttribute("RegistUser", user);
+                    request.getRequestDispatcher("Registreren_AdditionalInfo.jsp").forward(request, response);
                 }
+            } catch (Exception ex) {
+                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
+        }
+        //Register modal met userinformatie
+        if (request.getParameter("btnRegisterAddInfo") != null) {
+            String eMail = request.getParameter("eMail");
+            String tel = request.getParameter("telefoon");
+            String straat = request.getParameter("straat");
+            String huisnr = request.getParameter("huisnr");
+            String postcode = request.getParameter("postcode");
+            String stad = request.getParameter("stad");
+            try {
+                User reg = new User(eMail);
+                if (reg.UserInfo(tel, straat, huisnr, postcode, stad)) {
+                    response.setContentType("text/plain");
+                    response.getWriter().write("success");
+                } else {
+                    response.setContentType("text/plain");
+                    response.getWriter().write("unsuccess");
+                }
+            } catch (ClassNotFoundException | InstantiationException | SQLException | IllegalAccessException ex) {
+                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }

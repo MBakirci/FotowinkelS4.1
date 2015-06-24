@@ -43,6 +43,19 @@
                 <p><fmt:message key='Register_to_login'/><a href="Login.jsp"><fmt:message key='Register_to_login_link'/></a></p>
             </form>
         </div>
+        <div class="modal fade" id="Modal_Register" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Vul uw gegevens in</h3>
+                    </div>
+                    <div class="modal-body">
+                    </div>
+                    <div class="modal-footer" id="CustDetails">
+                    </div>
+                </div>
+            </div>
+        </div>  
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
