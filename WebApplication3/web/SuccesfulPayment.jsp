@@ -54,7 +54,10 @@
         Test.WinkelWagen winkelwagen = new Test.WinkelWagen();
         double totaal=0;    
         ArrayList<Test.WinkelWagenItem> itemlist = winkelwagen.GetWinkelWageValuta((String) session.getAttribute("valuta"));
-         
+                         if ("POST".equalsIgnoreCase(request.getMethod())) {
+                                winkelwagen.CreateBestelling(session.getAttribute("Name").toString());
+                                winkelwagen.CreateBestelling_Winkelwagen(itemlist,session.getAttribute("valuta").toString());
+                            }
         for(Test.WinkelWagenItem pd : itemlist)
         {
         %>

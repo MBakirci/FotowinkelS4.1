@@ -8,6 +8,7 @@ package Test;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -331,7 +332,7 @@ public class WinkelWagen {
     
     }
    
-    public void CreateBestelling_Winkelwagen(ArrayList<Test.WinkelWagenItem> itemlist) throws Exception {
+    public void CreateBestelling_Winkelwagen(ArrayList<Test.WinkelWagenItem> itemlist, String valuta) throws Exception {
         Databaseconnector ts = new Databaseconnector();
         Photo photo = new Photo();
         if (ts.verbindmetDatabase()) {
@@ -339,12 +340,14 @@ public class WinkelWagen {
             try {
                 for(Test.WinkelWagenItem es : itemlist)
                 {
-                String q = "INSERT INTO FW_PRODUCT_FOTO(PRODUCTID, PTYPE,FOTOCODE,PRIJS,BTW,X,Y,LENGTH,WIDTH,AANTAL,FK_BESTELLINGID) VALUES(?,? ,?,?,? ,?,?,? ,?,?,? ,?)";
+                String q = "INSERT INTO FW_PRODUCT_FOTO(PRODUCTID, PTYPE,FOTOCODE,PRIJS,BTW,X,Y,LENGTH,WIDTH,AANTAL,FK_BESTELLINGID,VALUTA) VALUES(?,? ,?,?,? ,?,?,? ,?,?,?,?)";
                 state = ts.conn.prepareStatement(q);
-                state.setInt(1,getProductId(es.getProducttype()));
+                String ptype = es.getProducttype();
+                int productID = getProductId(ptype);
+                state.setInt(1,productID);
                 state.setString(2, es.getKleurtype());
                 state.setString(3, es.getFotocode());
-                state.setDouble(4, es.getPrijs());
+                state.setDouble(4, Math.round(es.getPrijs()*100)/100);
                 state.setInt(5, 21);
                 state.setInt(6, es.getXcor());
                 state.setInt(7, es.getYcor());
@@ -352,6 +355,7 @@ public class WinkelWagen {
                 state.setInt(9, es.getWamnt());
                 state.setInt(10, es.getAantal());
                 state.setInt(11, getMaxBestellingId());
+                state.setString(12, valuta);
                 //state.executeQuery();
                 state.executeUpdate();  
                 }
@@ -378,7 +382,11 @@ public class WinkelWagen {
                 String q = "SELECT MAX(BESTELLINGID) FROM FW_BESTELLING";
                 state = ts.conn.prepareStatement(q);
                 //state.executeQuery();
-                BestellingId = state.executeUpdate(); 
+                ResultSet rs = state.executeQuery();
+                if(rs.next())
+                {
+                    BestellingId = rs.getInt(1);
+                }
                 return BestellingId;
             } catch (SQLException e) {
                 System.out.println(e.toString());
@@ -405,7 +413,12 @@ public class WinkelWagen {
                 state = ts.conn.prepareStatement(q);
                 state.setString(1, Ptype);
                 //state.executeQuery();
-                productId = state.executeUpdate(); 
+                //productId = state.executeUpdate(); 
+                ResultSet rs = state.executeQuery();
+                if(rs.next())
+                {
+                    productId = rs.getInt(1);
+                }
                 return productId;
             } catch (SQLException e) {
                 System.out.println(e.toString());

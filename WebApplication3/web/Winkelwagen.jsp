@@ -224,11 +224,6 @@
                     <% productnummer++;
 
                             //  Check if form has been submitted (Check if paid)
-                            if ("POST".equalsIgnoreCase(request.getMethod())) {
-                                out.print("Ik ben hier geweest");
-                                winkelwagen.CreateBestelling(session.getAttribute("Name").toString());
-                                winkelwagen.CreateBestelling_Winkelwagen(itemlist);
-                            }
                         }%>
 
                     <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/x-click-but6.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online.">
