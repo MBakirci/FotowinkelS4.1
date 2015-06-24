@@ -7,6 +7,8 @@ package Test;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -298,5 +300,122 @@ public class WinkelWagen {
 
     public String getURLWithContextPath(HttpServletRequest request) {
         return request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
+    }
+    
+              public static java.sql.Date getCurrentJavaSqlDate() {
+    java.util.Date today = new java.util.Date();
+    return new java.sql.Date(today.getTime());
+  }
+       public void CreateBestelling(String Email) throws Exception {
+        Databaseconnector ts = new Databaseconnector();
+        Photo photo = new Photo();
+        if (ts.verbindmetDatabase()) {
+            PreparedStatement state = null;
+            try {
+                
+                String q = "INSERT INTO FW_BESTELLING(KLANTID, BESTELDATUM) VALUES(?, ?)";
+                state = ts.conn.prepareStatement(q);
+                state.setString(1, photo.getID(Email));
+                state.setDate(2, getCurrentJavaSqlDate());
+                //state.executeQuery();
+                state.executeUpdate();  
+            } catch (SQLException e) {
+                System.out.println(e.toString());
+            } finally {
+                if (state != null) {
+                    state.close();
+                }
+                ts.verbindingverbrekenmetDatabase();
+            }
+        }
+    
+    }
+   
+    public void CreateBestelling_Winkelwagen(ArrayList<Test.WinkelWagenItem> itemlist) throws Exception {
+        Databaseconnector ts = new Databaseconnector();
+        Photo photo = new Photo();
+        if (ts.verbindmetDatabase()) {
+            PreparedStatement state = null;
+            try {
+                for(Test.WinkelWagenItem es : itemlist)
+                {
+                String q = "INSERT INTO FW_PRODUCT_FOTO(PRODUCTID, PTYPE,FOTOCODE,PRIJS,BTW,X,Y,LENGTH,WIDTH,AANTAL,FK_BESTELLINGID) VALUES(?,? ,?,?,? ,?,?,? ,?,?,? ,?)";
+                state = ts.conn.prepareStatement(q);
+                state.setInt(1,getProductId(es.getProducttype()));
+                state.setString(2, es.getKleurtype());
+                state.setString(3, es.getFotocode());
+                state.setDouble(4, es.getPrijs());
+                state.setInt(5, 21);
+                state.setInt(6, es.getXcor());
+                state.setInt(7, es.getYcor());
+                state.setInt(8, es.getHamnt());
+                state.setInt(9, es.getWamnt());
+                state.setInt(10, es.getAantal());
+                state.setInt(11, getMaxBestellingId());
+                //state.executeQuery();
+                state.executeUpdate();  
+                }
+            } catch (SQLException e) {
+                System.out.println(e.toString());
+          } finally {
+                if (state != null) {
+                    state.close();
+                }
+                ts.verbindingverbrekenmetDatabase();
+            }
+        }
+    
+    }
+    public int getMaxBestellingId() throws Exception
+    {
+        int BestellingId = 0;
+        
+        Databaseconnector ts = new Databaseconnector();
+            if (ts.verbindmetDatabase()) {
+            PreparedStatement state = null;
+            try {
+                
+                String q = "SELECT MAX(BESTELLINGID) FROM FW_BESTELLING";
+                state = ts.conn.prepareStatement(q);
+                //state.executeQuery();
+                BestellingId = state.executeUpdate(); 
+                return BestellingId;
+            } catch (SQLException e) {
+                System.out.println(e.toString());
+            } finally {
+                if (state != null) {
+                    state.close();
+                }
+                ts.verbindingverbrekenmetDatabase();
+            }
+        }
+        return BestellingId;
+        
+    }
+    public int getProductId(String Ptype)throws Exception {
+    
+        Databaseconnector ts = new Databaseconnector();
+        Photo photo = new Photo();
+        int productId =0;
+        if (ts.verbindmetDatabase()) {
+            PreparedStatement state = null;
+            try {
+                
+                String q = "SELECT PRODUCTID FROM FW_PRODUCT WHERE NAAM = ?";
+                state = ts.conn.prepareStatement(q);
+                state.setString(1, Ptype);
+                //state.executeQuery();
+                productId = state.executeUpdate(); 
+                return productId;
+            } catch (SQLException e) {
+                System.out.println(e.toString());
+            } finally {
+                if (state != null) {
+                    state.close();
+                }
+                ts.verbindingverbrekenmetDatabase();
+            }
+        }
+        return productId;
     }
 }

@@ -7,6 +7,7 @@
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@include file="TaalSettings.jsp" %>
 <!DOCTYPE html>
 <jsp:include page="Masterpage_final.jsp"></jsp:include>
     <html>
@@ -225,6 +226,8 @@
                             //  Check if form has been submitted (Check if paid)
                             if ("POST".equalsIgnoreCase(request.getMethod())) {
                                 out.print("Ik ben hier geweest");
+                                winkelwagen.CreateBestelling(session.getAttribute("Name").toString());
+                                winkelwagen.CreateBestelling_Winkelwagen(itemlist);
                             }
                         }%>
 
