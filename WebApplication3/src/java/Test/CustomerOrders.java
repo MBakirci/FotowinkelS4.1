@@ -1,0 +1,177 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Test;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ *
+ * @author asror
+ */
+public class CustomerOrders {
+
+    public ArrayList<String> getAllOrders(String usernameString) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException {
+        ArrayList orderlist = new ArrayList();
+        Test.Databaseconnector ts = new Test.Databaseconnector();
+        String klantid = getID(usernameString);
+        if (ts.verbindmetDatabase()) {
+            PreparedStatement state = null;
+            try {
+                //Update gebruiker gedeelte van fotograaf
+                String q = "select bestellingid\n"
+                        + "from FW_BESTELLING\n"
+                        + "where klantid= ?";
+                state = ts.conn.prepareStatement(q);
+                state.setString(1, klantid);
+                ResultSet rs = state.executeQuery();
+
+                while (rs.next()) {
+                    String bestellingid = rs.getString("bestellingid");
+                    orderlist.add(bestellingid);
+                }
+                return orderlist;
+            } catch (SQLException e) {
+                System.out.println(e.toString());
+            } finally {
+                if (state != null) {
+                    state.close();
+                }
+                ts.verbindingverbrekenmetDatabase();
+            }
+        }
+        return null;
+    }
+
+    public String getOrderPrice(String bestellingid) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException {
+        Test.Databaseconnector ts = new Test.Databaseconnector();
+        String price = "";
+        if (ts.verbindmetDatabase()) {
+            PreparedStatement state = null;
+            try {
+                //Update gebruiker gedeelte van fotograaf
+                String q = "select sum(prijs) as price \n"
+                        + "from fw_product_foto\n"
+                        + "where fk_bestellingid = ?";
+                state = ts.conn.prepareStatement(q);
+                state.setString(1, bestellingid);
+                ResultSet rs = state.executeQuery();
+
+                if (rs.next()) {
+                    price = rs.getString("price");
+                }
+            } catch (SQLException e) {
+                System.out.println(e.toString());
+            } finally {
+                if (state != null) {
+                    state.close();
+                }
+                ts.verbindingverbrekenmetDatabase();
+            }
+        }
+        return price;
+    }
+
+    public String getOrderValuta(String bestellingid) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException {
+        Test.Databaseconnector ts = new Test.Databaseconnector();
+        String price = "";
+        if (ts.verbindmetDatabase()) {
+            PreparedStatement state = null;
+            try {
+                //Update gebruiker gedeelte van fotograaf
+                String q = "select valuta \n"
+                        + "from fw_product_foto\n"
+                        + "where fk_bestellingid = ?";
+                state = ts.conn.prepareStatement(q);
+                state.setString(1, bestellingid);
+                ResultSet rs = state.executeQuery();
+
+                if (rs.next()) {
+                    price = rs.getString("valuta");
+                    if (price == null) {
+                        price = " ";
+                    }
+                }
+            } catch (SQLException e) {
+                System.out.println(e.toString());
+            } finally {
+                if (state != null) {
+                    state.close();
+                }
+                ts.verbindingverbrekenmetDatabase();
+            }
+        }
+
+        return price;
+    }
+
+    public String getOrderDatum(String bestellingid) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException {
+        Test.Databaseconnector ts = new Test.Databaseconnector();
+        String bestdatum = "";
+        if (ts.verbindmetDatabase()) {
+            PreparedStatement state = null;
+            try {
+                //Update gebruiker gedeelte van fotograaf
+                String q = "select besteldatum \n"
+                        + "from fw_bestelling \n"
+                        + "where bestellingid = ?";
+                state = ts.conn.prepareStatement(q);
+                state.setString(1, bestellingid);
+                ResultSet rs = state.executeQuery();
+
+                if (rs.next()) {
+                    bestdatum = rs.getString("besteldatum");
+                }
+            } catch (SQLException e) {
+                System.out.println(e.toString());
+            } finally {
+                if (state != null) {
+                    state.close();
+                }
+                ts.verbindingverbrekenmetDatabase();
+            }
+        }
+        return bestdatum;
+    }
+
+    public String getID(String email) throws ClassNotFoundException, InstantiationException, SQLException {
+
+        String accountID = "";
+
+        Test.Databaseconnector ts = new Test.Databaseconnector();
+        try {
+            if (ts.verbindmetDatabase()) {
+                PreparedStatement state = null;
+                try {
+                    //Update gebruiker gedeelte van fotograaf
+                    String q = "SELECT ACCOUNT_ID from FW_ACCOUNT where EMAIL=?";
+                    state = ts.conn.prepareStatement(q);
+                    state.setString(1, email);
+                    ResultSet gebruikersType = state.executeQuery();
+
+                    if (gebruikersType.next()) {
+                        accountID = gebruikersType.getString("ACCOUNT_ID");
+                    }
+                } catch (SQLException e) {
+                    System.out.println(e.toString());
+                } finally {
+                    if (state != null) {
+                        state.close();
+                    }
+                    ts.verbindingverbrekenmetDatabase();
+                }
+            }
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(AccountInfo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return accountID;
+    }
+
+}
