@@ -38,7 +38,7 @@
                         for (String es : orderlist) {
                     %>
                     <tr class='clickable-row'>
-                        <td data-th="Product">
+                        <td class ="orderid" data-th="Product">
                             <div class="row">
                                 <div class="col-sm-2 hidden-xs"><%= es%></div>
                                 <div class="col-sm-10">
@@ -61,7 +61,12 @@
             <script>
                 jQuery(document).ready(function ($) {
                     $(".clickable-row").click(function () {
-                        alert("eyey");
+                        var item = $(this).closest("tr")   // Finds the closest row <tr> 
+                                .find(".orderid")     // Gets a descendent with class="nr"
+                                .text();
+                        var orderId = item.replace(/\s/g, '');
+                        
+                        window.location.href = "Factuur.jsp?BestellingID=" + orderId;
                     });
                 });
             </script>

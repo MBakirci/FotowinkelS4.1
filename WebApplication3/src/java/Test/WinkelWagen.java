@@ -340,7 +340,7 @@ public class WinkelWagen {
             try {
                 for(Test.WinkelWagenItem es : itemlist)
                 {
-                String q = "INSERT INTO FW_PRODUCT_FOTO(PRODUCTID, PTYPE,FOTOCODE,PRIJS,BTW,X,Y,LENGTH,WIDTH,AANTAL,FK_BESTELLINGID,VALUTA) VALUES(?,? ,?,?,? ,?,?,? ,?,?,?,?)";
+                String q = "INSERT INTO FW_PRODUCT_FOTO(PRODUCTID, PTYPE,FOTOCODE,PRIJS,BTW,X,Y,LENGTH,WIDTH,AANTAL,FK_BESTELLINGID,VALUTA, NAMEFORFACTUUR) VALUES(?,? ,?,?,? ,?,?,? ,?,?,?,?, ?)";
                 state = ts.conn.prepareStatement(q);
                 String ptype = es.getProducttype();
                 int productID = getProductId(ptype);
@@ -356,6 +356,7 @@ public class WinkelWagen {
                 state.setInt(10, es.getAantal());
                 state.setInt(11, getMaxBestellingId());
                 state.setString(12, valuta);
+                state.setString(13, es.getProductnaam());
                 //state.executeQuery();
                 state.executeUpdate();  
                 }
