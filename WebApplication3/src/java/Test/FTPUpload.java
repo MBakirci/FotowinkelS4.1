@@ -82,7 +82,7 @@ public class FTPUpload {
             }
             Test.Categorieën categorieën = new Test.Categorieën();
 
-            categorieën.CreateCategory(path, foldername, dirToCreate);
+            categorieën.CreateCategory(foldername, path, dirToCreate);
 
             success = ftpClient.makeDirectory(dirToCreate);
             showServerReply(ftpClient);
