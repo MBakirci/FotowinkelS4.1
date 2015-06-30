@@ -24,15 +24,18 @@
                 </library>
                 <library dirs="200">
                     <file>${file.reference.jstl-api.jar}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
                     <file>${file.reference.jstl-impl.jar}</file>
+                </library>
+                <library dirs="200">
+                    <file>${libs.junit_4.classpath}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
             </web-module-libraries>
             <web-module-additional-libraries/>
             <source-roots>
+                <root id="src.Test%20Packages.dir"/>
                 <root id="src.dir"/>
             </source-roots>
             <test-roots>
