@@ -144,6 +144,30 @@
                                                 }
                                             %>
                                         </div>
+                                        
+                                        
+                                        <div class="form-group">
+                                            <form>
+                                                <fieldset>
+                                                    <h2><fmt:message key="Upload_NewCat"/></h2>
+                                                </fieldset>
+                                                <input type="text" class="file" name="FolderCategory" value=""/>    
+                                                <input type="submit" class="btn btn-primary" value="Categorie Toevoegen!" name="btnCategory" />
+                                            </form>
+                                        </div>
+                                        <%
+                                            String user = "";
+                                            if (request.getParameter("btnCategory") != null) {
+                                                if (session.getAttribute("Name") != null) {
+                                                    user = session.getAttribute("Name").toString();
+                                                }
+                                                ftpload.uploadDiretory(request.getParameter("FolderCategory").toString(), user);
+                                                //session.removeAttribute("cat");
+                                                // session.invalidate();
+                                                response.sendRedirect("Upload.jsp");
+                                            }
+                                        %>
+
                                     </div>
 
                                     <% if (request.getParameter("cat") != null) { %>
@@ -166,28 +190,7 @@
                                         <br/>
                                         <hr>
 
-                                        <div class="form-group">
-                                            <form action="NewCategoryUploaded" method="post">
-                                                <fieldset>
-                                                    <h2><fmt:message key="Upload_NewCat"/></h2>
-                                                </fieldset>
-                                                <input type="text" class="file" name="FolderCategory" value=""/>    
-                                                <input type="submit" class="btn btn-primary" value="Categorie Toevoegen!" name="btnCategory" />
-                                            </form>
-                                        </div>
-                                        <%
-                                            String user = "";
-                                            if (request.getParameter("btnCategory") != null) {
-                                                if (session.getAttribute("Name") != null) {
-                                                    user = session.getAttribute("Name").toString();
-                                                }
-                                                ftpload.uploadDiretory(request.getParameter("FolderCategory").toString(), user);
-                                                //session.removeAttribute("cat");
-                                                // session.invalidate();
-                                                response.sendRedirect("Upload.jsp");
-                                            }
-                                        %>
-
+                                        
                                     </div>
                                     <%
                                         progress = (String) request.getAttribute("bla"); %>
