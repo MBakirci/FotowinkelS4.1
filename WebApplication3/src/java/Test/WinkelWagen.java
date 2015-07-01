@@ -344,13 +344,22 @@ public class WinkelWagen {
                 state = ts.conn.prepareStatement(q);
                 String ptype = es.getProducttype();
                 int productID = getProductId(ptype);
+                if(valuta=="USD")
+                {
                 double prijs1= es.getPrijs();
                 double prijs2 = getRates(valuta);
                 double prijs3 = (double)Math.round((prijs1 * prijs2)*100.0)/100.0;
+                state.setDouble(4, prijs3);
+                }
+                if(valuta!="USD")
+                {
+                double prijs1= es.getPrijs();
+                state.setDouble(4, prijs1);
+                }
+                
                 state.setInt(1,productID);
                 state.setString(2, es.getKleurtype());
                 state.setString(3, es.getFotocode());
-                state.setDouble(4, prijs3);
                 state.setInt(5, 21);
                 state.setInt(6, es.getXcor());
                 state.setInt(7, es.getYcor());
