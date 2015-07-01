@@ -18,26 +18,29 @@ import java.util.logging.Logger;
  */
 public class CustomerOrders {
 
-    public ArrayList<String> getAllOrders(String usernameString) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException {
-        ArrayList orderlist = new ArrayList();
+    public ArrayList<Test.Order> getAllOrders(String usernameString) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException {
+        ArrayList<Test.Order> order = new ArrayList<Test.Order>();
         Test.Databaseconnector ts = new Test.Databaseconnector();
         String klantid = getID(usernameString);
         if (ts.verbindmetDatabase()) {
             PreparedStatement state = null;
             try {
                 //Update gebruiker gedeelte van fotograaf
-                String q = "select bestellingid\n"
-                        + "from FW_BESTELLING\n"
-                        + "where klantid= ?";
+                String q = "select c.bestellingid, c.BESTELDATUM, sum(b.PRIJS) as price, b.VALUTA from FW_BESTELLING c, fw_PRODUCT_FOTO b where c.bestellingid = b.FK_BESTELLINGID and klantid= ?\n"
+                        + "Group By c.BESTELLINGID, c.BESTELDATUM, b.PRIJS, b.valuta";
                 state = ts.conn.prepareStatement(q);
                 state.setString(1, klantid);
                 ResultSet rs = state.executeQuery();
 
                 while (rs.next()) {
                     String bestellingid = rs.getString("bestellingid");
-                    orderlist.add(bestellingid);
+                    String besteldatum = rs.getString("BESTELDATUM");
+                    String price = rs.getString("price");
+                    String valuta = rs.getString("valuta");
+                    Test.Order orderitem = new Test.Order(price, valuta, bestellingid, besteldatum);
+                    order.add(orderitem);
                 }
-                return orderlist;
+                return order;
             } catch (SQLException e) {
                 System.out.println(e.toString());
             } finally {

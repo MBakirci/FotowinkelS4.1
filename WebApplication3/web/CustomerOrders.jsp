@@ -18,7 +18,7 @@
         <title>JSP Page</title>
         <link href="CSS/CustomerOrders.css" rel="stylesheet" type="text/css"/>
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-
+        <link href="CSS/TableFactuurs.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <div class="container">
@@ -33,21 +33,21 @@
                 <tbody>
                     <% Test.CustomerOrders custord = new Test.CustomerOrders();
 
-                        ArrayList<String> orderlist = custord.getAllOrders("Dennnis@dennis.nl");
+                        ArrayList<Test.Order> orderlist = custord.getAllOrders("Dennnis@dennis.nl");
 
-                        for (String es : orderlist) {
+                        for (Test.Order es : orderlist) {
                     %>
                     <tr class='clickable-row'>
                         <td class ="orderid" data-th="Product">
                             <div class="row">
-                                <div class="col-sm-2 hidden-xs"><%= es%></div>
+                                <div class="col-sm-2 hidden-xs"><%= es.getBestellingid() %></div>
                                 <div class="col-sm-10">
                                 </div>
                             </div>
                         </td>
-                        <td data-th="Datum" class="text-center"><%= custord.getOrderDatum(es)%></td>
+                        <td data-th="Datum" class="text-center"><%= es.getDatum() %></td>
 
-                        <td data-th="Prijs" class="text-center"><%=  custord.getOrderPrice(es) + " " + custord.getOrderValuta(es)%></td>
+                        <td data-th="Prijs" class="text-center"><%=  es.getPrijs() + " " + es.getValuta() %></td>
 
                     </tr>
                     <% }%>

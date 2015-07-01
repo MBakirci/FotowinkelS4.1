@@ -32,13 +32,13 @@ public class CustomerFactuur {
                 PreparedStatement state = null;
                 try {
                     //Update gebruiker gedeelte van fotograaf
-                    String q = "Select b.nameforfactuur, b.aantal, b.ptype, c.naam, b.prijs, b.fotocode, b.x, b.y, b.length, b.width from fw_bestelling a, fw_product_foto b, fw_product c where a.bestellingid = b.fk_bestellingid and b.productid = c.productid and bestellingid = ?";
+                    String q = "Select b.nameforfactuur, b.aantal, b.ptype, c.naam, b.prijs, b.fotocode, b.x, b.y, b.length, b.width, b.valuta from fw_bestelling a, fw_product_foto b, fw_product c where a.bestellingid = b.fk_bestellingid and b.productid = c.productid and bestellingid = ?";
                     state = ts.conn.prepareStatement(q);
                     state.setString(1, orderid);
                     ResultSet rs = state.executeQuery();
                     
                     while (rs.next()) {
-                        Test.WinkelWagenItem item  = new Test.WinkelWagenItem(rs.getString("nameforfactuur"), rs.getInt("aantal"), rs.getString("ptype"), rs.getString("naam"), rs.getDouble("prijs"), rs.getString("fotocode"), rs.getInt("x"), rs.getInt("y"), rs.getInt("length"), rs.getInt("width"));
+                        Test.WinkelWagenItem item  = new Test.WinkelWagenItem(rs.getString("nameforfactuur"), rs.getInt("aantal"), rs.getString("ptype"), rs.getString("naam"), rs.getDouble("prijs"), rs.getString("fotocode"), rs.getInt("x"), rs.getInt("y"), rs.getInt("length"), rs.getInt("width"), rs.getString("valuta"));
                         orderlist.add(item);
                     }
                     return orderlist;

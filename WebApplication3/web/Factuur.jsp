@@ -21,7 +21,6 @@
 
         <!-- Bootstrap Core CSS -->
         <link href="CSS/bootstrap.min.css" rel="stylesheet">
-
         <!-- Custom CSS -->
         <link href="CSS/thumbnail-gallery.css" rel="stylesheet">
 
@@ -58,10 +57,11 @@
         ArrayList<Test.WinkelWagenItem> itemlist =  cust.OrdersList(request.getParameter("BestellingID"));
         for(Test.WinkelWagenItem pd : itemlist)
         {
+        session.setAttribute("valuta", pd.getValuta());
         %>
 
         <tr><td width="200"><div align="left"><b><%=pd.getProductnaam() %> &nbsp;&nbsp;</b></div></td>
-               <td width="202"><%=Math.round(pd.getPrijs()*pd.getAantal()* 100.0)/ 100.0%><fmt:message key="PaymentSucces_EUR"/></td></tr>
+            <td width="202"><%=Math.round(pd.getPrijs()*pd.getAantal()* 100.0)/ 100.0%><%=session.getAttribute("valuta")%></td></tr>
         
         <%
         totaal=totaal+(pd.getPrijs() * pd.getAantal());
@@ -75,7 +75,7 @@
     </tr>
     <tr>
       <td width="200"><div style="font-size:18px;" align="left"><b><fmt:message key="PaymentSucces_Totaal"/>:</b></div></td>
-     <td width="202"><span style="font-size:18px;"><%=Math.round(totaal *100.0)/100.0%> <fmt:message key="PaymentSucces_EUR"/></span></td>
+     <td width="202"><span style="font-size:18px;"><%=Math.round(totaal *100.0)/100.0%><%=session.getAttribute("valuta")%></span></td>
     </tr>  
     <tr>
       <td width="200">&nbsp;</td>
@@ -86,7 +86,7 @@
       <td width="202">&nbsp;</td>
     </tr>
     <tr>
-<td width="200"><div align="left"><b>PayPal&nbsp;&nbsp;</b></div></td><td width="202"><%=Math.round(totaal*100.0)/100.0%> <fmt:message key="PaymentSucces_EUR"/></td>    </tr>
+<td width="200"><div align="left"><b>PayPal&nbsp;&nbsp;</b></div></td><td width="202"><%=Math.round(totaal*100.0)/100.0%><%=session.getAttribute("valuta")%></td>    </tr>
     <tr>
         <% Test.CustomerOrders customerorders = new Test.CustomerOrders();
 %>

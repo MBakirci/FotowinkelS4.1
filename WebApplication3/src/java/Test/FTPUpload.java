@@ -316,7 +316,7 @@ public class FTPUpload {
     }
 
     
-    public boolean UploadFotoDatabase(String Uniq, int Cat, String Fotograaf, String FilePath, double Basis, int Winst) throws Exception {
+    public boolean UploadFotoDatabase(String Uniq, int Cat, String Fotograaf, String FilePath, double Basis, int Winst, String groepcode) throws Exception {
         Databaseconnector ts = new Databaseconnector();
         if (ts.verbindmetDatabase()) {
             PreparedStatement state = null;
@@ -329,14 +329,6 @@ public class FTPUpload {
                 state.setInt(3, Fotograafid);
                 state.setString(4, FilePath);
                 state.setDouble(5, Basis);
-                    final String alphabet = "0123456789ABCDEFGHJKLMNOPQRSTUVWXYZ";
-                    final int N = alphabet.length();
-                    String groepcode = "";
-                    Random r = new Random();
-
-                    for (int i = 0; i < 10; i++) {
-                        groepcode = groepcode + alphabet.charAt(r.nextInt(N));
-                    }
                 state.setString(6, groepcode);
                 //state.executeQuery();
                 state.executeUpdate();

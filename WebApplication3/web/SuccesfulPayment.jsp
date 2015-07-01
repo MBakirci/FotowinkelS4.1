@@ -9,7 +9,7 @@
 <%@page import="Test.WinkelWagen"%>
 <jsp:include page="Masterpage_final.jsp"></jsp:include>
 <%@include file="TaalSettings.jsp" %>
-<%@include file="TaalToggle.jsp" %>%>
+<%@include file="TaalToggle.jsp" %>
 <!DOCTYPE html>
 <html lang="${language}">
     <head>
@@ -66,7 +66,7 @@
                         %>
 
                         <tr><td width="200"><div align="left"><b><%=pd.getProductnaam()%> &nbsp;&nbsp;</b></div></td>
-                            <td width="202"><%=Math.round(pd.getPrijs() * pd.getAantal() * 100.0) / 100.0%><fmt:message key="PaymentSucces_EUR"/></td></tr>
+                            <td width="202"><%=Math.round(pd.getPrijs() * pd.getAantal() * 100.0) / 100.0%><%=session.getAttribute("valuta").toString()%></td></tr>
 
                         <%
                                 totaal = totaal + (pd.getPrijs() * pd.getAantal());
@@ -81,7 +81,7 @@
                         </tr>
                         <tr>
                             <td width="200"><div style="font-size:18px;" align="left"><b><fmt:message key="PaymentSucces_Totaal"/>:</b></div></td>
-                            <td width="202"><span style="font-size:18px;"><%=Math.round(totaal * 100.0) / 100.0%> <fmt:message key="PaymentSucces_EUR"/></span></td>
+                            <td width="202"><span style="font-size:18px;"><%=Math.round(totaal * 100.0) / 100.0%> <%=session.getAttribute("valuta").toString()%></span></td>
                         </tr>  
                         <tr>
                             <td width="200">&nbsp;</td>
@@ -92,7 +92,7 @@
                             <td width="202">&nbsp;</td>
                         </tr>
                         <tr>
-                            <td width="200"><div align="left"><b>PayPal&nbsp;&nbsp;</b></div></td><td width="202"><%=Math.round(totaal * 100.0) / 100.0%> <fmt:message key="PaymentSucces_EUR"/></td>    </tr>
+                            <td width="200"><div align="left"><b>PayPal&nbsp;&nbsp;</b></div></td><td width="202"><%=Math.round(totaal * 100.0) / 100.0%> <%=session.getAttribute("valuta").toString()%></td>    </tr>
                         <tr>
                             <td width="200"><div align="left"><b><fmt:message key="PaymentSucces_Bevestigingsdatum"/>:  </b></div></td>
                             <td id="Datum" width="202"></td>
