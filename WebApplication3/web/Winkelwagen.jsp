@@ -51,29 +51,29 @@
         <div class="row-fluid">
             <div class="col-md-10 col-lg-offset-1">
                 <div class="container">
-                <fieldset>
-                    <legend><fmt:message key="Winkelwagen_legend"/></legend>
-                    <%                        Double prijs = 0.0;
+                    <fieldset>
+                        <legend><fmt:message key="Winkelwagen_legend"/></legend>
+                        <%                        Double prijs = 0.0;
 
-                        Test.WinkelWagen winkelwagen = new Test.WinkelWagen();
+                            Test.WinkelWagen winkelwagen = new Test.WinkelWagen();
 
-                        ArrayList<Test.WinkelWagenItem> itemlist = winkelwagen.WinkelList();
+                            ArrayList<Test.WinkelWagenItem> itemlist = winkelwagen.WinkelList();
 
-                    %>
-                    
+                        %>
+
                         <table class="table table-bordered">
                             <tr>
-                                <th><fmt:message key="Winkelwagen_Foto"/></th>
-                                <th><fmt:message key="Winkelwagen_Aantal"/></th>
-                                <th><fmt:message key="Winkelwagen_Prijs"/></th>
-                                <th></th>
+                            <th><h4><fmt:message key="Winkelwagen_Foto"/></h4></th>
+                            <th><h4><fmt:message key="Winkelwagen_Aantal"/></h4></th>
+                            <th><h4><fmt:message key="Winkelwagen_Prijs"/></h4></th>
+                        <th><h4>X</h4></th>
                             </tr>
                             <%                            int i = 0;
                                 for (Test.WinkelWagenItem es : itemlist) {
                                     i++;
                             %>
                             <tr>
-                                <td width="150px">
+                                <td width="25%">
 
                                     <%  if (es.getWamnt() != 0) {%>
 
@@ -97,7 +97,7 @@
 
                                 </td>
                             <form>
-                                <td id="details">
+                                <td width="25%" id="details">
 
                                     <div class="input-group">
                                         <span class="input-group-btn">
@@ -112,7 +112,6 @@
                                             </button>
                                         </span>
                                     </div>
-
                                 </td>
 
                                 <input type="hidden" name="Soort2<%= i%>" value="<%= es.getProducttype()%>">
@@ -129,7 +128,7 @@
 
                             <td id="prijs"><%= es.getPrijs()%></td>
                             <%  prijs = prijs + es.getPrijs() * es.getAantal();
-                            prijs = Math.round(prijs * 100.0) / 100.0;%>
+                                prijs = Math.round(prijs * 100.0) / 100.0;%>
                             <td>
                                 <form action="ShoppingCart" method="post">
                                     <!-- Verwijder button met request naar servlet -->
@@ -147,14 +146,14 @@
                             </td>
                             </tr>    	
                             <%
-                            }%>
+                                }%>
                         </table>
 
 
                         <table class="table table-bordered">
                             <tr>
-                                <td align="left">Totaal prijs :</td> 
-                                <td id="price" align="right">
+                                <td align="right"><h3><b>Totaal prijs :</b></h3></td> 
+                                <td id="price" width="10%" align="right">
                                     <p id="Prijs" align="right"><%= prijs%></p> 
 
                                     <div>
@@ -169,7 +168,7 @@
                                 </td>   
                             </tr>
                         </table>
-                    </div>
+                </div>
 
                 </fieldset>
             </div>
