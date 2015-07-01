@@ -97,6 +97,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"><fmt:message key="MasterPage_profiel"/><span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="AccountInformation.jsp"><fmt:message key="Menu_AccountInformation"/></a></li>
+                                <li><a href="CustomerOrders.jsp">Mijn Bestellingen</a></li>
                             </ul>
                         </li>
                         <li><a href="PhotogalleryCategoryCustomer.jsp"><fmt:message key="Menu_Photogallery"/></a></li>
