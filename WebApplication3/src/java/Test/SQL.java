@@ -17,6 +17,36 @@ import java.util.ArrayList;
  */
 public class SQL {
 
+    public ArrayList<String> getFotoCodes(String groepscode) throws ClassNotFoundException, ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException {
+        ArrayList<String> fotoList = new ArrayList<String>();
+        Databaseconnector ts = new Databaseconnector();
+        if (ts.verbindmetDatabase()) {
+            PreparedStatement state = null;
+
+            try {
+                String q = "SELECT FILEPATH FROM FW_FOTO WHERE GROEPCODE = ?";
+                state = ts.conn.prepareStatement(q);
+                state.setString(1, groepscode);
+                ResultSet rs = state.executeQuery();
+
+                //state.executeUpdate();
+                while (rs.next()) {
+                    String uc = rs.getString("FILEPATH");
+                    fotoList.add("ftp://212.64.126.219:9942/"+uc);
+                }               
+
+            } catch (SQLException e) {
+                return null;
+            } finally {
+                if (state != null) {
+                    state.close();
+                }
+                ts.verbindingverbrekenmetDatabase();
+            }
+        }
+        return fotoList;
+    }
+
     public Boolean koppeling(int id, String source) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException {
         Databaseconnector ts = new Databaseconnector();
         if (ts.verbindmetDatabase()) {
@@ -114,12 +144,16 @@ public class SQL {
 
         try {
             fotoList = getFotoCode(groepscode);
-
+            if(fotoList.size() == 0)
+            {
+                throw new SQLException();
+            }
             for (String fotocode : fotoList) {
                 koppeling(id, fotocode);
             }
+           
             return true;
-        } catch(SQLException e)  {
+        } catch (SQLException e) {
             return false;
         }
     }
