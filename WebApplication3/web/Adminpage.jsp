@@ -27,6 +27,7 @@ Author     : Gebruiker
         <script src="js/list.min.js" type="text/javascript"></script>
     </head>
     <body>
+        <div class="container">
         <div class="col-lg-10 col-lg-offset-1">
             <h1>
                 <i class="fa fa-users">
@@ -84,6 +85,7 @@ Author     : Gebruiker
                     </table>
                 </div>
             </div>
+        </div>
             <div class="modal fade" id="Modal_currUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">

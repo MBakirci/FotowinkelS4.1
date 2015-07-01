@@ -18,9 +18,9 @@
         <title><fmt:message key="Price_Titel"/></title>
     </head>
     <body>
-        <div class="container-fluid">
+        <div class="container">
             <div class="row-fluid">
-                <div class="col-md-10 col-lg-offset-1">
+                <div class="col-md-12">
                     <fieldset>
                         <legend><fmt:message key="Price_Legend"/></legend>
                         <%

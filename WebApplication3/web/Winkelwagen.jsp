@@ -50,8 +50,9 @@
     <div class="container-fluid">
         <div class="row-fluid">
             <div class="col-md-10 col-lg-offset-1">
+                <div class="container">
                 <fieldset>
-                    <legend><fmt:message key="Winkelwagen_legend"/>Prijzen Instellen</legend>
+                    <legend><fmt:message key="Winkelwagen_legend"/></legend>
                     <%                        Double prijs = 0.0;
 
                         Test.WinkelWagen winkelwagen = new Test.WinkelWagen();
@@ -59,114 +60,116 @@
                         ArrayList<Test.WinkelWagenItem> itemlist = winkelwagen.WinkelList();
 
                     %>
-                    <table class="table table-bordered">
-                        <tr>
-                            <th><fmt:message key="Winkelwagen_Foto"/></th>
-                            <th><fmt:message key="Winkelwagen_Aantal"/></th>
-                            <th><fmt:message key="Winkelwagen_Prijs"/></th>
-                            <th></th>
-                        </tr>
-                        <%                            int i = 0;
-                            for (Test.WinkelWagenItem es : itemlist) {
-                                i++;
-                        %>
-                        <tr>
-                            <td width="150px">
+                    
+                        <table class="table table-bordered">
+                            <tr>
+                                <th><fmt:message key="Winkelwagen_Foto"/></th>
+                                <th><fmt:message key="Winkelwagen_Aantal"/></th>
+                                <th><fmt:message key="Winkelwagen_Prijs"/></th>
+                                <th></th>
+                            </tr>
+                            <%                            int i = 0;
+                                for (Test.WinkelWagenItem es : itemlist) {
+                                    i++;
+                            %>
+                            <tr>
+                                <td width="150px">
 
-                                <%  if (es.getWamnt() != 0) {%>
-
-
-                                <%
-                                    String url = "ProductPage.jsp?fotoid=" + es.getFotocode() + "&cropid=" + es.getProductnaam() + "&xcor=" + es.getXcor() + "&ycor=" + es.getYcor() + "&wamnt=" + es.getWamnt() + "&hamnt=" + es.getHamnt();
-                                %>
-
-                                <a class="thumbnail" href=<%= url%>>
-                                    <img id="<%= es.getFotocode()%>" class="img-responsive" style="position: relative; top: 0; left: 0;" alt="test" width="100" height="100" style="z-index: -1" src="ftp://asror:asror@212.64.126.219:9942/<%= es.getProductnaam()%>" > 
-
-                                </a>
-                                <% } else {%>
-                                <%
-                                    String url = "ProductPage.jsp?fotoid=" + es.getFotocode();
-                                %>
-                                <a class="thumbnail" href=<%= url%>>
-                                    <img id="<%= es.getFotocode()%>" class="img-responsive" style="position: relative; top: 0; left: 0;" alt="test" width="100" height="100" style="z-index: -1" src="ftp://asror:asror@212.64.126.219:9942/THUMB/<%= es.getfoto().substring(es.getfoto().lastIndexOf("/") + 1, es.getfoto().lastIndexOf(".") + 4)%>" > 
-                                </a>
-                                <% }%>
-
-                            </td>
-                        <form>
-                            <td id="details">
-
-                                <div class="input-group">
-                                    <span class="input-group-btn">
-                                        <button type="button" class="btn btn-danger btn-number"  data-type="minus" data-field="<%= i%>">
-                                            <span class="glyphicon glyphicon-minus"></span>
-                                        </button>
-                                    </span>
-                                    <input type="text" name="amount" id="<%= i%>" class="form-control input-number" value="<%= es.getAantal()%>" min="1">
-                                    <span class="input-group-btn">
-                                        <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="<%= i%>">
-                                            <span class="glyphicon glyphicon-plus"></span>
-                                        </button>
-                                    </span>
-                                </div>
-
-                            </td>
-
-                            <input type="hidden" name="Soort2<%= i%>" value="<%= es.getProducttype()%>">
-                            <input type="hidden" name="Type<%= i%>" value="<%= es.getKleurtype()%>">
-                            <input type="hidden" name="xcor<%= i%>" value="<%= es.getXcor()%>">
-                            <input type="hidden" name="ycor<%= i%>" value="<%= es.getYcor()%>">
-                            <input type="hidden" name="wamnt<%= i%>" value="<%= es.getWamnt()%>">
-                            <input type="hidden" name="hamnt<%= i%>" value="<%= es.getHamnt()%>">
-                            <input type="hidden" name="fotocod<%= i%>" value="<%= es.getFotocode()%>">
-                            <input type="hidden" name="price1<%= i%>" value="<%= es.getPrijs()%>">
-                        </form>
+                                    <%  if (es.getWamnt() != 0) {%>
 
 
+                                    <%
+                                        String url = "ProductPage.jsp?fotoid=" + es.getFotocode() + "&cropid=" + es.getProductnaam() + "&xcor=" + es.getXcor() + "&ycor=" + es.getYcor() + "&wamnt=" + es.getWamnt() + "&hamnt=" + es.getHamnt();
+                                    %>
 
-                        <td id="prijs"><%= es.getPrijs()%></td>
-                        <%  prijs = prijs + es.getPrijs() * es.getAantal();
-                            prijs = Math.round(prijs * 100.0) / 100.0;%>
-                        <td>
-                            <form action="ShoppingCart" method="post">
-                                <!-- Verwijder button met request naar servlet -->
-                                <input type="hidden" name="Soort2" value="<%= es.getProducttype()%>">
-                                <input type="hidden" name="Type" value="<%= es.getKleurtype()%>">
-                                <input type="hidden" name="xcor" value="<%= es.getXcor()%>">
-                                <input type="hidden" name="ycor" value="<%= es.getYcor()%>">
-                                <input type="hidden" name="wamnt" value="<%= es.getWamnt()%>">
-                                <input type="hidden" name="hamnt" value="<%= es.getHamnt()%>">
-                                <button type="submit" class="btn btn-default btn-sm btn-danger">
-                                    <span class="glyphicon glyphicon-trash"></span>
-                                </button>                                        
-                                <input type="hidden" name="typeID" value="<%= es.getFotocode()%>" />
+                                    <a class="thumbnail" href=<%= url%>>
+                                        <img id="<%= es.getFotocode()%>" class="img-responsive" style="position: relative; top: 0; left: 0;" alt="test" width="100" height="100" style="z-index: -1" src="ftp://asror:asror@212.64.126.219:9942/<%= es.getProductnaam()%>" > 
+
+                                    </a>
+                                    <% } else {%>
+                                    <%
+                                        String url = "ProductPage.jsp?fotoid=" + es.getFotocode();
+                                    %>
+                                    <a class="thumbnail" href=<%= url%>>
+                                        <img id="<%= es.getFotocode()%>" class="img-responsive" style="position: relative; top: 0; left: 0;" alt="test" width="100" height="100" style="z-index: -1" src="ftp://asror:asror@212.64.126.219:9942/THUMB/<%= es.getfoto().substring(es.getfoto().lastIndexOf("/") + 1, es.getfoto().lastIndexOf(".") + 4)%>" > 
+                                    </a>
+                                    <% }%>
+
+                                </td>
+                            <form>
+                                <td id="details">
+
+                                    <div class="input-group">
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-danger btn-number"  data-type="minus" data-field="<%= i%>">
+                                                <span class="glyphicon glyphicon-minus"></span>
+                                            </button>
+                                        </span>
+                                        <input type="text" name="amount" id="<%= i%>" class="form-control input-number" value="<%= es.getAantal()%>" min="1">
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="<%= i%>">
+                                                <span class="glyphicon glyphicon-plus"></span>
+                                            </button>
+                                        </span>
+                                    </div>
+
+                                </td>
+
+                                <input type="hidden" name="Soort2<%= i%>" value="<%= es.getProducttype()%>">
+                                <input type="hidden" name="Type<%= i%>" value="<%= es.getKleurtype()%>">
+                                <input type="hidden" name="xcor<%= i%>" value="<%= es.getXcor()%>">
+                                <input type="hidden" name="ycor<%= i%>" value="<%= es.getYcor()%>">
+                                <input type="hidden" name="wamnt<%= i%>" value="<%= es.getWamnt()%>">
+                                <input type="hidden" name="hamnt<%= i%>" value="<%= es.getHamnt()%>">
+                                <input type="hidden" name="fotocod<%= i%>" value="<%= es.getFotocode()%>">
+                                <input type="hidden" name="price1<%= i%>" value="<%= es.getPrijs()%>">
                             </form>
-                        </td>
-                        </tr>    	
-                        <%
+
+
+
+                            <td id="prijs"><%= es.getPrijs()%></td>
+                            <%  prijs = prijs + es.getPrijs() * es.getAantal();
+                            prijs = Math.round(prijs * 100.0) / 100.0;%>
+                            <td>
+                                <form action="ShoppingCart" method="post">
+                                    <!-- Verwijder button met request naar servlet -->
+                                    <input type="hidden" name="Soort2" value="<%= es.getProducttype()%>">
+                                    <input type="hidden" name="Type" value="<%= es.getKleurtype()%>">
+                                    <input type="hidden" name="xcor" value="<%= es.getXcor()%>">
+                                    <input type="hidden" name="ycor" value="<%= es.getYcor()%>">
+                                    <input type="hidden" name="wamnt" value="<%= es.getWamnt()%>">
+                                    <input type="hidden" name="hamnt" value="<%= es.getHamnt()%>">
+                                    <button type="submit" class="btn btn-default btn-sm btn-danger">
+                                        <span class="glyphicon glyphicon-trash"></span>
+                                    </button>                                        
+                                    <input type="hidden" name="typeID" value="<%= es.getFotocode()%>" />
+                                </form>
+                            </td>
+                            </tr>    	
+                            <%
                             }%>
-                    </table>
+                        </table>
 
 
-                    <table class="table table-bordered">
-                        <tr>
-                            <td align="left">Totaal prijs :</td> 
-                            <td id="price" align="right">
-                                <p id="Prijs" align="right"><%= prijs%></p> 
+                        <table class="table table-bordered">
+                            <tr>
+                                <td align="left">Totaal prijs :</td> 
+                                <td id="price" align="right">
+                                    <p id="Prijs" align="right"><%= prijs%></p> 
 
-                                <div>
-                                    <select id="ddlCurr" name="ddlCurr">
-                                        <option value="EUR">EURO €</option>
-                                        <option value="USD">DOLLAR $</option>
-                                        <option value="GBP">POUND £</option>
-                                        <option value="TRY">LIRA &#8378</option>
-                                    </select>
-                                </div>
+                                    <div>
+                                        <select id="ddlCurr" name="ddlCurr">
+                                            <option value="EUR">EURO €</option>
+                                            <option value="USD">DOLLAR $</option>
+                                            <option value="GBP">POUND £</option>
+                                            <option value="TRY">LIRA &#8378</option>
+                                        </select>
+                                    </div>
 
-                            </td>   
-                        </tr>
-                    </table>
+                                </td>   
+                            </tr>
+                        </table>
+                    </div>
 
                 </fieldset>
             </div>
