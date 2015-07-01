@@ -4,6 +4,7 @@
     Author     : asror
 --%>
 
+<%@page import="java.lang.String"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
@@ -22,10 +23,10 @@
 <!DOCTYPE html>
 <jsp:include page="Masterpage_final.jsp"></jsp:include>
 <%@include file="TaalSettings.jsp" %>
-    <html>
-        <head>
-            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-            <title>JSP Page</title>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
         <% Test.FTPUpload ftpload = new Test.FTPUpload(); %>
         <% Test.Categorie categorie = new Test.Categorie(); %>
         <% Test.Categorieën categorieën = new Test.Categorieën(); %>
@@ -109,7 +110,10 @@
                                 <li><a href='#step1' data-toggle="tab" class="not-active"><fmt:message key="Upload_Select"/></a></li>
                                 <li><a href='#step2' data-toggle="tab" class="not-active"><fmt:message key="Upload_Upload"/></a></li>
                                 <li  class='active'><a href='#step3' data-toggle="tab" class="not-active"><fmt:message key="Upload_Preview"/></a></li>
+                                <% String groepcode = (String) request.getAttribute("groepcode");%>
+                                <h4><p align="right">Groepscode = <%= groepcode%></p><h4/>
                                 </ul> 
+                                <br /> 
                                 <div id="myTabContent" class="tab-content">
                                     <div class="tab-pane fade" id="step1">
                                         <%
@@ -144,8 +148,8 @@
                                                 }
                                             %>
                                         </div>
-                                        
-                                        
+
+
                                         <div class="form-group">
                                             <form>
                                                 <fieldset>
@@ -190,7 +194,7 @@
                                         <br/>
                                         <hr>
 
-                                        
+
                                     </div>
                                     <%
                                         progress = (String) request.getAttribute("bla"); %>
@@ -206,6 +210,9 @@
                                             if (progress.length() > 5) {
                                     %>
                                     <div class="tab-pane fade active in" id="step3">
+
+
+
                                         <%
                                             for (String es : files) {
 
@@ -252,13 +259,13 @@
                                         'showPreview' : false,
                                                 'allowedFileExtensions' : ['jpg', 'png', 'gif'],
                                                 'elErrorContainer': '#errorBlock'
-                                        });                                    </script>
+                                        });</script>
 
                                     <script type="text/javascript">
                                                 function ButtonClicked()
                                                 {
                                                 //document.getElementById("UploadBTN").style.display = "none"; // to undisplay
-                                                        document.getElementById("buttonreplacement").style.display = ""; // to display
+                                                document.getElementById("buttonreplacement").style.display = ""; // to display
                                                         return true;
                                                 }
                                     </script>

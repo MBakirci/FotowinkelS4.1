@@ -43,10 +43,10 @@ public class TestServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html");
-        
-           cat = Test.StaticValues.getMyStaticMember();
-            user = Test.StaticValues.getMyStaticuser();
-    
+
+        cat = Test.StaticValues.getMyStaticMember();
+        user = Test.StaticValues.getMyStaticuser();
+
         boolean isMultipartContent = ServletFileUpload.isMultipartContent(request);
         if (!isMultipartContent) {
             return;
@@ -62,47 +62,50 @@ public class TestServlet extends HttpServlet {
             if (!it.hasNext()) {
                 return;
             }
+            final String alphabet = "0123456789ABCDEFGHJKLMNOPQRSTUVWXYZ";
+            final int A = alphabet.length();
+            String groepcode = "";
+            Random r = new Random();
+            for (int i = 0; i < 10; i++) {
+                groepcode = groepcode + alphabet.charAt(r.nextInt(A));
+            }
+
             while (it.hasNext()) {
                 FileItem fileItem = it.next();
                 boolean isFormField = fileItem.isFormField();
                 if (isFormField) {
                 } else {
                     String J = fileItem.toString();
-                    String L = "." +FilenameUtils.getExtension(fileItem.getName());
+                    String L = "." + FilenameUtils.getExtension(fileItem.getName());
                     String pathloca = J.substring(J.indexOf("C:\\"), J.indexOf(", size"));
                     Test.FTPUpload ftpload = new Test.FTPUpload();
                     Test.StaticValues stat = new Test.StaticValues();
-                    
-                    
-                    final String alphabet = "0123456789ABCDEFGHJKLMNOPQRSTUVWXYZ";
+
                     final int N = alphabet.length();
                     String UniqCode = user.substring(0, 3);
-                    Random r = new Random();
 
                     for (int i = 0; i < 10; i++) {
                         UniqCode = UniqCode + alphabet.charAt(r.nextInt(N));
                     }
                     String dbfilepath = "";
-                    if(cat == null || cat.equals(user))
-                    {
-                    dbfilepath = user + "/" + UniqCode + L;  
+                    if (cat == null || cat.equals(user)) {
+                        dbfilepath = user + "/" + UniqCode + L;
+                    } else {
+                        dbfilepath = user + "/" + cat + "/" + UniqCode + L;
                     }
-                    else
-                    {
-                    dbfilepath = user + "/" + cat + "/" + UniqCode + L;
-                    }
-                    ftpload.UploadFotoDatabase(UniqCode, Integer.parseInt(ftpload.getCategoryID(cat)), user, dbfilepath , 5, 5);
+
+                    ftpload.UploadFotoDatabase(UniqCode, Integer.parseInt(ftpload.getCategoryID(cat)), user, dbfilepath, 5, 5, groepcode);
                     ftpload.UploadFile(UniqCode + L, cat, user, pathloca);
-                    if((String) request.getAttribute("bla") != null)
-                    {
-                    progress = (String) request.getAttribute("bla");
+                    if ((String) request.getAttribute("bla") != null) {
+                        progress = (String) request.getAttribute("bla");
                     }
                     progress = progress + UniqCode + L + " has been successfully uploaded ! <br/>";
                     files.add(dbfilepath);
                     request.setAttribute("bla", progress);
+                    request.setAttribute("groepcode", groepcode);
                     request.setAttribute("fileslist", files);
                 }
-            }                  
+            }
             rd = request.getRequestDispatcher("Upload.jsp");
             rd.forward(request, response);
 
@@ -112,8 +115,8 @@ public class TestServlet extends HttpServlet {
 
             Logger.getLogger(TestServlet.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-        
-        response.sendRedirect("Upload.jsp");
+
+            response.sendRedirect("Upload.jsp");
 
         }
     }
