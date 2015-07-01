@@ -21,7 +21,6 @@
 
         <!-- Bootstrap Core CSS -->
         <link href="CSS/bootstrap.min.css" rel="stylesheet">
-
         <!-- Custom CSS -->
         <link href="CSS/thumbnail-gallery.css" rel="stylesheet">
 
