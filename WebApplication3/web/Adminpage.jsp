@@ -49,6 +49,10 @@ Author     : Gebruiker
             <div id="payload">
                 <input id="search" class="search form-control" placeholder="Search" />
                 <hr/>
+                
+                <div>
+                    <h3><I><%=type%></i></h3>
+                </div>
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped">
                         <thead>

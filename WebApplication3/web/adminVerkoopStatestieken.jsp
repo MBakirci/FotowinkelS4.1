@@ -44,10 +44,8 @@
             <form>
                 <div class="row">
                     <div class="col-xs-3">
-                        <div class="container"> 
-                            <fmt:message key="AdminOverzicht_Select_Maand"/>
-                        </div>
                         <div class="container">
+                            <p>Maand</p>
                             <select id="maandMenu" name="maandMenu">
                                 <option value="1"><fmt:message key="Januari"/></option>
                                 <option value="2"><fmt:message key="Februari"/></option>
@@ -73,13 +71,18 @@
                         <script>
                             setSelectedIndex(document.getElementById("maandMenu"), <%=maand%>);
                         </script>
+                        <button class="btn btn-default" name="maandbtn"><fmt:message key="AdminOverzicht_Get_Maand"/></button>
+                        <%
+                            if (request.getParameter("maandbtn") != null) {
+                                response.sendRedirect("adminVerkoopStatestieken.jsp?maand=" + request.getParameter("maandMenu") + "&jaar=" + request.getParameter("jaarMenu"));
+                            }
+
+                        %>
                         </div>
                     </div>
                     <div class="col-xs-3">
                         <div class="container">
-                            <fmt:message key="AdminOverzicht_Select_Jaar"/>
-                        </div>
-                        <div class="container">
+                            <p>Jaar</p>
                             <select id="jaarMenu" name="jaarMenu">
                                 <%
                                     int iJaar = 2000;
@@ -103,27 +106,20 @@
                         <script>
                             setSelectedIndex(document.getElementById("jaarMenu"), <%=eJaar%>);
                         </script>
-                        </div>
-                    </div>
-                    <div class="col-xs-3">
-                        <button class="btn btn-default" name="maandbtn"><fmt:message key="AdminOverzicht_Get_Maand"/></button>
-                        <%
-                            if (request.getParameter("maandbtn") != null) {
-                                response.sendRedirect("adminVerkoopStatestieken.jsp?maand=" + request.getParameter("maandMenu") + "&jaar=" + request.getParameter("jaarMenu"));
-                            }
-
-                        %>
-
                         <button class="btn btn-default" name="jaarbtn"><fmt:message key="AdminOverzicht_Get_Jaar"/></button>
                         <%if (request.getParameter("jaarbtn") != null) {
                                 response.sendRedirect("adminVerkoopStatestieken.jsp?jaar=" + request.getParameter("jaarMenu"));
                             }
 
                         %>
+                        </div>
                     </div>
                 </div>
+                    <hr/>
                 <div class="row">
+                    
                     <div class="col-xs-3">
+                     <p>Fotograaf</p>
                     <select id="username" name="username">
                         <% List<String> fotografen = VerkoopStatestieken.getAlleFotograven();
                         for(String fotograaf : fotografen){
@@ -242,6 +238,11 @@
         <%
            int  test = new Test.SQL().AantalBezoekers();
         %>
+        <div class="container">
+        <hr/>
+        <h2>Bezoekers statestieken</h2>
+        <hr/>
          <p>Total number of visits: <%=test%></p>
+         </div>
     </body>
 </html>
