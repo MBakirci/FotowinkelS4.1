@@ -9,7 +9,6 @@
 <%@page import="Test.WinkelWagen"%>
 <jsp:include page="Masterpage_final.jsp"></jsp:include>
 <%@include file="TaalSettings.jsp" %>
-<%@include file="TaalToggle.jsp" %>
 <!DOCTYPE html>
 <html lang="${language}">
     <head>
@@ -44,7 +43,7 @@
 
 
                 <p>
-                    Dear <h3><%=session.getAttribute("Name") + ","%></h3>
+                    Dear <h2><%=session.getAttribute("Name") + ","%></h2>
                 <h2 class="form-signin-heading"><fmt:message key="PaymentSucces_Thanks"/></h2>
 
                 <table style="font-size:11px;color:#333333;font-family:Trebuchet MS,Verdana,Arial,Helvetica,sans-serif;" cellspacing="4" width="420">
