@@ -67,7 +67,7 @@ Author     : Gebruiker
                                         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                         Edit
                                     </a>
-                                    <a href="" class="btn btn-info" style="margin-right: 3px;">
+                                        <a href="PhotogalleryCategoryAdmin.jsp?SelectedUser=<%=userEntry.getValue().get(0)%>" class="btn btn-info" style="margin-right: 3px;">
                                         <span class="glyphicon glyphicon-camera" aria-hidden="true"></span>
                                         Foto's
                                     </a>

@@ -56,10 +56,13 @@
                             ArrayList<String> photoList;
                             Test.PhotoCustomer tp = new Test.PhotoCustomer();
                             Test.Photo p = new Test.Photo();
+                            String parameter = request.getParameter("SelectedUser");
+                            session.setAttribute("SelectedUser", parameter);
                             
                             
-                            
-                            session.setAttribute("SelectedUser", "Henk@yolo.nl");
+                            if(request.getParameter("SelectedUser") != null){
+                                
+                            }
                             if (session.getAttribute("SelectedUser") != null) {
                                 if (p.isPhotographer(session.getAttribute("SelectedUser").toString())) {
                                     

@@ -103,7 +103,7 @@ public class UserController extends HttpServlet {
                 Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        if(request.getParameter("btnActive") != null){
+        if (request.getParameter("btnActive") != null) {
             Verwijderaccount activeer = new Verwijderaccount(request.getParameter("eMail"));
             try {
                 activeer.Zetstatusactief();
@@ -111,13 +111,19 @@ public class UserController extends HttpServlet {
                 Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        if(request.getParameter("btnDisable") != null){
+        if (request.getParameter("btnDisable") != null) {
             Verwijderaccount disable = new Verwijderaccount(request.getParameter("eMail"));
             try {
                 disable.Zetstatusnonactief();
             } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
                 Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
+        if (request.getParameter("myEmail_forPic") != null) {
+            HttpSession session = request.getSession();
+            String email_forPic = request.getParameter("myEmail_forPic");
+            session.setAttribute("SelectedUser", email_forPic);
+            request.getRequestDispatcher("PhotogalleryCategoryAdmin.jsp").forward(request, response);
         }
 
     }
