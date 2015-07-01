@@ -27,6 +27,7 @@ public class WinkelWagenItem {
     private int ycor;
     private int wamnt;
     private int hamnt;
+    private String valuta;
 
     public WinkelWagenItem(String productnaam, Integer aantal, String kleurtype, String producttype, Double prijs, String fotocode, int X, int Y, int wid, int hei) {
         this.productnaam = productnaam;
@@ -39,6 +40,21 @@ public class WinkelWagenItem {
         this.ycor = Y;
         this.wamnt = wid;
         this.hamnt = hei;
+    }
+    
+    
+    public WinkelWagenItem(String productnaam, Integer aantal, String kleurtype, String producttype, Double prijs, String fotocode, int X, int Y, int wid, int hei,String valuta) {
+        this.productnaam = productnaam;
+        this.aantal = aantal;
+        this.kleurtype = kleurtype;
+        this.producttype = producttype;
+        this.prijs = prijs;
+        this.fotocode = fotocode;
+        this.xcor = X;
+        this.ycor = Y;
+        this.wamnt = wid;
+        this.hamnt = hei;
+        this.valuta = valuta;
     }
 
     public int getXcor() {
@@ -111,6 +127,10 @@ public class WinkelWagenItem {
 
     public String getProducttype() {
         return producttype;
+    }
+    
+      public String getValuta() {
+        return valuta;
     }
 
     public Double getPrijs() {

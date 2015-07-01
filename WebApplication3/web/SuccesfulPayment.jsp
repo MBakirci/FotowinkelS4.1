@@ -9,7 +9,7 @@
 <%@page import="Test.WinkelWagen"%>
 <jsp:include page="Masterpage_final.jsp"></jsp:include>
 <%@include file="TaalSettings.jsp" %>
-<%@include file="TaalToggle.jsp" %>%>
+<%@include file="TaalToggle.jsp" %>
 <!DOCTYPE html>
 <html lang="${language}">
     <head>
