@@ -1,5 +1,6 @@
 package Test;
 
+import com.sun.javafx.scene.control.skin.VirtualFlow;
 import com.sun.xml.ws.tx.at.v10.types.PrepareResponse;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -16,18 +17,19 @@ import java.util.List;
  * @author Coen
  */
 public class VerkoopStatestieken {
+
     /**
-     * 
+     *
      * Haalt totole verkoop informatie een gekozen maand
+     *
      * @param maand Calender met het maand en jaar
-     * @return hashmap met <key, Valeus> voor:
-     * key: items, Value: totaal aantal verkochte items
-     * key: omzet, Value: omzet
-     * key: btw, Value: BTW over de omzet 
+     * @return hashmap met <key, Valeus> voor: key: items, Value: totaal aantal
+     * verkochte items key: omzet, Value: omzet key: btw, Value: BTW over de
+     * omzet
      * @throws ClassNotFoundException
      * @throws InstantiationException
      * @throws SQLException
-     * @throws IllegalAccessException 
+     * @throws IllegalAccessException
      */
     public static HashMap<String, Object> MaandVerkoop(Calendar maand) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException {
         //eerste en laaste datum van opgegeven maand instellen
@@ -35,24 +37,24 @@ public class VerkoopStatestieken {
         Calendar lastDay = new GregorianCalendar();
         // maandgetal moet daadwerkelijk maandgetal -1 zijn om de juiste maande krijgen (januarie = 0, decmenber is 11), 
         // uren minuten en seconden worden toegevoed om geen stukken van eerste en laaste dag te misen.
-        firstDay.set(maand.get(maand.YEAR), maand.get(maand.MONTH) - 1, 1, 0, 0, 0); 
-        lastDay.set(maand.get(maand.YEAR), maand.get(maand.MONTH) - 1, maand.getInstance().getActualMaximum(maand.DAY_OF_MONTH), 23, 59, 59); 
+        firstDay.set(maand.get(maand.YEAR), maand.get(maand.MONTH) - 1, 1, 0, 0, 0);
+        lastDay.set(maand.get(maand.YEAR), maand.get(maand.MONTH) - 1, GetMaximumDayOfMonth(maand.get(maand.MONTH), maand.get(maand.YEAR)), 23, 59, 59);
         return Verkoop(firstDay, lastDay);
     }
-    
+
     /**
-     * 
+     *
      * Haalt totole verkoop informatie een gekozen jaar
+     *
      * @param jaar Calender met het jaar
-     * @return hashmap met <key, Valeus> voor:
-     * key: items, Value: totaal aantal verkochte items
-     * key: omzet, Value: omzet
-     * key: btw, Value: BTW over de omzet 
+     * @return hashmap met <key, Valeus> voor: key: items, Value: totaal aantal
+     * verkochte items key: omzet, Value: omzet key: btw, Value: BTW over de
+     * omzet
      * @throws ClassNotFoundException
      * @throws InstantiationException
      * @throws InstantiationException
      * @throws SQLException
-     * @throws IllegalAccessException 
+     * @throws IllegalAccessException
      */
     public static HashMap<String, Object> JaarVerkoop(Calendar jaar) throws ClassNotFoundException, InstantiationException, InstantiationException, SQLException, IllegalAccessException {
         //eerste en laaste dag van een jaar instellen
@@ -63,22 +65,24 @@ public class VerkoopStatestieken {
         lastDay.set(jaar.get(jaar.YEAR), 11, 31, 23, 59, 59);
         return Verkoop(firstDay, lastDay);
     }
-    
+
     /**
-     * 
-     * methode haalt verkoop informatie van de totale verkoop in een gewenste periode uit de database
+     *
+     * methode haalt verkoop informatie van de totale verkoop in een gewenste
+     * periode uit de database
+     *
      * @param StartDate Calander met startdatum van de gewenste periode
      * @param EndDate Calander met einddatum van de gewenst periode
-     * @return hashmap met <key, Valeus> voor:
-     * key: items, Value: totaal aantal verkochte items in de gevraagde periode
-     * key: omzet, Value: omzet in de gevraade periode
-     * key: btw, Value: BTW over de omzet in de gevraagde periode
+     * @return hashmap met <key, Valeus> voor: key: items, Value: totaal aantal
+     * verkochte items in de gevraagde periode key: omzet, Value: omzet in de
+     * gevraade periode key: btw, Value: BTW over de omzet in de gevraagde
+     * periode
      * @throws ClassNotFoundException
      * @throws ClassNotFoundException
      * @throws InstantiationException
      * @throws SQLException
      * @throws SQLException
-     * @throws IllegalAccessException 
+     * @throws IllegalAccessException
      */
     private static HashMap<String, Object> Verkoop(Calendar StartDate, Calendar EndDate) throws ClassNotFoundException, ClassNotFoundException, InstantiationException, SQLException, SQLException, IllegalAccessException {
         //return varibale
@@ -117,16 +121,16 @@ public class VerkoopStatestieken {
         stats.put("btw", (Double) 00.00);
         return stats;
     }
-    
+
     /**
-     * 
+     *
      * Haalt verkoop informatie van fotograaf op van een gekozen maand
+     *
      * @param maand Calender met het maand en jaar
      * @param email String met email adres
-     * @return hashmap met <key, Valeus> voor:
-     * key: items, Value: totaal aantal verkochte items
-     * key: omzet, Value: omzet
-     * key: btw, Value: BTW over de omzet 
+     * @return hashmap met <key, Valeus> voor: key: items, Value: totaal aantal
+     * verkochte items key: omzet, Value: omzet key: btw, Value: BTW over de
+     * omzet
      */
     public static HashMap<String, Object> FotograafMaandVerkoop(Calendar maand, String email) {
         //eerste en laaste datum van opgegeven maand instellen
@@ -135,19 +139,19 @@ public class VerkoopStatestieken {
         // maandgetal moet daadwerkelijk maandgetal -1 zijn om de juiste maande krijgen (januarie = 0, decmenber is 11), 
         // uren minuten en seconden worden toegevoed om geen stukken van eerste en laaste dag te misen.
         firstDay.set(maand.get(maand.YEAR), maand.get(maand.MONTH) - 1, 1, 0, 0, 0);
-        lastDay.set(maand.get(maand.YEAR), maand.get(maand.MONTH) - 1, maand.getInstance().getActualMaximum(maand.DAY_OF_MONTH), 23, 59, 59);
+        lastDay.set(maand.get(maand.YEAR), maand.get(maand.MONTH) - 1, GetMaximumDayOfMonth(maand.get(maand.MONTH), maand.get(maand.YEAR)), 23, 59, 59);
         return FotograafVerkoop(firstDay, lastDay, email);
     }
-    
+
     /**
-     * 
+     *
      * Haalt verkoop informatie van fotograaf op van een gekozen jaar
+     *
      * @param jaar Calender met het jaar
      * @param email String met email adres
-     * @return hashmap met <key, Valeus> voor:
-     * key: items, Value: totaal aantal verkochte items
-     * key: omzet, Value: omzet
-     * key: btw, Value: BTW over de omzet 
+     * @return hashmap met <key, Valeus> voor: key: items, Value: totaal aantal
+     * verkochte items key: omzet, Value: omzet key: btw, Value: BTW over de
+     * omzet
      */
     public static HashMap<String, Object> FotograafJaarVerkoop(Calendar jaar, String email) {
         //eerste en laaste dag van een jaar instellen
@@ -160,15 +164,17 @@ public class VerkoopStatestieken {
     }
 
     /**
-     * 
-     * methode haalt verkoop informatie van een fotograaf in gewenste periode op uit de datebase
+     *
+     * methode haalt verkoop informatie van een fotograaf in gewenste periode op
+     * uit de datebase
+     *
      * @param StartDate Calander met startdatum van de gewenste periodec
      * @param EndDate Calander met einddatum van de gewenst periode
      * @param email String met geweste mail adres
-     * @return hashmap met <key, Valeus> voor:
-     * key: items, Value: totaal aantal verkochte items in de gevraagde periode
-     * key: omzet, Value: omzet in de gevraade periode
-     * key: btw, Value: BTW over de omzet in de gevraagde periode
+     * @return hashmap met <key, Valeus> voor: key: items, Value: totaal aantal
+     * verkochte items in de gevraagde periode key: omzet, Value: omzet in de
+     * gevraade periode key: btw, Value: BTW over de omzet in de gevraagde
+     * periode
      */
     private static HashMap<String, Object> FotograafVerkoop(Calendar StartDate, Calendar EndDate, String email) {
         //return varibale
@@ -214,11 +220,12 @@ public class VerkoopStatestieken {
         stats.put("btw", (Double) 00.00);
         return stats;
     }
-    
+
     /**
-     * 
-     * methode zet Calander object om in een dat data object dat te gebruiken is 
+     *
+     * methode zet Calander object om in een dat data object dat te gebruiken is
      * in een prepared statement
+     *
      * @param input Calendar
      * @return java.sql.Date met zelfde datum als invoer
      */
@@ -228,13 +235,13 @@ public class VerkoopStatestieken {
     }
 
     /**
-     * 
+     *
      * Methode die check of email bestaat in de database
+     *
      * @param email String die email adres bevat
-     * @return booleaan
-     * true: email adres bestaat
-     * false: email adres bestaat niet
-     */ 
+     * @return booleaan true: email adres bestaat false: email adres bestaat
+     * niet
+     */
     private static boolean checkEmail(String email) {
         //aantal keer dat het eamil adres voorkomt, als er een fout optreed in het 
         //uitvoeren van de methode word er false gereturned
@@ -263,9 +270,9 @@ public class VerkoopStatestieken {
         //als het email adres voorkomt return true
         return aantal > 0;
     }
-    
+
     /**
-     * 
+     *
      * @return ArrayList met alle fotograven
      */
     public static List<String> getAlleFotograven() {
@@ -274,9 +281,9 @@ public class VerkoopStatestieken {
         try {
             if (ts.verbindmetDatabase()) {
                 PreparedStatement state = null;
-                String querry = "Select a.email as email " +
-                        "from FW_ACCOUNT a " +
-                        "where a.ATYPE = 'fotograaf'";
+                String querry = "Select a.email as email "
+                        + "from FW_ACCOUNT a "
+                        + "where a.ATYPE = 'fotograaf'";
                 state = ts.conn.prepareStatement(querry);
                 ResultSet result = state.executeQuery();
                 while (result.next()) {
@@ -289,5 +296,39 @@ public class VerkoopStatestieken {
             ts.close();
         }
         return output;
+    }
+
+    private static int GetMaximumDayOfMonth(int month, int year) {
+        List<Integer> monthWith31Days = new ArrayList<>();
+        monthWith31Days.add(1);
+        monthWith31Days.add(3);
+        monthWith31Days.add(5);
+        monthWith31Days.add(7);
+        monthWith31Days.add(8);
+        monthWith31Days.add(10);
+        monthWith31Days.add(12);
+        List<Integer> monthWith30Days = new ArrayList<>();
+        monthWith30Days.add(4);
+        monthWith30Days.add(6);
+        monthWith30Days.add(9);
+        monthWith30Days.add(11);
+        if (monthWith31Days.contains(month)) {
+            return 31;
+        } else if (monthWith30Days.contains(month)) {
+            return 30;
+        }
+        else if(month == 2){
+            GregorianCalendar cal = (GregorianCalendar) new GregorianCalendar().getInstance();
+            boolean leapYear = cal.isLeapYear(year);
+            if(leapYear){
+                return 29;
+            }
+            else{
+                return 28;
+            }
+        }
+        else{
+            return 31;
+        }
     }
 }
