@@ -324,9 +324,6 @@
                     {
                         window.location.replace("Winkelwagen.jsp");
                     }
-                },
-                error: function (ts) {
-                    alert(ts.responseText)
                 }
             });
         });</script>

@@ -71,6 +71,7 @@
                         <%
                                 totaal = totaal + (pd.getPrijs() * pd.getAantal());
                             }
+                            winkelwagen.NewList();
                         %>
 
 
@@ -110,7 +111,7 @@
                 </p>
             </div>
 
-        </div>
+        </div>      
     </body>
 </html>
 
