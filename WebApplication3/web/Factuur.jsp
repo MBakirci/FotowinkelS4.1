@@ -9,7 +9,6 @@
 <%@page import="Test.WinkelWagen"%>
 <jsp:include page="Masterpage_final.jsp"></jsp:include>
 <%@include file="TaalSettings.jsp" %>
-<%@include file="TaalToggle.jsp" %>
 <!DOCTYPE html>
 <html lang="${language}">
     <head>
@@ -43,8 +42,7 @@
         
         
         
-  <p>
-      Dear <h3><%=session.getAttribute("Name")+","%></h3>
+            <h1> Dear </h1> <h3><%=session.getAttribute("Name")+","%></h3>
   <h2 class="form-signin-heading"><fmt:message key="PaymentSucces_Thanks"/></h2>
   
   <table style="font-size:11px;color:#333333;font-family:Trebuchet MS,Verdana,Arial,Helvetica,sans-serif;" cellspacing="4" width="420">
@@ -60,7 +58,7 @@
         session.setAttribute("valuta", pd.getValuta());
         %>
 
-        <tr><td width="200"><div align="left"><b><%=pd.getProductnaam() %> &nbsp;&nbsp;</b></div></td>
+        <tr><td width="200"><div align="left"><b><%=pd.getFotocode() %> &nbsp;&nbsp;</b></div></td>
             <td width="202"><%=Math.round(pd.getPrijs()*pd.getAantal()* 100.0)/ 100.0%><%=session.getAttribute("valuta")%></td></tr>
         
         <%
@@ -95,8 +93,6 @@
     </tr>
     
   </tbody></table>
-  
-  </p>
   <p>
         Fotowinkel <br>
         Netherlands<br>

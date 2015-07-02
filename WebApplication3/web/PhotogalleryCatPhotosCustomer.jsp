@@ -77,14 +77,17 @@
 
                             </a>
                                    
-                            <div style="margin-top: 10px;">
+                            <div class="col-md-12">
+                                <div class="col-md-6">
                                  <form action="ShoppingCart" method="POST">
-                                <a><button class="btn btn-danger" name="addtocart"><fmt:message key='PhotogalleryCPC_ToCart'/></button></a>
+                                     <a><button class="btn btn-danger" name="addtocart"><span class="glyphicon glyphicon-shopping-cart"></span><fmt:message key='PhotogalleryCPC_ToCart'/></button></a>
                                 <input type="hidden" class="form-control" name="fotoimage" value="<%= es.substring(es.lastIndexOf("/") + 1, es.lastIndexOf(".")) %>" id="fotoimage">
                                 <input type="hidden" class="form-control" name="cat" value="<%= request.getParameter("cat") %>" id="cat">
                                 </form>
-                                <a href="ProductPage.jsp?fotoid=<%=es.substring(es.lastIndexOf("/") + 1, es.lastIndexOf("."))%>"><button class="btn btn-success"><fmt:message key='PhotogalleryCPC_Customize'/></button></a>
-                            </div></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="ProductPage.jsp?fotoid=<%=es.substring(es.lastIndexOf("/") + 1, es.lastIndexOf("."))%>"><button class="btn btn-success"><span class="glyphicon glyphicon-edit"></span><fmt:message key='PhotogalleryCPC_Customize'/></button></a>
+                                </div></div></div>
                     
                         <%
                                 }

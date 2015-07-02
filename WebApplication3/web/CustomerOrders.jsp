@@ -33,7 +33,7 @@
                 <tbody>
                     <% Test.CustomerOrders custord = new Test.CustomerOrders();
 
-                        ArrayList<Test.Order> orderlist = custord.getAllOrders("Dennnis@dennis.nl");
+                        ArrayList<Test.Order> orderlist = custord.getAllOrders(session.getAttribute("Name").toString());
 
                         for (Test.Order es : orderlist) {
                     %>
@@ -45,9 +45,9 @@
                                 </div>
                             </div>
                         </td>
-                        <td data-th="Datum" class="text-center"><%= es.getDatum() %></td>
+                        <td data-th="Datum"><%= es.getDatum() %></td>
 
-                        <td data-th="Prijs" class="text-center"><%=  es.getPrijs() + " " + es.getValuta() %></td>
+                        <td data-th="Prijs"><%=  es.getPrijs() + " " + es.getValuta() %></td>
 
                     </tr>
                     <% }%>

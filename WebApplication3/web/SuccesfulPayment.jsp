@@ -64,7 +64,7 @@
                             for (Test.WinkelWagenItem pd : itemlist) {
                         %>
 
-                        <tr><td width="200"><div align="left"><b><%=pd.getProductnaam()%> &nbsp;&nbsp;</b></div></td>
+                        <tr><td width="200"><div align="left"><b><%=pd.getFotocode() %> &nbsp;&nbsp;</b></div></td>
                             <td width="202"><%=Math.round(pd.getPrijs() * pd.getAantal() * 100.0) / 100.0%><%=session.getAttribute("valuta").toString()%></td></tr>
 
                         <%

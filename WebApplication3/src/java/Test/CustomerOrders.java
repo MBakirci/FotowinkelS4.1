@@ -26,8 +26,8 @@ public class CustomerOrders {
             PreparedStatement state = null;
             try {
                 //Update gebruiker gedeelte van fotograaf
-                String q = "select c.bestellingid, c.BESTELDATUM, sum(b.PRIJS) as price, b.VALUTA from FW_BESTELLING c, fw_PRODUCT_FOTO b where c.bestellingid = b.FK_BESTELLINGID and klantid= ?\n"
-                        + "Group By c.BESTELLINGID, c.BESTELDATUM, b.PRIJS, b.valuta";
+                String q = "select c.bestellingid, to_char(c.BESTELDATUM, 'DD MON YYYY') as BESTELDATUM, sum(prijs * aantal)  as price, b.VALUTA from FW_BESTELLING c, fw_PRODUCT_FOTO b where c.bestellingid = b.FK_BESTELLINGID and klantid=?\n"
+                        + "Group By c.BESTELLINGID, c.BESTELDATUM, b.valuta, b.fk_bestellingid ORDER BY c.BESTELDATUM DESC";
                 state = ts.conn.prepareStatement(q);
                 state.setString(1, klantid);
                 ResultSet rs = state.executeQuery();
